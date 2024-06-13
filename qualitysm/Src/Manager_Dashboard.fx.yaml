@@ -26,7 +26,7 @@ Manager_Dashboard As screen:
                 GroupBy(
                     Filter(
                         SkillMap_TestData_1,
-                         EmployeeId in colresourcemain.Title && SkillType.Value <> "Soft Skill"
+                         EmployeeId in colresourcemain.'Employee Id' && SkillType.Value <> "Soft Skill"
                     ),
                     SkillId,
                     skill
