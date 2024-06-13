@@ -1499,12 +1499,12 @@ Admin_UserManagement As screen:
                 Title_DataCard1 As typedDataCard.textualEditCard:
                     BorderStyle: =BorderStyle.Solid
                     DataField: ="Title"
-                    Default: =If(Form_UserManagement.Mode=FormMode.Edit,ThisItem.EmployeeID,IsBlank(DataCardValue5.Text),Blank(), Office365Users.UserProfile(Text(DataCardValue5.Text)).Id)
+                    Default: =//If(Form_UserManagement.Mode=FormMode.Edit,ThisItem.EmployeeID,IsBlank(DataCardValue5.Text),Blank(), Office365Users.UserProfile(Text(DataCardValue5.Text)).Id)
                     DisplayMode: =Parent.DisplayMode
-                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,EmployeeID)
+                    DisplayName: =//DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,EmployeeID)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =50
-                    MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, EmployeeID)
+                    MaxLength: =//DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, EmployeeID)
                     Required: =false
                     Update: =DataCardValue1.Text
                     Visible: =false

@@ -100,7 +100,7 @@
       "zeroalltabindexes": false
     },
     "Author": "",
-    "BindingErrorCount": 3779,
+    "BindingErrorCount": 2681,
     "ContainsThirdPartyPcfControls": false,
     "DefaultConnectedDataSourceMaxGetRowsCount": 2000,
     "DocumentAppType": "DesktopOrTablet",
@@ -158,6 +158,7 @@
     "User_Profile_DH",
     "RegistrationPageNew",
     "Login_Error",
-    "Screen3"
+    "Screen3",
+    "Screen1"
   ]
 }

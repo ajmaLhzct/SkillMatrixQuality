@@ -26,7 +26,7 @@ Manager_Dashboard As screen:
                 GroupBy(
                     Filter(
                         SkillMap_TestData_1,
-                        EmployeeId in colresourcemain.EmployeeID && SkillType.Value <> "Soft Skill"
+                         EmployeeId in colresourcemain.Title && SkillType.Value <> "Soft Skill"
                     ),
                     SkillId,
                     skill
@@ -35,8 +35,8 @@ Manager_Dashboard As screen:
                 CountRows(skill),
                 skilltitle,
                 LookUp(
-                    'SkillMatrix_Skills Admin',
-                    ID = SkillId
+                    'SkillMatrix_Skills Admin_TestData',
+                    ID = Title
                 ).Title
             )
         );
@@ -73,7 +73,7 @@ Manager_Dashboard As screen:
                     AlignInContainer: =AlignInContainer.Start
                     DropShadow: =DropShadow.None
                     FillPortions: =0
-                    Height: =270
+                    Height: =370
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     LayoutMode: =LayoutMode.Auto
@@ -84,15 +84,15 @@ Manager_Dashboard As screen:
                     ColumnChart1_13 As barChart:
                         AlignInContainer: =AlignInContainer.Start
                         Font: =Font.Arial
-                        Height: =350
+                        Height: =Container34_10.Height
                         ItemColorSet: =[RGBA(94,193,108,1),RGBA(246,199,144,1),RGBA(247,199,114,1),RGBA(247,180,91,1),RGBA(246,143,100,1),RGBA(212,96,104,1),RGBA(148,110,176,1),RGBA(118,154,204,1),RGBA(96,197,234,1),RGBA(51,153,255,1),RGBA(255,102,255,1),RGBA(255,0,102,1),]
-                        Items: =Sort(colresourcecount,Count,SortOrder.Descending)
+                        Items: |
+                            =Sort(colresourcecount,Count,SortOrder.Descending)
                         ItemsGap: =10
                         MinimumBarWidth: =100
                         OnSelect: =Set(varSkillOnselect,true)
-                        PaddingRight: =0
                         Size: =9
-                        Width: =1100
+                        Width: =Container34_10.Width 
                         X: =40
                         XLabelAngle: =0
                         Y: =437
@@ -101,60 +101,12 @@ Manager_Dashboard As screen:
                 Legend1_2 As legend:
                     Height: =80
                     ItemColorSet: =ColumnChart1_13.ItemColorSet
-                    Items: =ForAll(colresourcecount,skilltitle)
+                    Items: =//ForAll(colresourcecount,skilltitle)
+                    Visible: =false
                     Width: =320
                     X: =80
                     Y: =480
                     ZIndex: =2
-
-                Container35_2 As groupContainer.verticalAutoLayoutContainer:
-                    AlignInContainer: =AlignInContainer.Start
-                    DropShadow: =DropShadow.None
-                    FillPortions: =0
-                    Height: =64
-                    LayoutDirection: =LayoutDirection.Vertical
-                    LayoutMinHeight: =100
-                    LayoutMinWidth: =250
-                    LayoutMode: =LayoutMode.Auto
-                    PaddingLeft: =70
-                    Visible: =false
-                    Width: =If(IsEmpty(colresourcecount),1100 , Parent.Width+300)
-                    ZIndex: =3
-
-                    Gallery4_14 As gallery.galleryHorizontal:
-                        '#CopilotOverlayLabel': ="Filtered"
-                        AlignInContainer: =AlignInContainer.Center
-                        DelayItemLoading: =true
-                        Fill: =RGBA(255, 255, 255, 1)
-                        FillPortions: =0
-                        Height: =55
-                        Items: |
-                            =Sort(colresourcecount,Count,SortOrder.Descending)
-                        LayoutMinHeight: =287
-                        LayoutMinWidth: =320
-                        ShowScrollbar: =false
-                        TemplatePadding: =4
-                        TemplateSize: |-
-                            =//Parent.Width / CountRows(ColTopskills) - 4
-                            IfError(Parent.Width / CountRows(colresourcecount)- 25, 0)
-                        Visible: =false
-                        Width: =1100
-                        X: =50
-                        Y: =265
-                        ZIndex: =1
-
-                        Label14_6 As label:
-                            Height: =Parent.TemplateHeight
-                            OnSelect: =Select(Parent)
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            Size: =10
-                            Text: |-
-                                =ThisItem.skilltitle
-                                //"Php"
-                            Width: =Parent.TemplateWidth - 4
-                            X: =4
-                            ZIndex: =1
 
             Label13_46 As label:
                 Color: =RGBA(122, 138, 143, 1)
