@@ -318,7 +318,7 @@
         {
           "Category": "Design",
           "PropertyName": "MinimumBarWidth",
-          "RuleProviderType": "Unknown"
+          "RuleProviderType": "User"
         },
         {
           "Category": "Design",
