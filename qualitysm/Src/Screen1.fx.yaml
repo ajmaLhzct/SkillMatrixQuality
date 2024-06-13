@@ -1,4 +1,6 @@
 Screen1 As screen:
+    OnVisible: |
+        =Set(MaxValue, Max(colresourcecount, Count))
 
     Container12 As groupContainer.manualLayoutContainer:
         Height: =370
@@ -14,7 +16,7 @@ Screen1 As screen:
             Items: |
                 =Sort(colresourcecount,Count,SortOrder.Descending)
             ItemsGap: =10
-            MinimumBarWidth: =100
+            MinimumBarWidth: =70
             OnSelect: =Set(varSkillOnselect,true)
             Size: =9
             Width: =Container12.Width
@@ -43,11 +45,12 @@ Screen1 As screen:
             ZIndex: =3
 
     "Gallery2 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+        BorderStyle: =BorderStyle.None
         DelayItemLoading: =true
-        Height: =Container34_10.Height
+        Height: =343
         Items: =Sort(colresourcecount,Count,SortOrder.Descending)
         LoadingSpinner: =LoadingSpinner.Data
-        TemplatePadding: =0
+        TemplatePadding: =10
         TemplateSize: =ColumnChart1_16.Width/CountRows(Gallery2.AllItems)
         Width: =Container12.Width
         X: =244
@@ -57,7 +60,7 @@ Screen1 As screen:
         HtmlText1 As htmlViewer:
             Height: =ColumnChart1_16.Height
             HtmlText: |-
-                ="<div style='text-align:right;    
+                =/*"<div style='text-align:right;    
                      position: absolute;   
                      left: calc(50% - 50vh); 
                      top: calc(50% - 50vw);   
@@ -69,13 +72,23 @@ Screen1 As screen:
                      justify-content: center;'> 
                     " & ThisItem.field_4 & "       
                 </div>"
+                */
+                "<div style='width:100%;'>" & ThisItem.Count & "</div>"
             OnSelect: =Select(Parent)
-            Width: |
-                =(ColumnChart1_16.Width/Label34.Text)
+            Width: |-
+                =//(ColumnChart1_16.Width/Label34.Text)
+                
+                ColumnChart1_16.Width * (Value(ThisItem.Count) / Value(MaxValue))
             ZIndex: =3
 
     Label34 As label:
-        Text: =CountRows(Gallery2.AllItems)
+        Text: |-
+            =//CountRows(Gallery2.AllItems)
+            
+            CountRows(colresourcecount)
+        Width: |-
+            =//ColumnChart1_16.Width * (ThisItem.YourColumnName / MaxValue)
+            150
         X: =40
         Y: =40
         ZIndex: =4
