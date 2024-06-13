@@ -1,6 +1,9 @@
 Screen1 As screen:
-    OnVisible: |
-        =Set(MaxValue, Max(colresourcecount, Count))
+    OnVisible: |+
+        =Set(NumberOfDataPoints, CountRows(colresourcecount));
+        Set(TotalRequiredWidth, NumberOfDataPoints * 70);
+        Set(EffectiveBarWidth, If(TotalRequiredWidth > ColumnChart1_16.Width, 70, ColumnChart1_16.Width / NumberOfDataPoints));
+        
 
     Container12 As groupContainer.manualLayoutContainer:
         Height: =370
@@ -47,11 +50,11 @@ Screen1 As screen:
     "Gallery2 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
         BorderStyle: =BorderStyle.None
         DelayItemLoading: =true
-        Height: =343
+        Height: =370
         Items: =Sort(colresourcecount,Count,SortOrder.Descending)
         LoadingSpinner: =LoadingSpinner.Data
         TemplatePadding: =10
-        TemplateSize: =ColumnChart1_16.Width/CountRows(Gallery2.AllItems)
+        TemplateSize: =EffectiveBarWidth
         Width: =Container12.Width
         X: =244
         Y: =124
@@ -60,7 +63,7 @@ Screen1 As screen:
         HtmlText1 As htmlViewer:
             Height: =ColumnChart1_16.Height
             HtmlText: |-
-                =/*"<div style='text-align:right;    
+                ="<div style='text-align:right;    
                      position: absolute;   
                      left: calc(50% - 50vh); 
                      top: calc(50% - 50vw);   
@@ -70,15 +73,17 @@ Screen1 As screen:
                      display: flex; 
                      align-items: center; 
                      justify-content: center;'> 
-                    " & ThisItem.field_4 & "       
+                    "   & ThisItem.Count &   "       
                 </div>"
-                */
-                "<div style='width:100%;'>" & ThisItem.Count & "</div>"
+                
+                //"<div style='width:100%;'>" & ThisItem.Count & "</div>"
             OnSelect: =Select(Parent)
+            PaddingLeft: =50
             Width: |-
                 =//(ColumnChart1_16.Width/Label34.Text)
                 
-                ColumnChart1_16.Width * (Value(ThisItem.Count) / Value(MaxValue))
+                //ColumnChart1_16.Width * (Value(ThisItem.Count) / Value(MaxValue))
+                EffectiveBarWidth
             ZIndex: =3
 
     Label34 As label:
