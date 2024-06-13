@@ -405,7 +405,21 @@
       "SkillMatrix_Project",
       "SkillMatrix_QualificationsAdmin",
       "SkillMatrix_Skills Admin",
-      "Downloaded Templates"
+      "Downloaded Templates",
+      "SkillMatrix_UserManagement",
+      "EmployeeProject_TestData",
+      "EmployeeProject_TestData_1",
+      "CertificationsList_TestData",
+      "CertificationsList_TestData_1",
+      "Security List",
+      "SkillMap_TestData",
+      "SkillMap_TestData_1",
+      "Projects_TestData",
+      "Projects_TestData_1",
+      "Qualifications_TestData",
+      "Qualifications_TestData_1",
+      "UsersSkillMatrix_TestData",
+      "UsersSkillMatrix_TestData_1"
     ],
     "dependencies": {},
     "dependents": [
