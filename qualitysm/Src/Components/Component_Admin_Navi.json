@@ -111,7 +111,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "Component_Admin_Navi",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 5393,
+        "PublishOrderIndex": 5398,
         "Rules": [
           {
             "Category": "Data",
@@ -461,7 +461,7 @@
         "OptimizeForDevices": "Off",
         "Parent": "Component_Admin_Navi",
         "PersistMetaDataIDKey": false,
-        "PublishOrderIndex": 5394,
+        "PublishOrderIndex": 5399,
         "Rules": [
           {
             "Category": "Data",
