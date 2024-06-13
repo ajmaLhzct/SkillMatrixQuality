@@ -1,0 +1,1226 @@
+Admin_Report_SkillReport As screen:
+    Fill: =RGBA(248, 249, 250, 1)
+    OnVisible: |+
+        =Set(
+            varPageNumber,
+            1
+        );
+        Set(
+            varTopTab,
+            "Skill Report"
+        );
+        Set(
+            varShowMenu,
+            false
+        );
+        Set (
+            LoadingSpinnerVisible,
+            false
+        );
+        ClearCollect(
+            colskillmap,
+            SkillMap_TestData_1
+        );
+        ClearCollect(
+            FilteredData,
+            Filter(Filter(UsersSkillMatrix_TestData_1,IsActive),!IsBlank(Fullname))
+        );
+        Set(
+            varSkillMandate,
+            false
+        );
+        ClearCollect(
+            ColUserReport,
+            Filter(Filter(UsersSkillMatrix_TestData_1,IsActive),!IsBlank(Fullname))
+        );
+        Reset(ComboBox_Qualification);
+        Reset(ComboBox_Skill);
+        Reset(ComboBox_Experience);
+        Reset(ComboBox_Experience_1);
+        Set(
+            varSuccess,
+            false
+        );
+        Set(
+            varAction,
+            false
+        );
+        
+
+    Container_SkillReport As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(202, 202, 202, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =1
+        DropShadow: =DropShadow.None
+        Height: =608
+        Visible: |-
+            =//varTopTab="Skill Report"
+            true
+        Width: =1115
+        X: =240
+        Y: =160
+        ZIndex: =1
+
+        Container7 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =80
+            Width: =1110
+            X: =4
+            ZIndex: =1
+
+            Toggle_SkillMandate As toggleSwitch:
+                BorderStyle: =BorderStyle.None
+                Default: =varSkillMandate
+                FalseText: =
+                Height: =25
+                LabelPaddingRight: =15
+                OnChange: |+
+                    =
+                    
+                OnCheck: =Set(varSkillMandate,true)
+                OnUncheck: =Set(varSkillMandate,false)
+                ShowLabel: =false
+                TrueText: =
+                Width: =37
+                X: =292
+                Y: =38
+                ZIndex: =6
+
+            Container23_9 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =50
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =230
+                X: =14
+                Y: =16
+                ZIndex: =13
+
+                ComboBox_Skill As combobox:
+                    BorderStyle: =BorderStyle.None
+                    ChevronBackground: =RGBA(0, 0, 0, 0)
+                    ChevronFill: =RGBA(128, 128, 128, 1)
+                    ChevronHoverBackground: =RGBA(149, 149, 149, 1)
+                    DisplayFields: =["Value"]
+                    HoverBorderColor: =RGBA(219, 219, 219, 1)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    InputTextPlaceholder: ="Skills"
+                    Items: =ForAll('SkillMatrix_Skills Admin',Title)
+                    NoSelectionText: ="Skills"
+                    PressedBorderColor: =RGBA(202, 202, 202, 1)
+                    PressedFill: =RGBA(202, 202, 202, 1)
+                    SearchFields: =["Value"]
+                    SearchItems: =Search(ForAll('SkillMatrix_Skills Admin',Title),ComboBox_Skill.SearchText,Value)
+                    SelectionFill: =RGBA(128, 128, 128, 1)
+                    Tooltip: ="Skills"
+                    Width: =220
+                    X: =4
+                    Y: =4
+                    ZIndex: =1
+
+            Group6 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =13
+
+                Button23 As button:
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =45
+                    HoverFill: =RGBA(238, 238, 238, 1)
+                    OnSelect: |-
+                        =ClearCollect(
+                            Colskillsfilter,
+                            DropColumns(
+                                AddColumns(
+                                    GroupBy(
+                                        Filter(
+                                            Filter(SkillMap_TestData_1,EmployeeId = LookUp(Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),Email =SkillMap_TestData_1[@'Created By'].Email).EmployeeID),
+                                            SkillId in ForAll(
+                                                ComboBox_Skill.SelectedItems,
+                                                LookUp(
+                                                    'SkillMatrix_Skills Admin',
+                                                    Title = Value
+                                                ).ID
+                                            )
+                                        ),
+                                        EmployeeId,
+                                        Groupby
+                                    ),
+                                    'Count of Rows',
+                                    CountRows(Groupby)
+                                ),
+                                Groupby
+                            )
+                        );
+                        ClearCollect(
+                            ColUserReport,
+                            If(
+                                varSkillMandate = true,
+                                Filter(
+                                    Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),
+                                    (EmployeeID in Filter(
+                                        Colskillsfilter,
+                                        'Count of Rows' = CountRows(ComboBox_Skill.SelectedItems)
+                                    ).Title) And ((TotalExperience >= ComboBox_Experience.Selected.Value And TotalExperience <= ComboBox_Experience_1.Selected.Value) || ComboBox_Experience.Selected.Value = Blank() || ComboBox_Experience_1.Selected.Value = Blank()) And EmployeeID in Filter(
+                                        Qualifications_TestData_1,
+                                        (LookUp(
+                                            SkillMatrix_QualificationsAdmin,
+                                            ID = QualificationId
+                                        ).Title in ComboBox_Qualification.SelectedItems || ComboBox_Qualification.Selected.Value = Blank())
+                                    ).EmployeeId
+                                ),
+                                Filter(
+                                    Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),
+                                    (EmployeeID in Filter(
+                                        SkillMap_TestData_1,
+                                        (SkillId in ForAll(
+                                            ComboBox_Skill.SelectedItems,
+                                            LookUp(
+                                                'SkillMatrix_Skills Admin',
+                                                Title = Value
+                                            ).ID
+                                        ) || ComboBox_Skill.Selected.Value = Blank())
+                                    ).EmployeeId) And (EmployeeID in Filter(
+                                        Qualifications_TestData_1,
+                                        (LookUp(
+                                            SkillMatrix_QualificationsAdmin,
+                                            ID = QualificationId
+                                        ).Title in ComboBox_Qualification.SelectedItems || ComboBox_Qualification.Selected.Value = Blank())
+                                    ).EmployeeId) And ((TotalExperience >= ComboBox_Experience.Selected.Value And TotalExperience <= ComboBox_Experience_1.Selected.Value) || ComboBox_Experience.Selected.Value = Blank() || ComboBox_Experience_1.Selected.Value = Blank())
+                                )
+                            )
+                        )
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Text: =""
+                    Tooltip: ="Search"
+                    Width: =45
+                    X: =1003
+                    Y: =17
+                    ZIndex: =7
+
+                Button23_3 As button:
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =45
+                    HoverFill: =RGBA(238, 238, 238, 1)
+                    OnSelect: |-
+                        =ClearCollect(ColUserReport,Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)));
+                        Reset(ComboBox_Qualification);
+                        Reset(ComboBox_Skill);
+                        Reset(ComboBox_Experience);
+                        Reset(ComboBox_Experience_1);
+                        
+                        Set(varSkillMandate,false);
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Text: =""
+                    Tooltip: ="Reset"
+                    Width: =45
+                    X: =1056
+                    Y: =18
+                    ZIndex: =10
+
+                Icon11 As icon.Reload:
+                    Color: =RGBA(116, 116, 116, 1)
+                    Height: =20
+                    Icon: =Icon.Reload
+                    OnSelect: |-
+                        =ClearCollect(ColUserReport,Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)));
+                        Reset(ComboBox_Qualification);
+                        Reset(ComboBox_Skill);
+                        Reset(ComboBox_Experience);
+                        Reset(ComboBox_Experience_1);
+                        
+                        Set(varSkillMandate,false);
+                    Tooltip: ="Reset"
+                    Width: =36
+                    X: =1062
+                    Y: =29
+                    ZIndex: =11
+
+                Icon12 As icon.Search:
+                    Color: =RGBA(116, 116, 116, 1)
+                    Height: =20
+                    Icon: =Icon.Search
+                    OnSelect: |-
+                        =ClearCollect(
+                            Colskillsfilter,
+                            DropColumns(
+                                AddColumns(
+                                    GroupBy(
+                                        Filter(
+                                            Filter(SkillMap_TestData_1,EmployeeId = LookUp(Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),Email =SkillMap_TestData_1[@'Created By'].Email).EmployeeID),
+                                            SkillId in ForAll(
+                                                ComboBox_Skill.SelectedItems,
+                                                LookUp(
+                                                    'SkillMatrix_Skills Admin',
+                                                    Title = Value
+                                                ).ID
+                                            )
+                                        ),
+                                        EmployeeId,
+                                        Groupby
+                                    ),
+                                    'Count of Rows',
+                                    CountRows(Groupby)
+                                ),
+                                Groupby
+                            )
+                        );
+                        ClearCollect(
+                            ColUserReport,
+                            If(
+                                varSkillMandate = true,
+                                Filter(
+                                    Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),
+                                    (EmployeeID in Filter(
+                                        Colskillsfilter,
+                                        'Count of Rows' = CountRows(ComboBox_Skill.SelectedItems)
+                                    ).Title) And ((TotalExperience >= ComboBox_Experience.Selected.Value And TotalExperience <= ComboBox_Experience_1.Selected.Value) || ComboBox_Experience.Selected.Value = Blank() || ComboBox_Experience_1.Selected.Value = Blank()) And EmployeeID in Filter(
+                                        Qualifications_TestData_1,
+                                        (LookUp(
+                                            SkillMatrix_QualificationsAdmin,
+                                            ID = QualificationId
+                                        ).Title in ComboBox_Qualification.SelectedItems || ComboBox_Qualification.Selected.Value = Blank())
+                                    ).EmployeeId
+                                ),
+                                Filter(
+                                    Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),
+                                    (EmployeeID in Filter(
+                                        SkillMap_TestData_1,
+                                        (SkillId in ForAll(
+                                            ComboBox_Skill.SelectedItems,
+                                            LookUp(
+                                                'SkillMatrix_Skills Admin',
+                                                Title = Value
+                                            ).ID
+                                        ) || ComboBox_Skill.Selected.Value = Blank())
+                                    ).EmployeeId) And (EmployeeID in Filter(
+                                        Qualifications_TestData_1,
+                                        (LookUp(
+                                            SkillMatrix_QualificationsAdmin,
+                                            ID = QualificationId
+                                        ).Title in ComboBox_Qualification.SelectedItems || ComboBox_Qualification.Selected.Value = Blank())
+                                    ).EmployeeId) And ((TotalExperience >= ComboBox_Experience.Selected.Value And TotalExperience <= ComboBox_Experience_1.Selected.Value) || ComboBox_Experience.Selected.Value = Blank() || ComboBox_Experience_1.Selected.Value = Blank())
+                                )
+                            )
+                        )
+                    Tooltip: ="Search"
+                    Width: =36
+                    X: =1003
+                    Y: =29
+                    ZIndex: =12
+
+            Label42 As label:
+                Height: =24
+                PaddingTop: =0
+                Size: =10
+                Text: =" All skills required ?"
+                Width: =135
+                X: =258
+                Y: =14
+                ZIndex: =14
+
+            Container8 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =50
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =115
+                X: =750
+                Y: =17
+                ZIndex: =15
+
+                ComboBox_Experience As combobox:
+                    BorderStyle: =BorderStyle.None
+                    ChevronBackground: =RGBA(0, 0, 0, 0)
+                    ChevronFill: =RGBA(128, 128, 128, 1)
+                    ChevronHoverBackground: =RGBA(149, 149, 149, 1)
+                    DisplayFields: =["Value"]
+                    HoverBorderColor: =RGBA(219, 219, 219, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    InputTextPlaceholder: ="Experience"
+                    IsSearchable: =false
+                    Items: =[1,2,3,4,5,6,7,8,9,10]
+                    NoSelectionText: ="From"
+                    PressedFill: =RGBA(219, 219, 219, 1)
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =RGBA(128, 128, 128, 1)
+                    SelectMultiple: =false
+                    Width: =105
+                    X: =8
+                    Y: =4
+                    ZIndex: =1
+
+            Container15 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =50
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =230
+                X: =400
+                Y: =17
+                ZIndex: =16
+
+                ComboBox_Qualification As combobox:
+                    BorderStyle: =BorderStyle.None
+                    ChevronBackground: =RGBA(0, 0, 0, 0)
+                    ChevronFill: =RGBA(128, 128, 128, 1)
+                    ChevronHoverBackground: =RGBA(149, 149, 149, 1)
+                    DisplayFields: =["Value"]
+                    HoverBorderColor: =RGBA(219, 219, 219, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    InputTextPlaceholder: ="Qualification"
+                    Items: =ForAll(SkillMatrix_QualificationsAdmin,Title)
+                    PressedFill: =RGBA(219, 219, 219, 1)
+                    SearchFields: =["Value"]
+                    SearchItems: =Search(ForAll(SkillMatrix_QualificationsAdmin,Title),ComboBox_Qualification.SearchText,Value)
+                    SelectionFill: =RGBA(128, 128, 128, 1)
+                    Width: =220
+                    X: =4
+                    Y: =4
+                    ZIndex: =1
+
+            Container8_1 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =50
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =115
+                X: =874
+                Y: =17
+                ZIndex: =17
+
+                ComboBox_Experience_1 As combobox:
+                    BorderStyle: =BorderStyle.None
+                    ChevronBackground: =RGBA(0, 0, 0, 0)
+                    ChevronFill: =RGBA(128, 128, 128, 1)
+                    ChevronHoverBackground: =RGBA(149, 149, 149, 1)
+                    DisplayFields: =["Value"]
+                    HoverBorderColor: =RGBA(219, 219, 219, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    InputTextPlaceholder: ="Experience"
+                    IsSearchable: =false
+                    Items: =[1,2,3,4,5,6,7,8,9,10]
+                    NoSelectionText: ="To"
+                    PressedFill: =RGBA(219, 219, 219, 1)
+                    SearchFields: =["Value"]
+                    SearchItems: =[]
+                    SelectionFill: =RGBA(128, 128, 128, 1)
+                    SelectMultiple: =false
+                    Width: =105
+                    X: =8
+                    Y: =4
+                    ZIndex: =1
+
+            Label13 As label:
+                Height: =50
+                Size: =14
+                Text: ="Experience"
+                Width: =106
+                X: =643
+                Y: =16
+                ZIndex: =18
+
+        Group4 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =4
+
+            Container25_4 As groupContainer.horizontalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =54
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =1
+                RadiusBottomRight: =1
+                RadiusTopLeft: =1
+                RadiusTopRight: =1
+                Width: =1109
+                X: =5
+                Y: =92
+                ZIndex: =2
+
+                Label34_4 As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =55
+                    PaddingLeft: =10
+                    Size: =15
+                    Text: ="Full name"
+                    Width: =310
+                    ZIndex: =1
+
+                Container27_7 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Visible: =false
+                    Width: =210
+                    ZIndex: =2
+
+                    Label37_7 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Email"
+                        ZIndex: =1
+
+                Container27_10 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Visible: =false
+                    Width: =320
+                    ZIndex: =3
+
+                    Label37_10 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Phone"
+                        ZIndex: =1
+
+                Container27_6 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =320
+                    ZIndex: =4
+
+                    Label37_6 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Qualification"
+                        ZIndex: =1
+
+                Container27_11 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =310
+                    ZIndex: =5
+
+                    Label37_11 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Skills"
+                        ZIndex: =1
+
+                Container27_14 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =170
+                    ZIndex: =6
+
+                    Label37_14 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Exp (in years)"
+                        ZIndex: =1
+
+            Gallery_SkillReport As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
+                BorderColor: =RGBA(149, 149, 149, 1)
+                DelayItemLoading: =true
+                Height: =371
+                Items: |-
+                    =//ColUserReport
+                    If(
+                        icoNext_3.DisplayMode = DisplayMode.Disabled,
+                        LastN(
+                            FirstN(
+                                galHidden_1.AllItems,
+                                drpPaginationSize_1.Selected.Value * varPageNumber
+                            ),
+                            drpPaginationSize_1.Selected.Value - (drpPaginationSize_1.Selected.Value * varPageNumber - Value(lblCountRows_1.Text))
+                        ),
+                        LastN(
+                            FirstN(
+                                galHidden_1.AllItems,
+                                drpPaginationSize_1.Selected.Value * varPageNumber
+                            ),
+                            drpPaginationSize_1.Selected.Value
+                        )
+                    )
+                Layout: =Layout.Vertical
+                LoadingSpinner: =LoadingSpinner.Data
+                ShowScrollbar: =false
+                TemplatePadding: =1
+                TemplateSize: =55
+                Width: =1110
+                X: =4
+                Y: =146
+                ZIndex: =3
+
+                Container25_5 As groupContainer.horizontalAutoLayoutContainer:
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =55
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =1
+                    RadiusBottomRight: =1
+                    RadiusTopLeft: =1
+                    RadiusTopRight: =1
+                    Width: =1109
+                    ZIndex: =1
+
+                    Label34_5 As label:
+                        Height: =55
+                        PaddingLeft: =10
+                        Text: =ThisItem.Fullname
+                        Width: =310
+                        ZIndex: =1
+
+                    Container27_8 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =false
+                        Width: =210
+                        ZIndex: =3
+
+                        Label37_8 As label:
+                            Height: =55
+                            PaddingLeft: =10
+                            Text: =ThisItem.Email
+                            Width: =210
+                            ZIndex: =1
+
+                    Container30_4 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.Start
+                        FillPortions: =0
+                        Height: =55
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =270
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =false
+                        Width: =180
+                        ZIndex: =4
+
+                        Label38_4 As label:
+                            Height: =55
+                            PaddingLeft: =15
+                            Text: =ThisItem.MobileNumber
+                            Width: =180
+                            ZIndex: =1
+
+                    Container27_9 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =320
+                        ZIndex: =5
+
+                        Label37_9 As label:
+                            Height: =55
+                            PaddingLeft: =10
+                            Text: =Concat(Filter(Qualifications_TestData_1,EmployeeId=ThisItem.EmployeeID),LookUp(SkillMatrix_QualificationsAdmin,ID=QualificationId).Title&"  ",", ")
+                            Tooltip: =Concat(Filter(Qualifications_TestData_1,EmployeeId = ThisItem.EmployeeID),LookUp(SkillMatrix_QualificationsAdmin,ID =QualificationId).Title & " ; ")
+                            Width: =320
+                            Wrap: =false
+                            ZIndex: =1
+
+                    Container27_12 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =310
+                        ZIndex: =6
+
+                        Label37_12 As label:
+                            Height: =55
+                            PaddingLeft: =10
+                            Text: =Concat(Filter(SkillMap_TestData_1,EmployeeId = ThisItem.EmployeeID),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") "," , ")
+                            Tooltip: =Concat(Filter(SkillMap_TestData_1,EmployeeId = ThisItem.EmployeeID),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") "," ;")
+                            Width: =310
+                            Wrap: =false
+                            ZIndex: =1
+
+                    Container27_13 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =180
+                        ZIndex: =7
+
+                        Label37_13 As label:
+                            Align: =Align.Center
+                            Height: =55
+                            PaddingLeft: =10
+                            Text: =ThisItem.TotalExperience
+                            Width: =170
+                            ZIndex: =1
+
+    Component_Admin_Navi_5 As Component_Admin_Navi:
+        Height: =79
+        MenuImage: =Report_black
+        MenuTitle: =" Skill Report"
+        Width: =1108
+        X: =245
+        Y: =70
+        ZIndex: =2
+
+    Component_SidbarNavi_Admin_New_8 As Component_SidbarNavi_Admin:
+        DirectoryItems: |-
+            =Table(
+            
+                 {
+                    Title: "Skills",
+                    Screen: Skills
+                },
+                {
+                    Title: "Qualifications",
+                    Screen: Qualifications
+                }
+            )
+        Height: =768
+        ZIndex: =3
+
+    Label43 As label:
+        Color: =RGBA(116, 116, 116, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =42
+        Size: =18
+        Text: ="Skill Matrix"
+        Width: =385
+        X: =245
+        Y: =15
+        ZIndex: =4
+
+    Container_Success_popup_1 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =varSuccess
+        Width: =1366
+        ZIndex: =20
+
+        Container_Success_popoup_1 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(219, 219, 219, 1)
+            BorderThickness: =1
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =186
+            Visible: =false
+            Width: =667
+            X: =500
+            Y: =235
+            ZIndex: =1
+
+            Label14_12 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Semibold
+                Height: =59
+                Size: =14
+                Text: ="Registeration completed Successfully. You are being Redirecting to Home page."
+                Width: =565
+                X: =60
+                Y: =35
+                ZIndex: =12
+
+            Image18_2 As image:
+                Height: =80
+                Image: ='Rolling-1s-204px'
+                ImagePosition: =ImagePosition.Center
+                Width: =80
+                X: =302
+                Y: =94
+                ZIndex: =13
+
+        Timer1_1 As timer:
+            Duration: =2000
+            OnTimerEnd: |-
+                =Set(varSuccessPopup,false);
+                Navigate(User_Dashboard);
+            OnTimerStart: =
+            Start: =varSuccessPopup
+            Visible: =false
+            X: =1206
+            Y: =15
+            ZIndex: =2
+
+        Image18_4 As image:
+            Image: ='output-onlinegiftools'
+            X: =688
+            Y: =308
+            ZIndex: =3
+
+    Group_HeaderNavi_2 As group:
+        Height: =5
+        Width: =5
+        X: =7
+        Y: =20
+        ZIndex: =66
+
+        Button10_5 As button:
+            Align: =Align.Left
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =42
+            HoverFill: =RGBA(41, 63, 84, 1)
+            OnSelect: =Set(varAction,!varAction)
+            PaddingLeft: =20
+            PaddingRight: =10
+            Size: =13
+            Text: ="Actions"
+            Tooltip: ="Actions"
+            Visible: =false
+            Width: =129
+            X: =1209
+            Y: =92
+            ZIndex: =5
+
+        Image10_19 As image:
+            Height: =14
+            HoverBorderColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            Image: =Down
+            Tooltip: ="Actions"
+            Visible: =false
+            Width: =19
+            X: =1305
+            Y: =106
+            ZIndex: =6
+
+    Group_Action_5 As group:
+        Height: =5
+        Width: =5
+        X: =7
+        Y: =20
+        ZIndex: =67
+
+        Rectangle6_7 As rectangle:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =137
+            Visible: =varAction
+            Width: =186
+            X: =1169
+            Y: =156
+            ZIndex: =7
+
+        Button9_23 As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =42
+            HoverBorderColor: =
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(237, 237, 237, 1)
+            OnSelect: |-
+                =Set(varSuccess , true);
+                ForAll(
+                    ColUserReport,
+                    Collect(
+                        col_ExportData,
+                        {
+                            Firstname: ThisRecord.Fullname,
+                            Qualification :Concat(Filter(Qualifications_TestData_1,EmployeeID =ThisRecord.EmployeeId), LookUp(SkillMatrix_QualificationsAdmin,ID =QualificationId).Title & "  "  , "; "),
+                            Skills:Concat(Filter(SkillMap_TestData_1,EmployeeID=ThisRecord.EmployeeId),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") "," ; "),Experience:ThisRecord.TotalExperience
+                
+                
+                
+                
+                             
+                        }
+                    )
+                );
+                Set(
+                    VarFileLink5,
+                    'ExcelExportSkillReport(p)'.Run(
+                        JSON(
+                            col_ExportData,
+                            JSONFormat.IncludeBinaryData & JSONFormat.IgnoreUnsupportedTypes
+                        )
+                    ).filelink
+                );
+                Launch(VarFileLink5);
+                Clear(col_ExportData);
+                Set(varAction , false);
+                Set(varSuccess , false);
+            PaddingLeft: =30
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(202, 202, 202, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Export CSV"
+            Visible: =varAction
+            Width: =180
+            X: =1171
+            Y: =163
+            ZIndex: =8
+
+        Button9_22 As button:
+            BorderThickness: =0
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverBorderColor: =
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(202, 202, 202, 1)
+            OnSelect: |
+                =Set(
+                    varSuccess,
+                    true
+                );
+                ForAll(
+                    ColUserReport,
+                    Collect(
+                        col_ExportPDF,
+                        {
+                            Firstname: ThisRecord.Fullname,
+                            Qualification: Concat(
+                                Filter(
+                                    Qualifications_TestData_1,
+                                    EmployeeID = ThisRecord.EmployeeId
+                                ),
+                                LookUp(
+                                    SkillMatrix_QualificationsAdmin,
+                                    ID = QualificationId
+                                ).Title & "  ",
+                                "; "
+                            ),
+                            Skills: Concat(
+                                Filter(
+                                    SkillMap_TestData_1,
+                                    EmployeeID = ThisRecord.EmployeeId
+                                ),
+                                LookUp(
+                                    'SkillMatrix_Skills Admin',
+                                    ID = SkillId
+                                ).Title & " (" & Rating & ") ",
+                                " ; "
+                            ),
+                            Experience: ThisRecord.TotalExperience
+                        }
+                    )
+                );
+                Set(
+                    varPDFLink,
+                    'PDFExportSkillsReport(p)'.Run(
+                        JSON(
+                            col_ExportPDF,
+                            JSONFormat.IncludeBinaryData & JSONFormat.IgnoreUnsupportedTypes
+                        )
+                    ).pdflink
+                );
+                Launch(varPDFLink);
+                Clear(col_ExportPDF);
+                Set(
+                    varAction,
+                    false
+                );
+                Set(
+                    varSuccess,
+                    false
+                );
+            PaddingLeft: =40
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(202, 202, 202, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="Export PDF"
+            Visible: =varAction
+            Width: =180
+            X: =1173
+            Y: =221
+            ZIndex: =9
+
+        Icon1_23 As icon.Compose:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =25
+            Icon: =Icon.DocumentWithContent
+            OnSelect: |-
+                =Set(varSuccess , true);
+                ForAll(
+                    ColUserReport,
+                    Collect(
+                        col_ExportData,
+                        {
+                            Firstname: ThisRecord.Fullname,
+                            Email : ThisRecord.Email,
+                            Mobilenumber : ThisRecord.MobileNumber
+                
+                             
+                        }
+                    )
+                );
+                Set(
+                    VarFileLink5,
+                    'ExcelExportSkillReport(p)'.Run(
+                        JSON(
+                            col_ExportData,
+                            JSONFormat.IncludeBinaryData & JSONFormat.IgnoreUnsupportedTypes
+                        )
+                    ).filelink
+                );
+                Launch(VarFileLink5);
+                Clear(col_ExportData);
+                Set(varAction , false);
+                Set(varSuccess , false);
+            Visible: =varAction
+            Width: =25
+            X: =1179
+            Y: =175
+            ZIndex: =10
+
+        Icon1_22 As icon.Compose:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =25
+            Icon: =Icon.DocumentPDF
+            OnSelect: |-
+                =Set(varSuccess , true);
+                ForAll(
+                    ColUserReport,
+                    Collect(
+                        col_ExportPDF,
+                        {
+                            Firstname: ThisRecord.Fullname,
+                         
+                            Email: ThisRecord.Email,
+                            Mobilenumber :ThisRecord.MobileNumber
+                            
+                        }
+                    )
+                );
+                
+                Set(
+                    varPDFLink,
+                'PDFExportSkillsReport(p)'.Run(
+                        JSON(
+                             col_ExportPDF,
+                            JSONFormat.IncludeBinaryData & JSONFormat.IgnoreUnsupportedTypes
+                        )
+                    ).pdflink
+                );
+                Launch(varPDFLink);
+                Clear(col_ExportPDF);
+                Set(varAction , false);
+                Set(varSuccess , false);
+            Visible: =varAction
+            Width: =25
+            X: =1184
+            Y: =232
+            ZIndex: =11
+
+    Group_Paginataion_Location_1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =72
+
+        galHidden_1 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            Default: |-
+                =If(
+                    drpPaginationSize_1.Selected.Value * varPageNumber >= CountRows(Self.AllItems),
+                    Last(Self.AllItems)
+                )
+            DelayItemLoading: =true
+            Height: =75
+            Items: =ColUserReport
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+            Visible: =false
+            Width: =20
+            X: =1100
+            Y: =691
+            ZIndex: =12
+
+        lblCountRows_1 As label:
+            Height: =51
+            Text: =CountRows(galHidden_1.AllItems)
+            Visible: =false
+            Width: =241
+            X: =244
+            Y: =691
+            ZIndex: =13
+
+        Container12_1 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =45
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Width: =152
+            X: =245
+            Y: =706
+            ZIndex: =14
+
+            drpPaginationSize_1 As dropdown:
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                ChevronBackground: =RGBA(0, 0, 0, 0)
+                ChevronFill: =RGBA(116, 116, 116, 1)
+                ChevronHoverBackground: =RGBA(0, 0, 0, 0)
+                ChevronHoverFill: =RGBA(116, 116, 116, 1)
+                HoverFill: =RGBA(237, 237, 237, 1)
+                Items: |
+                    =[5,10,25,50,100]
+                PressedColor: =RGBA(0, 0, 0, 1)
+                PressedFill: =RGBA(202, 202, 202, 1)
+                SelectionFill: =RGBA(219, 219, 219, 1)
+                Width: =150
+                Y: =5
+                ZIndex: =1
+
+        Label32_1 As label:
+            PaddingLeft: =1
+            Size: =11
+            Text: ="Per Page"
+            X: =405
+            Y: =708
+            ZIndex: =15
+
+        Label21_3 As label:
+            Height: =38
+            PaddingLeft: =0
+            Size: =12
+            Text: |-
+                ="Showing "&((varPageNumber * drpPaginationSize_1.Selected.Value) - drpPaginationSize_1.Selected.Value) + 1 & " to " & If(
+                    ((varPageNumber * drpPaginationSize_1.Selected.Value) > CountRows(galHidden_1.AllItems)),
+                    CountRows(galHidden_1.AllItems),
+                    (varPageNumber * drpPaginationSize_1.Selected.Value)
+                )&"  of " & lblCountRows_1.Text & " entries"
+            Width: =345
+            X: =246
+            Y: =668
+            ZIndex: =16
+
+        icoPrev_3 As button:
+            BorderThickness: =1
+            Color: =RGBA(0, 121, 187, 1)
+            DisplayMode: |-
+                =If(
+                    varPageNumber = 1,
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit
+                )
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varPageNumber,varPageNumber-1)
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =0
+            RadiusTopLeft: =8
+            RadiusTopRight: =0
+            Text: ="← Previous"
+            Tooltip: ="Previous"
+            Width: =140
+            X: =895
+            Y: =706
+            ZIndex: =17
+
+        Label15_3 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =45
+            Text: |-
+                ="Page " & varPageNumber & " of " & If(
+                    Mod(
+                         CountRows(galHidden_1.AllItems),
+                        100
+                    ) = 0,
+                    RoundUp(
+                         CountRows(galHidden_1.AllItems) / drpPaginationSize_1.Selected.Value,
+                        0
+                    ) & " + Pages ",
+                    RoundUp(
+                         CountRows(galHidden_1.AllItems) / drpPaginationSize_1.Selected.Value,
+                        0
+                    ) & " Pages"
+                )
+            Width: =177
+            X: =1035
+            Y: =706
+            ZIndex: =18
+
+        icoNext_3 As button:
+            Color: =RGBA(0, 121, 187, 1)
+            DisplayMode: |-
+                =If(
+                    drpPaginationSize_1.Selected.Value * varPageNumber <= Value(lblCountRows_1.Text),
+                    DisplayMode.Edit,
+                    DisplayMode.Disabled
+                )
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varPageNumber,varPageNumber+1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =8
+            RadiusTopLeft: =0
+            RadiusTopRight: =8
+            Text: ="Next → "
+            Tooltip: ="Next"
+            Width: =140
+            X: =1212
+            Y: =706
+            ZIndex: =19
+

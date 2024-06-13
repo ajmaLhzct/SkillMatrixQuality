@@ -1,0 +1,20 @@
+Screen3 As screen:
+
+    TextCanvas2 As Text:
+        DisplayMode: =DisplayMode.Edit
+        Height: =32
+        Text: =
+        Width: =96
+        X: =324
+        Y: =64
+        ZIndex: =1
+
+    TextCanvas3 As Text:
+        DisplayMode: =DisplayMode.Edit
+        Height: =32
+        Text: =LookUp(SkillMap_TestData_1,ID=3050).EmployeeId
+        Width: =96
+        X: =40
+        Y: =40
+        ZIndex: =2
+

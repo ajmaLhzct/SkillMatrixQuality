@@ -1,0 +1,4220 @@
+Admin_Organization_Dashboard As screen:
+    Fill: =RGBA(248, 249, 250, 1)
+    OnVisible: |-
+        =Set (
+            LoadingSpinnerVisible,
+            false
+        );
+        ClearCollect(colusersbyrating,AddColumns(GroupBy(SkillMap_TestData_1,EmployeeId,Rating1),avgrating,RoundUp(Sum(Rating1,Rating)/CountRows(Rating1),1)));
+        Set(varSkillOnselect,false);
+        Set(
+            VarProfileDetails,
+            false
+        );
+        ClearCollect(colusers,Filter(UsersSkillMatrix_TestData_1,IsActive));
+
+    Container_DashboardAdmin_2 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Height: =597
+        PaddingBottom: =1
+        Visible: |-
+            =//varTopTab="Summary"
+            true
+        Width: =1122
+        X: =244
+        Y: =160
+        ZIndex: =16
+
+        Container7_14 As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =218
+            Width: =360
+            ZIndex: =3
+
+            Label13_28 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                Italic: =true
+                PaddingLeft: =15
+                Text: ="Statistics"
+                ZIndex: =1
+
+            Label42_8 As label:
+                Height: =31
+                Size: =14
+                Text: |-
+                    ="People in Organization :"
+                Width: =243
+                X: =15
+                Y: =55
+                ZIndex: =2
+
+            Label42_9 As label:
+                Align: =Align.Center
+                Height: =31
+                Size: =14
+                Text: =CountRows(Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)))
+                Width: =74
+                X: =276
+                Y: =55
+                ZIndex: =3
+
+            Rectangle34_2 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =321
+                X: =15
+                Y: =110
+                ZIndex: =4
+
+            Label42_10 As label:
+                Height: =31
+                Size: =14
+                Text: |-
+                    ="Self-Assessment completed :"
+                Width: =261
+                X: =15
+                Y: =141
+                ZIndex: =5
+
+            Label42_11 As label:
+                Align: =Align.Center
+                Height: =31
+                Size: =14
+                Text: =CountRows(Filter(Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname)),SelfAssessment.Value="Completed"))
+                Width: =74
+                X: =276
+                Y: =141
+                ZIndex: =6
+
+        Container5 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =218
+            Width: =725
+            X: =382
+            ZIndex: =7
+
+            Container16 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Semilight
+                Height: =160
+                Width: =206
+                X: =26
+                Y: =35
+                ZIndex: =1
+
+                Container17 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =80
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =206
+                    Y: =80
+                    ZIndex: =1
+
+                    Button2_3 As button:
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        HoverBorderColor: =
+                        HoverColor: =RGBA(71, 158, 245, 1)
+                        HoverFill: =
+                        OnSelect: =Set(varrating,12);Set(varskillselect,false);Set(varSkillOnselect,true);
+                        PaddingLeft: =15
+                        PressedBorderColor: =
+                        PressedColor: =
+                        PressedFill: =
+                        Size: =17
+                        Text: =CountRows(Filter(colusersbyrating,avgrating >= 1,avgrating<= 2))
+                        Width: =206
+                        Y: =20
+                        ZIndex: =2
+
+                Container17_1 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.Regular
+                    Fill: =RGBA(248, 249, 250, 1)
+                    Height: =80
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =206
+                    ZIndex: =2
+
+                    Label10 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(106, 122, 127, 1)
+                        FontWeight: =FontWeight.Bold
+                        Size: =15
+                        Text: ="1 - 2"
+                        Width: =206
+                        Y: =20
+                        ZIndex: =1
+
+                    Star2 As star:
+                        Fill: =RGBA(106, 122, 127, 1)
+                        Height: =20
+                        Width: =20
+                        X: =46
+                        Y: =30
+                        ZIndex: =2
+
+            Container16_1 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Semilight
+                Height: =160
+                Width: =206
+                X: =263
+                Y: =35
+                ZIndex: =2
+
+                Container17_2 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =80
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =206
+                    Y: =80
+                    ZIndex: =1
+
+                    Button2_4 As button:
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        HoverBorderColor: =
+                        HoverColor: =RGBA(71, 158, 245, 1)
+                        HoverFill: =
+                        OnSelect: =Set(varrating,24);Set(varskillselect,false);Set(varSkillOnselect,true);
+                        PaddingLeft: =15
+                        PressedBorderColor: =
+                        PressedColor: =
+                        PressedFill: =
+                        Size: =17
+                        Text: =CountRows(Filter(colusersbyrating,avgrating >= 2,avgrating<= 4))
+                        Width: =206
+                        Y: =20
+                        ZIndex: =2
+
+                Container17_3 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.Regular
+                    Fill: =RGBA(248, 249, 250, 1)
+                    Height: =80
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =206
+                    ZIndex: =2
+
+                    Label10_4 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(106, 122, 127, 1)
+                        FontWeight: =FontWeight.Bold
+                        Size: =15
+                        Text: ="2 - 4"
+                        Width: =206
+                        Y: =20
+                        ZIndex: =1
+
+                    Star2_1 As star:
+                        Fill: =RGBA(106, 122, 127, 1)
+                        Height: =20
+                        Width: =20
+                        X: =46
+                        Y: =30
+                        ZIndex: =2
+
+            Container16_2 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.Semilight
+                Height: =160
+                Width: =206
+                X: =501
+                Y: =35
+                ZIndex: =3
+
+                Container17_4 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =80
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =206
+                    Y: =80
+                    ZIndex: =1
+
+                    Button2_5 As button:
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        HoverBorderColor: =
+                        HoverColor: =RGBA(71, 158, 245, 1)
+                        HoverFill: =
+                        OnSelect: =Set(varrating,45);Set(varskillselect,false);Set(varSkillOnselect,true);
+                        PaddingLeft: =15
+                        PressedBorderColor: =
+                        PressedColor: =
+                        PressedFill: =
+                        Size: =17
+                        Text: =CountRows(Filter(colusersbyrating,avgrating >= 4,avgrating<= 5))
+                        Width: =206
+                        Y: =20
+                        ZIndex: =2
+
+                Container17_5 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.Regular
+                    Fill: =RGBA(248, 249, 250, 1)
+                    Height: =80
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =206
+                    ZIndex: =2
+
+                    Label10_7 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(106, 122, 127, 1)
+                        FontWeight: =FontWeight.Bold
+                        Size: =15
+                        Text: ="4 - 5"
+                        Width: =206
+                        Y: =20
+                        ZIndex: =1
+
+                    Star2_2 As star:
+                        Fill: =RGBA(106, 122, 127, 1)
+                        Height: =20
+                        Width: =20
+                        X: =46
+                        Y: =30
+                        ZIndex: =2
+
+            Label13_40 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                Italic: =true
+                PaddingLeft: =15
+                PaddingRight: =15
+                Text: ="Resource Count vs Rating"
+                Width: =265
+                ZIndex: =4
+
+        Container7_40 As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =355
+            Width: =725
+            X: =382
+            Y: =241
+            ZIndex: =8
+
+            Gallery4_2 As gallery.variableTemplateHeightGallery:
+                '#CopilotOverlayLabel': ="Filtered"
+                DelayItemLoading: =true
+                Height: =325
+                Items: |-
+                    =Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname) && IsActive)
+                    //Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname) && IsActive)
+                Layout: =Layout.Vertical
+                OnSelect: =Set(VarProfileDetails,true)
+                TemplatePadding: =9
+                TemplateSize: =40
+                Width: =725
+                Y: =30
+                ZIndex: =1
+
+                Container12_10 As groupContainer.horizontalAutoLayoutContainer:
+                    Height: =40
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =705
+                    ZIndex: =4
+
+                    Button2_1 As button:
+                        Align: =Align.Left
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Normal
+                        HoverBorderColor: =
+                        HoverColor: =RGBA(71, 158, 245, 1)
+                        HoverFill: =
+                        OnSelect: =Set(VarProfileDetails , true)
+                        PaddingLeft: =15
+                        PressedBorderColor: =
+                        PressedColor: =
+                        PressedFill: =
+                        Size: =13
+                        Text: =ThisItem.Fullname
+                        Width: =300
+                        ZIndex: =1
+
+                    Label10_10 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        Height: =30
+                        HoverColor: =RGBA(71, 158, 245, 1)
+                        OnSelect: =Set(VarProfileDetails , true)
+                        PaddingLeft: =15
+                        Text: =ThisItem.Fullname
+                        Visible: =false
+                        Width: =300
+                        X: =18
+                        Y: =19
+                        ZIndex: =2
+
+                    Label17_3 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Center
+                        OnSelect: =
+                        Text: =ThisItem.TotalExperience & "  Years"
+                        Width: =180
+                        X: =180
+                        Y: =19
+                        ZIndex: =3
+
+                    Label15_2 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Center
+                        OnSelect: =//Select(Parent)
+                        Text: |+
+                            =CountRows(Filter(SkillMap_TestData_1,EmployeeId = ThisItem.EmployeeID)) & "  active skills "
+                            
+                        Tooltip: =Concat(Filter(SkillMap_TestData_1,EmployeeId = ThisItem.EmployeeID),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") "," ;")
+                        Width: =170
+                        X: =414
+                        Y: =19
+                        ZIndex: =4
+
+            Label13_49 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                Italic: =true
+                PaddingLeft: =15
+                Text: ="Members"
+                Width: =175
+                ZIndex: =2
+
+            Label13_53 As label:
+                Align: =Align.Center
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =22
+                PaddingLeft: =15
+                Text: ="No Records to Display"
+                Visible: =IsEmpty(Gallery4_2.AllItems)
+                Width: =238
+                X: =243
+                Y: =181
+                ZIndex: =3
+
+        Container7_15 As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.Regular
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =355
+            Width: =360
+            Y: =241
+            ZIndex: =9
+
+            Label13_29 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                Italic: =true
+                PaddingLeft: =15
+                Text: ="Skills"
+                ZIndex: =1
+
+            Gallery8_6 As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
+                DelayItemLoading: =true
+                Height: =325
+                Items: ='SkillMatrix_Skills Admin'
+                Layout: =Layout.Vertical
+                OnSelect: =Set(varskillselect,true);Set(varSkillOnselect,true);
+                TemplatePadding: =9
+                TemplateSize: =40
+                Width: =360
+                Y: =30
+                ZIndex: =2
+
+                Container15_6 As groupContainer.manualLayoutContainer:
+                    Height: =43
+                    Width: =334
+                    X: =5
+                    ZIndex: =1
+
+                    Rectangle3 As rectangle:
+                        Fill: =RGBA(106, 122, 127, 1)
+                        Height: =43
+                        Visible: =ThisItem.IsSelected
+                        Width: =4
+                        ZIndex: =2
+
+                    Label43_13 As label:
+                        Align: =Align.Center
+                        Height: =41
+                        PaddingLeft: =10
+                        Size: =14
+                        Text: =CountRows(Filter(SkillMap_TestData_1,SkillId = ThisItem.ID))
+                        Width: =68
+                        X: =272
+                        Y: =2
+                        ZIndex: =3
+
+                Button2_2 As button:
+                    Align: =Align.Left
+                    BorderStyle: =BorderStyle.None
+                    Color: =RGBA(0, 0, 0, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FontWeight: =FontWeight.Normal
+                    HoverBorderColor: =
+                    HoverColor: =RGBA(71, 158, 245, 1)
+                    HoverFill: =
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =15
+                    PressedBorderColor: =
+                    PressedColor: =
+                    PressedFill: =
+                    Size: =13
+                    Text: =ThisItem.Title
+                    Width: =334
+                    ZIndex: =2
+
+    Component_Admin_Navi_3 As Component_Admin_Navi:
+        Height: =79
+        MenuImage: ='svg-edited (8)'
+        MenuTitle: ="Organization"
+        Width: =1108
+        X: =245
+        Y: =70
+        ZIndex: =17
+
+    Component_SidbarNavi_Admin_New_4 As Component_SidbarNavi_Admin:
+        DirectoryItems: |-
+            =Table(
+                 {
+                    Title: "Skills",
+                    Screen: Skills
+                },
+                {
+                    Title: "Qualifications",
+                    Screen: Qualifications
+                }
+                
+            )
+        Height: =768
+        ZIndex: =18
+
+    Label24_2 As label:
+        Color: =RGBA(116, 116, 116, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =44
+        Size: =18
+        Text: ="Skill Matrix "
+        Width: =523
+        X: =245
+        Y: =13
+        ZIndex: =20
+
+    Container2_4 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.4)
+        Height: =768
+        Visible: =VarProfileDetails
+        Width: =1366
+        ZIndex: =21
+
+        Container2_6 As groupContainer.verticalAutoLayoutContainer:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =663
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =15
+            LayoutMode: =LayoutMode.Auto
+            LayoutOverflowY: =LayoutOverflow.Scroll
+            PaddingBottom: =20
+            PaddingLeft: =20
+            PaddingRight: =20
+            PaddingTop: =20
+            Width: =1122
+            X: =244
+            Y: =78
+            ZIndex: =1
+
+            Container3_1 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                LayoutAlignItems: =LayoutAlignItems.End
+                LayoutJustifyContent: =LayoutJustifyContent.End
+                LayoutMinHeight: =50
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =1
+
+                Label3_2 As label:
+                    AlignInContainer: =AlignInContainer.Center
+                    FontWeight: =FontWeight.Semibold
+                    PaddingLeft: =55
+                    Size: =18
+                    Text: ="User Details"
+                    Width: =1020
+                    ZIndex: =1
+
+                Container31_44 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Center
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =50
+                    LayoutMinHeight: =50
+                    LayoutMinWidth: =100
+                    Width: =60
+                    ZIndex: =2
+
+                    Button29_119 As button:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 0)
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =Parent.Height
+                        HoverBorderColor: =
+                        HoverColor: =RGBA(0, 0, 0, 0)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnSelect: |
+                            =Clear(col_Skills);
+                            Clear(colCurrentuserdata);
+                            Clear(colCurrentuserdata1);
+                            Clear(colCurrentuserdata2);
+                            Clear(colCurrentuserdata3);
+                            Clear(colPrimaryskills);
+                            Clear(colSecondaryskills);
+                            Clear(colSoftskills);
+                            Clear(col_ExportData);
+                            Clear(col_ExportPDF);
+                            Clear(col_ExportPDF1);
+                            Clear(col_ExportPDF2);
+                            Clear(col_ExportPDF3);
+                            Set(
+                                varISLoading,
+                                true
+                            );
+                            ForAll(
+                                UsersSkillMatrix_TestData_1,
+                                Collect(
+                                    col_ExportPDF,
+                                    {
+                                        ProfilePicture: ThisRecord.ProfilePicture,
+                                        Email: ThisRecord.Email,
+                                        Location: ThisRecord.Location,
+                                        Mobilenumber: ThisRecord.MobileNumber,
+                                        'Experience (in years)':ThisRecord.TotalExperience,
+                                        Fullname: ThisRecord.Fullname
+                                    }
+                                )
+                            );
+                            ForAll(
+                                Qualifications_TestData_1,
+                                Collect(
+                                    col_ExportPDF1,
+                                    {
+                                        Qualificationtitle: LookUp(SkillMatrix_QualificationsAdmin,ID =QualificationId).Title,
+                                        Institutename: ThisRecord.Institutename,
+                                        Gradesystem: ThisRecord.Gradesystem.Value,
+                                        'Percentage / CGPA': ThisRecord.'Percentage / CGPA',
+                                        'IsHighestQualification ': ThisRecord.'IsHighestQualification ',
+                                        EmployeeId: ThisRecord.EmployeeId
+                                    }
+                                )
+                            );
+                            ForAll(
+                                Projects_TestData,
+                                Collect(
+                                    col_ExportPDF2,
+                                    {
+                                        Title: ThisRecord.Projecttitle,
+                                        Clientname: ThisRecord.Clientname,
+                                        Startdate: ThisRecord.Startdate,
+                                        Enddate: ThisRecord.Enddate,
+                                        Projectrole: ThisRecord.Projectrole,
+                                        EmployeeId: ThisRecord.EmployeeId
+                                    }
+                                )
+                            );
+                            ForAll(
+                                Certifications_TestData_1,
+                                Collect(
+                                    col_ExportPDF3,
+                                    {
+                                        Title: ThisRecord.Title,
+                                        Completeddate: ThisRecord.Completeddate,
+                                        EmployeeId: ThisRecord.EmployeeId
+                                    }
+                                )
+                            );
+                            ForAll(
+                                SkillMap_TestData_1,
+                                Collect(
+                                    col_Skills,
+                                    {
+                                        EmployeeId: ThisRecord.EmployeeId,
+                                        Skilltitle: LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title,
+                                        SkillType: ThisRecord.SkillType.Value
+                                    }
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata,
+                                Filter(
+                                    col_ExportPDF,
+                                    Gallery_GlobalSearch_1.Selected.Email = Email
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata1,
+                                Filter(
+                                    col_ExportPDF1,
+                                     Gallery_GlobalSearch_1.Selected.EmployeeID = EmployeeId
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentSkills,
+                                Filter(
+                                    col_Skills,
+                                    Gallery_GlobalSearch_1.Selected.EmployeeID = EmployeeId
+                                )
+                            );
+                            ClearCollect(
+                                colPrimaryskills,
+                                Filter(
+                                    colCurrentSkills,
+                                    SkillType = "Primary Skill"
+                                )
+                            );
+                            ClearCollect(
+                                colSecondaryskills,
+                                Filter(
+                                    colCurrentSkills,
+                                    SkillType = "Secondary Skill"
+                                )
+                            );
+                            ClearCollect(
+                                colSoftskills,
+                                Filter(
+                                    colCurrentSkills,
+                                    SkillType = "Soft Skill"
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata2,
+                                Filter(
+                                    col_ExportPDF2,
+                                    Gallery_GlobalSearch_1.Selected.EmployeeID = EmployeeId
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata3,
+                                Filter(
+                                    col_ExportPDF3,
+                                    Gallery_GlobalSearch_1.Selected.EmployeeID = EmployeeId
+                                )
+                            );
+                            Launch(
+                                'ExportUserData_PDF(p)'.Run(
+                                    JSON(
+                                        {
+                                            colCurrentuserdata: colCurrentuserdata,
+                                            colCurrentuserdata1: colCurrentuserdata1,
+                                            colCurrentuserdata2: colCurrentuserdata2,
+                                            colCurrentuserdata3: colCurrentuserdata3,
+                                            colPrimaryskills:colPrimaryskills,
+                                            colSoftskills:colSoftskills,
+                                            colSecondaryskills:colSecondaryskills
+                                 
+                                        },
+                                        JSONFormat.IncludeBinaryData & JSONFormat.IgnoreUnsupportedTypes
+                                    ),LookUp(UsersSkillMatrix_TestData_1,EmployeeID = Gallery_GlobalSearch_1.Selected.EmployeeID).ID).varlink
+                            );
+                            Set(
+                                varISLoading,
+                                false
+                            );
+                        PaddingTop: =0
+                        PressedBorderColor: =
+                        PressedColor: =RGBA(0, 0, 0, 0)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        Text: =""
+                        Tooltip: ="View PDF"
+                        Width: =45
+                        X: =7
+                        ZIndex: =2
+
+                    Image6_8 As image:
+                        Height: =Parent.Height
+                        Image: ='pdf-file (1)'
+                        OnSelect: |
+                            =Clear(col_Skills);
+                            Clear(colCurrentuserdata);
+                            Clear(colCurrentuserdata1);
+                            Clear(colCurrentuserdata2);
+                            Clear(colCurrentuserdata3);
+                            Clear(colPrimaryskills);
+                            Clear(colSecondaryskills);
+                            Clear(colSoftskills);
+                            Clear(col_ExportData);
+                            Clear(col_ExportPDF);
+                            Clear(col_ExportPDF1);
+                            Clear(col_ExportPDF2);
+                            Clear(col_ExportPDF3);
+                            Set(
+                                varISLoading,
+                                true
+                            );
+                            ForAll(
+                                UsersSkillMatrix_TestData_1,
+                                Collect(
+                                    col_ExportPDF,
+                                    {
+                                        ProfilePicture: ThisRecord.ProfilePicture,
+                                        Email: ThisRecord.Email,
+                                        Location: ThisRecord.Location,
+                                        Mobilenumber: ThisRecord.MobileNumber,
+                                        'Experience (in years)':ThisRecord.TotalExperience,
+                                        Fullname: ThisRecord.Fullname
+                                    }
+                                )
+                            );
+                            ForAll(
+                                Qualifications_TestData_1,
+                                Collect(
+                                    col_ExportPDF1,
+                                    {
+                                        Qualificationtitle: LookUp(SkillMatrix_QualificationsAdmin,ID =QualificationId).Title,
+                                        Institutename: ThisRecord.Institutename,
+                                        Gradesystem: ThisRecord.Gradesystem.Value,
+                                        'Percentage / CGPA': ThisRecord.'Percentage / CGPA',
+                                        'IsHighestQualification ': ThisRecord.'IsHighestQualification ',
+                                        EmployeeId: ThisRecord.EmployeeId
+                                    }
+                                )
+                            );
+                            ForAll(
+                                Projects_TestData,
+                                Collect(
+                                    col_ExportPDF2,
+                                    {
+                                        Title: ThisRecord.Projecttitle,
+                                        Clientname: ThisRecord.Clientname,
+                                        Startdate: ThisRecord.Startdate,
+                                        Enddate: ThisRecord.Enddate,
+                                        Projectrole: ThisRecord.Projectrole,
+                                        EmployeeId: ThisRecord.EmployeeId
+                                    }
+                                )
+                            );
+                            ForAll(
+                                Certifications_TestData_1,
+                                Collect(
+                                    col_ExportPDF3,
+                                    {
+                                        Title: ThisRecord.Title,
+                                        Completeddate: ThisRecord.Completeddate,
+                                        EmployeeId: ThisRecord.EmployeeId
+                                    }
+                                )
+                            );
+                            ForAll(
+                                SkillMap_TestData_1,
+                                Collect(
+                                    col_Skills,
+                                    {
+                                        EmployeeId: ThisRecord.EmployeeId,
+                                        Skilltitle: LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title,
+                                        SkillType: ThisRecord.SkillType.Value
+                                    }
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata,
+                                Filter(
+                                    col_ExportPDF,
+                                  Gallery4_1.Selected.Email = Email
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata1,
+                                Filter(
+                                    col_ExportPDF1,
+                                     Gallery_Qualifications_16.Selected.EmployeeId = EmployeeId
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentSkills,
+                                Filter(
+                                    col_Skills,
+                                   Gallery_PrimarySkills_17.Selected.EmployeeId = EmployeeId
+                                )
+                            );
+                            ClearCollect(
+                                colPrimaryskills,
+                                Filter(
+                                    colCurrentSkills,
+                                    SkillType = "Primary Skill"
+                                )
+                            );
+                            ClearCollect(
+                                colSecondaryskills,
+                                Filter(
+                                    colCurrentSkills,
+                                    SkillType = "Secondary Skill"
+                                )
+                            );
+                            ClearCollect(
+                                colSoftskills,
+                                Filter(
+                                    colCurrentSkills,
+                                    SkillType = "Soft Skill"
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata2,
+                                Filter(
+                                    col_ExportPDF2,
+                                   Gallery3_6.Selected.EmployeeId = EmployeeId
+                                )
+                            );
+                            ClearCollect(
+                                colCurrentuserdata3,
+                                Filter(
+                                    col_ExportPDF3,
+                                    Gallery_Certifications_15.Selected.EmployeeId = EmployeeId
+                                )
+                            );
+                            Launch(
+                                'ExportUserData_PDF(p)'.Run(
+                                    JSON(
+                                        {
+                                            colCurrentuserdata: colCurrentuserdata,
+                                            colCurrentuserdata1: colCurrentuserdata1,
+                                            colCurrentuserdata2: colCurrentuserdata2,
+                                            colCurrentuserdata3: colCurrentuserdata3,
+                                            colPrimaryskills:colPrimaryskills,
+                                            colSoftskills:colSoftskills,
+                                            colSecondaryskills:colSecondaryskills
+                                 
+                                        },
+                                        JSONFormat.IncludeBinaryData & JSONFormat.IgnoreUnsupportedTypes
+                                    ),LookUp(UsersSkillMatrix_TestData_1,EmployeeID = Gallery4_1.Selected.EmployeeID).ID).varlink
+                                    
+                            );
+                            Set(
+                                varISLoading,
+                                false
+                            );
+                        PaddingBottom: =12
+                        PaddingLeft: =12
+                        PaddingRight: =12
+                        PaddingTop: =12
+                        Tooltip: ="View PDF"
+                        Width: =Parent.Width
+                        ZIndex: =3
+
+                Icon2_1 As icon.CancelBadge:
+                    AlignInContainer: =AlignInContainer.Center
+                    Color: =RGBA(112, 112, 112, 1)
+                    Height: =35
+                    Icon: =Icon.CancelBadge
+                    OnSelect: =Set(VarProfileDetails , false)
+                    Tooltip: ="Close"
+                    Width: =35
+                    ZIndex: =3
+
+            Container32_4 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(238, 238, 238, 1)
+                FillPortions: =0
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                ZIndex: =2
+
+                Container_ProfilePic_17 As groupContainer.manualLayoutContainer:
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =190
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    Width: =200
+                    X: =63
+                    Y: =77
+                    ZIndex: =1
+
+                    Image29_20 As image:
+                        BorderColor: =RGBA(0, 0, 0, 1)
+                        BorderThickness: =1
+                        Height: =180
+                        Image: =Gallery4_2.Selected.ProfilePicture
+                        RadiusBottomLeft: =100
+                        RadiusBottomRight: =100
+                        RadiusTopLeft: =100
+                        RadiusTopRight: =100
+                        Width: =180
+                        X: =12
+                        Y: =8
+                        ZIndex: =1
+
+                Form_UserDetails_16 As form:
+                    AlignInContainer: =AlignInContainer.Center
+                    BorderColor: =RGBA(219, 219, 219, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    DataSource: =UsersSkillMatrix_TestData_1
+                    DefaultMode: =If(varEditProfile= true ,FormMode.Edit,FormMode.View)
+                    FillPortions: =0
+                    Height: =Parent.Height - 20
+                    Item: =Gallery4_2.Selected
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =400
+                    NumberOfColumns: =2
+                    OnSuccess: |-
+                        =Set(
+                                varSuccessPopup,
+                                true)
+                    Width: =828
+                    X: =299
+                    Y: =100
+                    ZIndex: =2
+
+                    Location_DataCard1_9 As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Location"
+                        Default: =ThisItem.Location
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,Location)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =60
+                        MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, Location)
+                        Required: =false
+                        Update: =DataCardValue4_9.Text
+                        Width: =414
+                        X: =1
+                        Y: =0
+                        ZIndex: =1
+
+                        DataCardValue4_9 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            BorderStyle: =BorderStyle.None
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =14
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =53
+                            ZIndex: =2
+
+                        ErrorMessage5_9 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue4_9.Y + DataCardValue4_9.Height
+                            ZIndex: =3
+
+                        StarVisible5_9 As label:
+                            Align: =Align.Center
+                            Height: =
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =
+                            ZIndex: =4
+
+                        Image29_11 As image:
+                            Height: =30
+                            Image: ='location-svgrepo-com'
+                            Width: =25
+                            X: =15
+                            Y: =10
+                            ZIndex: =5
+
+                    "'Experience (in years)_DataCard2_16' As typedDataCard.numberEditCard":
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Experience_x0028_inyears_x0029_"
+                        Default: =ThisItem.TotalExperience
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,TotalExperience)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =59
+                        Required: =true
+                        Update: =Value(DataCardValue22_24.Text)
+                        Visible: =true
+                        Width: =414
+                        X: =0
+                        Y: =2
+                        ZIndex: =1
+
+                        ErrorMessage17_23 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue22_24.Y + DataCardValue22_24.Height
+                            ZIndex: =3
+
+                        StarVisible17_23 As label:
+                            Align: =Align.Center
+                            Color: =RGBA(184, 0, 0, 1)
+                            Height: =
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            X: =231
+                            Y: =10
+                            ZIndex: =4
+
+                        DataCardValue22_24 As text:
+                            BorderColor: =RGBA(79, 90, 94, 1)
+                            BorderThickness: =1
+                            Default: |
+                                =Parent.Default 
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            Fill: =If(Form_UserDetails_16.Mode = FormMode.Edit, RGBA(255, 255, 255, 1),RGBA(238, 238, 238, 1))
+                            FontWeight: =FontWeight.Semibold
+                            Format: =TextFormat.Number
+                            Height: =45
+                            HintText: ="Total Experience till " & Today() 
+                            HoverBorderColor: =RGBA(219, 219, 219, 1)
+                            HoverFill: =RGBA(255, 255, 255, 1)
+                            MaxLength: =//Parent.MaxLength
+                            PaddingLeft: =10
+                            PaddingTop: =0
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Size: =14
+                            Tooltip: =Parent.DisplayName
+                            Width: =336
+                            X: =56
+                            Y: =5
+                            ZIndex: =5
+
+                        Image30_8 As image:
+                            Height: =40
+                            Image: ='business-time-svgrepo-com'
+                            Width: =30
+                            X: =15
+                            Y: =5
+                            ZIndex: =6
+
+                        Label4 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Text: ="Years"
+                            X: =105
+                            Y: =7
+                            ZIndex: =7
+
+                    ProfilePicture_DataCard1_3 As typedDataCard.addLargePictureCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="ProfilePicture"
+                        Default: =ThisItem.ProfilePicture
+                        DisplayMode: =Parent.DisplayMode
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,ProfilePicture)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =50
+                        Required: =false
+                        Update: =Image3_4.Image
+                        Visible: =false
+                        Width: =414
+                        X: =0
+                        Y: =3
+                        ZIndex: =1
+
+                        DataCardKey5_3 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        Image3_4 As image:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            DisplayMode: =Parent.DisplayMode
+                            Height: =AddPicture1_3.Height
+                            Image: =User().Image
+                            Tooltip: =Parent.DisplayName
+                            Width: =AddPicture1_3.Width
+                            X: =AddPicture1_3.X
+                            Y: =AddPicture1_3.Y
+                            ZIndex: =2
+
+                        AddPicture1_3 As addMedia:
+                            Height: =200
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey5_3.Y + DataCardKey5_3.Height + 5
+                            ZIndex: =3
+
+                        ErrorMessage5_3 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =Image3_4.Y + Image3_4.Height
+                            ZIndex: =4
+
+                        StarVisible5_3 As label:
+                            Align: =Align.Center
+                            Height: =DataCardKey5_3.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey5_3.Y
+                            ZIndex: =5
+
+                    "'First name_DataCard1_19' As typedDataCard.textualEditCard":
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Firstname"
+                        Default: =ThisItem.Fullname
+                        DisplayMode: =DisplayMode.View
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,Fullname)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =60
+                        MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, Fullname)
+                        Required: =false
+                        Update: =DataCardValue8_19.Text
+                        Width: =414
+                        X: =0
+                        Y: =0
+                        ZIndex: =2
+
+                        DataCardValue8_19 As text:
+                            BorderColor: =RGBA(79, 90, 94, 1)
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =1
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledBorderColor: =RGBA(53, 61, 63, 1)
+                            DisabledFill: =RGBA(255, 255, 255, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            HoverFill: =RGBA(255, 255, 255, 1)
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =0
+                            Size: =14
+                            Tooltip: =Parent.DisplayName
+                            Width: =300
+                            X: =60
+                            ZIndex: =2
+
+                        ErrorMessage9_19 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue8_19.Y + DataCardValue8_19.Height
+                            ZIndex: =3
+
+                        StarVisible9_19 As label:
+                            Align: =Align.Center
+                            Height: =
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =
+                            ZIndex: =4
+
+                        Image20_14 As image:
+                            Height: =40
+                            Image: =UserProfile
+                            Width: =30
+                            X: =13
+                            Y: =5
+                            ZIndex: =5
+
+                    Email_DataCard1_19 As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Email"
+                        Default: =ThisItem.Email
+                        DisplayMode: =DisplayMode.View
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,Email)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =60
+                        MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, Email)
+                        Required: =false
+                        Update: =DataCardValue12_23.Text
+                        Width: =414
+                        X: =0
+                        Y: =1
+                        ZIndex: =2
+
+                        DataCardValue12_23 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =Parent.Default
+                            DelayOutput: =true
+                            DisabledFill: =RGBA(255, 255, 255, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =0
+                            Size: =14
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =60
+                            Y: =
+                            ZIndex: =2
+
+                        ErrorMessage13_23 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue12_23.Y + DataCardValue12_23.Height
+                            ZIndex: =3
+
+                        StarVisible13_23 As label:
+                            Align: =Align.Center
+                            Height: =
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =
+                            ZIndex: =4
+
+                        Image28_8 As image:
+                            Height: =30
+                            Image: ='email-svgrepo-com'
+                            Width: =25
+                            X: =15
+                            Y: =10
+                            ZIndex: =5
+
+                    "'Mobile number_DataCard1_19' As typedDataCard.numberEditCard":
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Mobilenumber"
+                        Default: =ThisItem.MobileNumber
+                        DisplayMode: =DisplayMode.View
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,MobileNumber)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =60
+                        Required: =false
+                        Update: =Value(DataCardValue13_19.Text)
+                        Width: =414
+                        X: =1
+                        Y: =1
+                        ZIndex: =2
+
+                        DataCardValue13_19 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: |
+                                =Parent.Default
+                            DelayOutput: =true
+                            DisabledFill: =RGBA(255, 255, 255, 1)
+                            DisplayMode: =Parent.DisplayMode
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            PaddingLeft: =0
+                            Size: =14
+                            Tooltip: =Parent.DisplayName
+                            Width: =376
+                            X: =60
+                            Y: =
+                            ZIndex: =2
+
+                        ErrorMessage14_19 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue13_19.Y + DataCardValue13_19.Height
+                            ZIndex: =3
+
+                        StarVisible14_19 As label:
+                            Align: =Align.Center
+                            Height: =
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =
+                            ZIndex: =4
+
+                        Image27_8 As image:
+                            Height: =30
+                            Image: ='phone-svgrepo-com (1)'
+                            Width: =25
+                            X: =15
+                            Y: =10
+                            ZIndex: =5
+
+                    Title_DataCard3_19 As typedDataCard.textualEditCard:
+                        BorderStyle: =BorderStyle.Solid
+                        DataField: ="Title"
+                        Default: =ThisItem.EmployeeID
+                        DisplayMode: =DisplayMode.Edit
+                        DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,EmployeeID)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =40
+                        MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, EmployeeID)
+                        Required: =false
+                        Update: =DataCardValue7_19.Text
+                        Visible: =false
+                        Width: =414
+                        X: =1
+                        Y: =2
+                        ZIndex: =2
+
+                        DataCardKey8_22 As label:
+                            AutoHeight: =true
+                            Height: =34
+                            Text: ="Employee ID"
+                            Width: =Parent.Width - 60
+                            Wrap: =false
+                            X: =30
+                            Y: =10
+                            ZIndex: =1
+
+                        DataCardValue7_19 As text:
+                            BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                            Default: =LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID
+                            DelayOutput: =true
+                            DisplayMode: =Parent.DisplayMode
+                            FontWeight: =FontWeight.Semibold
+                            MaxLength: =Parent.MaxLength
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Tooltip: =Parent.DisplayName
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardKey8_22.Y + DataCardKey8_22.Height + 5
+                            ZIndex: =2
+
+                        ErrorMessage8_22 As label:
+                            AutoHeight: =true
+                            Height: =10
+                            Live: =Live.Assertive
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: =Parent.Error
+                            Visible: =Parent.DisplayMode=DisplayMode.Edit
+                            Width: =Parent.Width - 60
+                            X: =30
+                            Y: =DataCardValue7_19.Y + DataCardValue7_19.Height
+                            ZIndex: =3
+
+                        StarVisible8_22 As label:
+                            Align: =Align.Center
+                            Height: =DataCardKey8_22.Height
+                            Text: ="*"
+                            Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                            Width: =30
+                            Wrap: =false
+                            Y: =DataCardKey8_22.Y
+                            ZIndex: =4
+
+            Container_QualiHeading_3 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =60
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =5
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                ZIndex: =3
+
+                Image37_37 As image:
+                    Height: =Parent.Height
+                    Image: ='education-cap-svgrepo-com'
+                    PaddingTop: =5
+                    Width: =Parent.Height
+                    X: =61
+                    Y: =320
+                    ZIndex: =1
+
+                Lbl_Qualication_14 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Parent.Height
+                    Size: =17
+                    Text: ="Qualification Details"
+                    Width: =325
+                    X: =103
+                    Y: =312
+                    ZIndex: =2
+
+                Container33_39 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =Parent.Height
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    PaddingTop: =10
+                    Visible: =varEditProfile
+                    Width: =Button_Qualification_55.Width+4
+                    ZIndex: =5
+
+                    Button_Qualification_55 As button:
+                        Align: =Align.Left
+                        BorderThickness: =1
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Normal
+                        Height: =44
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(245, 245, 245, 1)
+                        OnSelect: |
+                            =ClearCollect(ColQchoices,SkillMatrix_QualificationsAdmin);
+                            ResetForm(Form_Qualification_8);
+                            NewForm(Form_Qualification_8);
+                            Set(
+                                varQualificationform,
+                                true
+                            );
+                            ForAll(
+                                Gallery_Qualifications_16.AllItems,
+                                Remove(
+                                    ColQchoices,
+                                    LookUp(
+                                        ColQchoices,
+                                        Title = LookUp(SkillMatrix_QualificationsAdmin,ID=QualificationId).Title
+                                    )
+                                )
+                            );
+                        PaddingLeft: =45
+                        PressedBorderColor: =RGBA(219, 219, 219, 1)
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(219, 219, 219, 1)
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Size: =14
+                        Text: ="  Add Qualification"
+                        Tooltip: ="Add Qualification"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =210
+                        X: =2
+                        Y: =7
+                        ZIndex: =2
+
+                    Img_qul_add_45 As image:
+                        BorderColor: =RGBA(219, 219, 219, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =30
+                        Image: =Plus
+                        OnSelect: |
+                            =ClearCollect(ColQchoices,SkillMatrix_QualificationsAdmin);
+                            ResetForm(Form_Qualification_8);
+                            NewForm(Form_Qualification_8);
+                            Set(
+                                varQualificationform,
+                                true
+                            );
+                            ForAll(
+                                Gallery_Qualifications_16.AllItems,
+                                Remove(
+                                    ColQchoices,
+                                    LookUp(
+                                        ColQchoices,
+                                        Title = LookUp(SkillMatrix_QualificationsAdmin,ID=QualificationId).Title
+                                    )
+                                )
+                            );
+                        PaddingBottom: =6
+                        PaddingLeft: =6
+                        PaddingRight: =6
+                        PaddingTop: =6
+                        Tooltip: ="Add Qualification"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =30
+                        X: =10
+                        Y: =14
+                        ZIndex: =3
+
+            Container_Qualification_View_16 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(106, 122, 127, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Fill: =RGBA(238, 238, 238, 1)
+                FillPortions: =0
+                Height: |
+                    =//355
+                    CountRows(Gallery_Qualifications_16.AllItems)*60 +100
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                PaddingBottom: =20
+                PaddingLeft: =20
+                PaddingRight: =20
+                PaddingTop: =20
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Visible: |-
+                    =//varTab=2
+                    true
+                Width: =1253
+                X: =61
+                Y: =362
+                ZIndex: =4
+
+                Gallery_Qualifications_16 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    BorderColor: =RGBA(238, 238, 238, 1)
+                    BorderThickness: =1
+                    DelayItemLoading: =true
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: |-
+                        =//272
+                        CountRows(Gallery_Qualifications_16.AllItems)*60+1
+                    Items: =Filter(Qualifications_TestData_1,EmployeeId =  Gallery4_2.Selected.EmployeeID)
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    TemplatePadding: =0
+                    TemplateSize: =55
+                    Width: =1070
+                    Y: =75
+                    ZIndex: =1
+
+                    Container8_55 As groupContainer.manualLayoutContainer:
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        Visible: =false
+                        Width: =1051
+                        ZIndex: =1
+
+                        Image12_57 As image:
+                            Height: =60
+                            Image: =magistrate
+                            OnSelect: =//Select(Parent)
+                            Width: =50
+                            X: =12
+                            Y: =4
+                            ZIndex: =1
+
+                        Label24_52 As label:
+                            FontWeight: =FontWeight.Semibold
+                            OnSelect: =//Select(Parent)
+                            Size: =14
+                            Text: =LookUp(SkillMatrix_QualificationsAdmin,ID =ThisItem.QualificationId).Title
+                            Width: =272
+                            X: =86
+                            Y: =16
+                            ZIndex: =2
+
+                        Label50_11 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Height: =42
+                            Size: =14
+                            Text: ="Highest Qualification"
+                            Visible: =ThisItem.'IsHighestQualification ' = true
+                            Width: =216
+                            X: =821
+                            Y: =13
+                            ZIndex: =3
+
+                        Label52_12 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Size: =14
+                            Text: =ThisItem.Institutename
+                            Width: =250
+                            X: =347
+                            Y: =15
+                            ZIndex: =4
+
+                    Container28_63 As groupContainer.manualLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        Height: =55
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Visible: =false
+                        Width: =151
+                        ZIndex: =2
+
+                        Button29_120 As button:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            OnSelect: |-
+                                =EditForm(Form_Qualification_8);
+                                Set(varQualificationform , true)
+                            PaddingTop: =0
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Text: =""
+                            Tooltip: ="Edit"
+                            Width: =45
+                            X: =24
+                            Y: =8
+                            ZIndex: =1
+
+                        Image19_120 As image:
+                            DisabledFill: =RGBA(219, 219, 219, 1)
+                            Height: =25
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            Image: =Edit
+                            OnSelect: |-
+                                =EditForm(Form_Qualification_8);
+                                Set(varQualificationform , true)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            Tooltip: ="Edit"
+                            Width: =25
+                            X: =34
+                            Y: =15
+                            ZIndex: =2
+
+                        Button29_124 As button:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            OnSelect: =Remove(Qualifications_TestData_1,ThisItem)
+                            PaddingTop: =0
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Text: =""
+                            Tooltip: ="Delete"
+                            Width: =45
+                            X: =88
+                            Y: =8
+                            ZIndex: =3
+
+                        Image19_121 As image:
+                            DisabledFill: =RGBA(219, 219, 219, 1)
+                            Height: =20
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            Image: =trash
+                            OnSelect: =Remove(Qualifications_TestData_1,ThisItem)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            Tooltip: ="Delete"
+                            Width: =20
+                            X: =100
+                            Y: =18
+                            ZIndex: =4
+
+                    Container8_59 As groupContainer.horizontalAutoLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width - 40
+                        X: =20
+                        ZIndex: =3
+
+                        Label13_92 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            FillPortions: =1
+                            Height: =55
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: |
+                                =LookUp(SkillMatrix_QualificationsAdmin,ID =ThisItem.QualificationId).Title
+                            Visible: |-
+                                =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                                true
+                            Width: =310
+                            X: =
+                            ZIndex: =2
+
+                        Label14_70 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            FillPortions: =1
+                            Height: =55
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: =ThisItem.Institutename
+                            Width: =190
+                            ZIndex: =6
+
+                        Label14_71 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            FillPortions: =1
+                            Height: =55
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: |
+                                =If(ThisItem.'IsHighestQualification '= false,"No","Yes")
+                            Width: =190
+                            ZIndex: =7
+
+                Container_QualiHeader_3 As groupContainer.horizontalAutoLayoutContainer:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =60
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =Parent.Width -40
+                    X: =20
+                    Y: =15
+                    ZIndex: =2
+
+                    Label13_87 As label:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Name"
+                        Visible: |-
+                            =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                            true
+                        Width: =360
+                        X: =
+                        ZIndex: =1
+
+                    Label14_68 As label:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Institute name"
+                        Width: =190
+                        ZIndex: =5
+
+                    Label14_69 As label:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Is highest qualification"
+                        Width: =190
+                        ZIndex: =6
+
+                    Label14_67 As label:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(139, 154, 159, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height
+                        Size: =15
+                        Text: ="Actions"
+                        Visible: =varEditProfile
+                        Width: =160
+                        ZIndex: =7
+
+            Container_SkillHeading_3 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =50
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =5
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                ZIndex: =5
+
+                Image37_38 As image:
+                    Height: =Parent.Height
+                    Image: =skill
+                    PaddingTop: =5
+                    Width: =Parent.Height
+                    X: =61
+                    Y: =320
+                    ZIndex: =1
+
+                Lbl_Qualication_25 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Parent.Height
+                    Size: =17
+                    Text: ="Skills"
+                    Width: =325
+                    X: =103
+                    Y: =312
+                    ZIndex: =2
+
+            Container_Skills_View_17 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(238, 238, 238, 1)
+                FillPortions: =0
+                Height: |-
+                    =//Gallery_skillcategory_14.Height+Container23_44.Height+Gallery_PrimarySkills_14.Height+Container_SkillHeader_1.Height+20
+                    //386
+                    CountRows(Gallery_PrimarySkills_17.AllItems)*55 +200
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Width: =1254
+                X: =57
+                Y: |
+                    =//788
+                    //(Container_Qualification_View_12.Height )*120 + 500
+                    (Container_Qualification_View_16.Height) +440
+                ZIndex: =6
+
+                Gallery_skillcategory_18 As gallery.galleryHorizontal:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Height: =69
+                    Items: |
+                        =Table({Title:"Primary Skill"},{Title:"Secondary Skill"},{Title:"Soft Skill"})
+                    OnSelect: =Set(vargalcat,ThisItem.Title)
+                    ShowScrollbar: =false
+                    TemplatePadding: =0
+                    TemplateSize: =350
+                    Width: =1071
+                    Y: =8
+                    ZIndex: =6
+
+                    Button18_30 As button:
+                        BorderColor: =RGBA(53, 61, 63, 1)
+                        BorderThickness: =1
+                        Color: =If(vargalcat = ThisItem.Title ,Color.White , RGBA(0,0,0,1))
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledColor: =RGBA(0, 0, 0, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        Fill: =If(vargalcat = ThisItem.Title ,RGBA(51, 122, 183, 1) , Color.Transparent)
+                        FocusedBorderThickness: =0
+                        FontWeight: =FontWeight.Normal
+                        Height: =51
+                        HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =If(vargalcat = ThisItem.Title ,RGBA(51, 122, 183, 1) , Color.Transparent)
+                        OnSelect: =Set(vargalcat,ThisItem.Title)
+                        PaddingLeft: =0
+                        PressedBorderColor: =RGBA(0, 0, 0, 0)
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =15
+                        RadiusTopRight: =15
+                        Text: =ThisItem.Title
+                        Tooltip: ="Add Skills"
+                        Width: =321
+                        X: =23
+                        Y: =9
+                        ZIndex: =1
+
+                Button27_17 As button:
+                    Fill: =RGBA(51, 122, 183, 1)
+                    FontWeight: =FontWeight.Normal
+                    Height: =45
+                    OnSelect: |
+                        =ForAll(
+                            ComboBox_Skill_Select_16.SelectedItems,
+                            Patch(
+                                SkillMap_TestData_1,
+                                Defaults(SkillMap_TestData_1),
+                                {SkillType: {Value: vargalcat}},
+                                {EmployeeId: LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID},
+                                {SkillId:LookUp('SkillMatrix_Skills Admin',Title = Value).ID}
+                            )
+                        );
+                        Reset(ComboBox_Skill_Select_16);
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Text: ="Select"
+                    Visible: =varEditProfile
+                    Width: =124
+                    X: =699
+                    Y: =77
+                    ZIndex: =8
+
+                Container23_47 As groupContainer.manualLayoutContainer:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =50
+                    RadiusBottomLeft: =5
+                    RadiusBottomRight: =5
+                    RadiusTopLeft: =5
+                    RadiusTopRight: =5
+                    Visible: =varEditProfile
+                    Width: =674
+                    X: =10
+                    Y: =72
+                    ZIndex: =11
+
+                    ComboBox_Skill_Select_16 As combobox:
+                        BorderColor: =RGBA(149, 149, 149, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronFill: =RGBA(116, 116, 116, 1)
+                        ChevronHoverBackground: =
+                        ChevronHoverFill: =RGBA(116, 116, 116, 1)
+                        DisplayFields: =["Value"]
+                        Height: =47
+                        HoverFill: =RGBA(237, 237, 237, 1)
+                        IsSearchable: =false
+                        Items: |-
+                            =If(
+                                vargalcat = "Soft Skill",
+                                ForAll(
+                                    Filter(
+                                        Filter(
+                                            'SkillMatrix_Skills Admin',
+                                            Category.Value = "Soft Skill"
+                                        ),
+                                        Not(
+                                            Title in ForAll(Filter(
+                                                SkillMap_TestData_1,
+                                                EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID
+                                            ),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title
+                                        )
+                                    ),
+                                    Title
+                                ),Title),
+                                ForAll(
+                                    Filter(
+                                        Filter(
+                                            'SkillMatrix_Skills Admin',
+                                            Category.Value = "General Skill"
+                                        ),
+                                        Not(
+                                            Title in ForAll(Filter(
+                                                SkillMap_TestData_1,
+                                                EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID
+                                            ),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title
+                                        )
+                                        )
+                                    ),
+                                    Title
+                                )
+                            )
+                        NoSelectionText: ="Select Skills"
+                        OnChange: =
+                        PaddingLeft: =10
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(202, 202, 202, 1)
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionColor: =RGBA(0, 0, 0, 1)
+                        SelectionFill: =RGBA(219, 219, 219, 1)
+                        Width: =Parent.Width
+                        Y: =3
+                        ZIndex: =1
+
+                Gallery_PrimarySkills_17 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    BorderStyle: =BorderStyle.None
+                    DelayItemLoading: =true
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: =CountRows(Gallery_PrimarySkills_17.AllItems)*60+1
+                    Items: |
+                        =Filter(SkillMap_TestData_1,EmployeeId =  Gallery4_1.Selected.EmployeeID && SkillType.Value = vargalcat  && 'Created By'.Email =  Gallery4_2.Selected.Email )
+                    Layout: =Layout.Vertical
+                    TemplatePadding: =0
+                    TemplateSize: =55
+                    Width: =Parent.Width
+                    X: =10
+                    Y: =148
+                    ZIndex: =13
+
+                    Container8_115 As groupContainer.manualLayoutContainer:
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        Visible: =false
+                        Width: =1
+                        ZIndex: =1
+
+                        Image12_74 As image:
+                            Height: =50
+                            Image: ='logical-thinking'
+                            OnSelect: =//Select(Parent)
+                            Width: =40
+                            X: =12
+                            Y: =5
+                            ZIndex: =1
+
+                        Label24_69 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Height: =54
+                            OnSelect: =//Select(Parent)
+                            PaddingBottom: =0
+                            Size: =14
+                            Text: =LookUp('SkillMatrix_Skills Admin',ID = ThisItem.SkillId).Title
+                            Width: =462
+                            X: =86
+                            Y: =5
+                            ZIndex: =2
+
+                    Rating2_34 As rating:
+                        BorderStyle: =BorderStyle.None
+                        Default: =If(ThisItem.Rating = Blank(),0,ThisItem.Rating)
+                        DisabledFill: =Self.Fill
+                        DisplayMode: =DisplayMode.Edit
+                        FocusedBorderColor: =Self.BorderColor
+                        Height: =30
+                        HoverFill: =Self.Fill
+                        OnChange: |-
+                            =Patch(
+                                SkillMap_TestData_1,
+                                Gallery_PrimarySkills_17.Selected,
+                                {Rating: Rating2_34.Value}
+                            )
+                        OnSelect: =Select(Parent)
+                        PressedFill: =Self.Fill
+                        RatingFill: =RGBA(255, 191, 0, 1)
+                        Visible: =false
+                        Width: =1
+                        X: =0
+                        Y: =15
+                        ZIndex: =2
+
+                    Container28_96 As groupContainer.manualLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        Height: =55
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Visible: =false
+                        Width: =1
+                        ZIndex: =3
+
+                        Button29_96 As button:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            OnSelect: =Remove(SkillMap_TestData_1,ThisItem)
+                            PaddingTop: =0
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Text: =""
+                            Tooltip: ="Delete"
+                            Visible: =vargalcat<>"Soft Skill"
+                            Width: =45
+                            X: =76
+                            Y: =12
+                            ZIndex: =3
+
+                        Image19_91 As image:
+                            DisabledFill: =RGBA(219, 219, 219, 1)
+                            Height: =20
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            Image: =trash
+                            OnSelect: =Remove(SkillMap_TestData_1,ThisItem)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            Tooltip: ="Delete"
+                            Visible: =vargalcat<>"Soft Skill"
+                            Width: =20
+                            X: =88
+                            Y: =22
+                            ZIndex: =4
+
+                    Container8_116 As groupContainer.horizontalAutoLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width - 40
+                        X: =1
+                        ZIndex: =4
+
+                        Label13_142 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            FillPortions: =1
+                            Height: =Parent.Height-0.5
+                            LayoutMinWidth: =120
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: |
+                                =LookUp('SkillMatrix_Skills Admin',ID = ThisItem.SkillId).Title
+                            Visible: |-
+                                =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                                true
+                            Width: =500
+                            X: =
+                            ZIndex: =1
+
+                        Container37_2 As groupContainer.manualLayoutContainer:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            DropShadow: =DropShadow.None
+                            LayoutMinHeight: =60
+                            LayoutMinWidth: =250
+                            ZIndex: =2
+
+                            Rating2_33 As rating:
+                                BorderColor: =RGBA(139, 154, 159, 1)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =0.2
+                                Default: =If(ThisItem.Rating = Blank(),0,ThisItem.Rating)
+                                DisabledFill: =Self.Fill
+                                DisplayMode: =DisplayMode.View
+                                FocusedBorderColor: =Self.BorderColor
+                                Height: =32
+                                HoverFill: =Self.Fill
+                                OnChange: |-
+                                    =Patch(
+                                        SkillMap_TestData_1,
+                                        Gallery_PrimarySkills_17.Selected,
+                                        {Rating: Rating2_33.Value}
+                                    )
+                                OnSelect: =//Select(Parent)
+                                PressedFill: =Self.Fill
+                                RatingFill: =RGBA(255, 191, 0, 1)
+                                Visible: =true
+                                Width: =250
+                                X: =8
+                                Y: =12
+                                ZIndex: =1
+
+                        Container28_97 As groupContainer.manualLayoutContainer:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            DropShadow: =DropShadow.None
+                            FillPortions: =0
+                            Height: =Parent.Height-0.5
+                            LayoutMinHeight: =55
+                            LayoutMinWidth: =160
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Visible: =varEditProfile
+                            Width: =160
+                            X: =1067
+                            ZIndex: =3
+
+                            Button29_99 As button:
+                                BorderColor: =RGBA(202, 202, 202, 1)
+                                Fill: =RGBA(0, 0, 0, 0)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                OnSelect: |-
+                                    =//Remove('SkillMap_TestData_1',ThisItem)
+                                    Set(VarSkillsdelete,true);
+                                PaddingTop: =0
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                RadiusBottomLeft: =4
+                                RadiusBottomRight: =4
+                                RadiusTopLeft: =4
+                                RadiusTopRight: =4
+                                Text: =""
+                                Tooltip: ="Delete"
+                                Visible: =LookUp('SkillMatrix_Skills Admin',ID =ThisItem.SkillId).Mandatory.Value ="No"
+                                Width: =45
+                                X: =51
+                                Y: =8
+                                ZIndex: =3
+
+                            Icon3_8 As icon.Trash:
+                                Color: =RGBA(0, 0, 0, 1)
+                                Height: =25
+                                Icon: =Icon.Trash
+                                OnSelect: =Set(VarSkillsdelete,true);
+                                Tooltip: ="Delete"
+                                Visible: =vargalcat<>"Soft Skill"
+                                Width: =25
+                                X: =61
+                                Y: =15
+                                ZIndex: =5
+
+                Container_SkillHeader_3 As groupContainer.horizontalAutoLayoutContainer:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    DropShadow: =DropShadow.None
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =60
+                    LayoutAlignItems: =LayoutAlignItems.Center
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =1030
+                    X: =20
+                    Y: =88
+                    ZIndex: =14
+
+                    Label13_140 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        LayoutMinWidth: =120
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Name"
+                        Visible: |-
+                            =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                            true
+                        Width: =500
+                        X: =
+                        ZIndex: =1
+
+                    Label14_103 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Ratings"
+                        Width: =190
+                        ZIndex: =2
+
+                    Label14_113 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        Size: =15
+                        Text: ="Actions"
+                        Visible: =varEditProfile
+                        Width: =160
+                        ZIndex: =3
+
+                Container33_40 As groupContainer.manualLayoutContainer:
+                    DropShadow: =DropShadow.None
+                    Height: =66
+                    Visible: =varEditProfile
+                    Width: =232
+                    X: =838
+                    Y: =71
+                    ZIndex: =15
+
+                    Button_Qualification_56 As button:
+                        BorderThickness: =1
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Normal
+                        Height: =45
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(245, 245, 245, 1)
+                        OnSelect: |
+                            =ResetForm(Form_Skill_11);
+                            NewForm(Form_Skill_11);
+                            Set(
+                                varSkillform,
+                                true
+                            );
+                            Reset(Rating1_6)
+                        PaddingLeft: =20
+                        PressedBorderColor: =RGBA(219, 219, 219, 1)
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(219, 219, 219, 1)
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Size: =14
+                        Text: ="  Add Skill"
+                        Tooltip: ="Add Skill"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =200
+                        X: =7
+                        Y: =7
+                        ZIndex: =2
+
+                    Img_qul_add_46 As image:
+                        BorderColor: =RGBA(219, 219, 219, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =30
+                        Image: =Plus
+                        OnSelect: |
+                            =ResetForm(Form_Skill_11);
+                            NewForm(Form_Skill_11);
+                            Set(
+                                varSkillform,
+                                true
+                            );
+                            Reset(Rating1_6)
+                        PaddingBottom: =6
+                        PaddingLeft: =6
+                        PaddingRight: =6
+                        PaddingTop: =6
+                        Tooltip: ="Add Skill"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =30
+                        X: =39
+                        Y: =15
+                        ZIndex: =3
+
+            Container_ProjectHeading_3 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =60
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =5
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                ZIndex: =7
+
+                Image37_39 As image:
+                    Height: =Parent.Height
+                    Image: =project
+                    PaddingTop: =5
+                    Width: =Parent.Height
+                    X: =61
+                    Y: =320
+                    ZIndex: =1
+
+                Lbl_Qualication_27 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Parent.Height
+                    Size: =17
+                    Text: ="Projects"
+                    Width: =325
+                    X: =103
+                    Y: =312
+                    ZIndex: =2
+
+                Container33_24 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =Parent.Height
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: =varEditProfile
+                    Width: =Button_Qualification_39.Width+4
+                    ZIndex: =5
+
+                    Button_Qualification_39 As button:
+                        BorderThickness: =1
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Normal
+                        Height: =44
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(245, 245, 245, 1)
+                        OnSelect: =ResetForm(Form_Project_17); NewForm(Form_Project_17); Set(varProjectform,true);
+                        PaddingLeft: =20
+                        PressedBorderColor: =RGBA(219, 219, 219, 1)
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(219, 219, 219, 1)
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Size: =14
+                        Text: ="  Add Project"
+                        Tooltip: ="Add project"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =210
+                        X: =2
+                        Y: =8
+                        ZIndex: =2
+
+                    Img_qul_add_47 As image:
+                        BorderColor: =RGBA(219, 219, 219, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =30
+                        Image: =Plus
+                        OnSelect: =ResetForm(Form_Project_17); NewForm(Form_Project_17); Set(varProjectform,true);
+                        PaddingBottom: =6
+                        PaddingLeft: =6
+                        PaddingRight: =6
+                        PaddingTop: =6
+                        Tooltip: ="Add Qualification"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =30
+                        X: =24
+                        Y: =15
+                        ZIndex: =3
+
+            Container_Project_View_21 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(238, 238, 238, 1)
+                FillPortions: =0
+                Height: |-
+                    =//336
+                    //CountRows(Gallery3_1.AllItems)*Label8 +120
+                    Gallery3_6.Height + 20
+                    //Max(Container20_14.Height +Container21_4.Height+Container20_16.Height+Container20_18.Height+Container20_20.Height)+50
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                Visible: |-
+                    =//varTab=4
+                    true
+                Width: =1258
+                X: =60
+                Y: |-
+                    =//1245
+                    (Container_Skills_View_15.Height) + 790
+                ZIndex: =8
+
+                Gallery3_6 As gallery.variableTemplateHeightGallery:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: |-
+                        =//CountRows(Gallery3_1.AllItems)*64+260
+                        //Max(Container20_14.Height +Container21_4.Height+Container20_16.Height+Container20_18.Height+Container20_20.Height)
+                        Sum(Self.AllItems,Label8_5.Text)+40
+                        //CountRows(Gallery3_1.AllItems)*Label8 +100
+                    Items: |
+                        =Filter(Projects_TestData,!IsBlank(Projecttitle),EmployeeId =  Gallery4_2.Selected.'Employee Id')
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    ShowScrollbar: =false
+                    TemplateSize: =206
+                    Width: =1068
+                    Y: =20
+                    ZIndex: =4
+
+                    Label8_5 As label:
+                        OnSelect: =Select(Parent)
+                        Text: =Container23_8.Height
+                        Visible: =false
+                        X: =40
+                        Y: =40
+                        ZIndex: =2
+
+                    Container23_8 As groupContainer.horizontalAutoLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =If(varEditProfile, Max(Container20_62.Height +Container21_10.Height+Container20_64.Height+Container20_66.Height+Container20_76.Height+Container20_75.Height)+10,Max(Container20_62.Height +Container21_10.Height+Container20_64.Height+Container20_66.Height+Container20_76.Height+Container20_75.Height)+1)
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =1030
+                        X: =20
+                        ZIndex: =3
+
+                        Container19_10 As groupContainer.verticalAutoLayoutContainer:
+                            BorderColor: =RGBA(219, 219, 219, 1)
+                            BorderThickness: =1
+                            Height: =Max(Container20_62.Height +Container21_10.Height+Container20_64.Height+Container20_66.Height+Container20_76.Height)
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingTop: =10
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Width: =1093
+                            ZIndex: =1
+
+                            Container20_62 As groupContainer.horizontalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                Height: =50
+                                LayoutMinHeight: =50
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: |-
+                                    =//1045
+                                    Parent.Width
+                                ZIndex: =1
+
+                                Label32_62 As label:
+                                    FillPortions: =1
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =50
+                                    LayoutMinWidth: =250
+                                    PaddingLeft: =15
+                                    Size: =20
+                                    Text: |
+                                        =ThisItem.Projecttitle
+                                    Width: =550
+                                    ZIndex: =1
+
+                                Label32_22 As label:
+                                    FillPortions: =1
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =50
+                                    LayoutMinWidth: =250
+                                    PaddingLeft: =15
+                                    Size: =18
+                                    Text: =
+                                    Width: =550
+                                    ZIndex: =2
+
+                                Container20_63 As groupContainer.horizontalAutoLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.Center
+                                    DropShadow: =DropShadow.None
+                                    Fill: =RGBA(238, 238, 238, 1)
+                                    FillPortions: =0
+                                    Height: =40
+                                    LayoutAlignItems: =LayoutAlignItems.Center
+                                    LayoutJustifyContent: =LayoutJustifyContent.Center
+                                    LayoutMinHeight: =50
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    PaddingLeft: =5
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Width: =350
+                                    ZIndex: =3
+
+                                    Image37_83 As image:
+                                        Height: =Parent.Height
+                                        Image: ='calender-svgrepo-com (1)'
+                                        PaddingBottom: =10
+                                        PaddingLeft: =10
+                                        PaddingRight: =10
+                                        PaddingTop: =10
+                                        Width: =55
+                                        X: =61
+                                        Y: =11
+                                        ZIndex: =1
+
+                                    Label29_47 As label:
+                                        Height: =50
+                                        Text: =ThisItem.Startdate 
+                                        Width: =110
+                                        ZIndex: =2
+
+                                    Image37_84 As image:
+                                        Height: =40
+                                        Image: ='horizontal-rule-svgrepo-com'
+                                        PaddingBottom: =10
+                                        PaddingLeft: =10
+                                        PaddingRight: =10
+                                        PaddingTop: =10
+                                        Width: =50
+                                        X: =61
+                                        Y: =11
+                                        ZIndex: =3
+
+                                    Label32_64 As label:
+                                        FillPortions: =1
+                                        Height: =50
+                                        LayoutMinWidth: =90
+                                        PaddingLeft: =10
+                                        Text: =ThisItem.Enddate
+                                        Width: =90
+                                        ZIndex: =4
+
+                                Label32_63 As label:
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =50
+                                    LayoutMinWidth: =10
+                                    PaddingLeft: =15
+                                    Size: =18
+                                    Text: =
+                                    Width: =15
+                                    ZIndex: =4
+
+                            Container20_64 As groupContainer.horizontalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                Height: =50
+                                LayoutMinHeight: =50
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: |-
+                                    =//1045
+                                    Parent.Width
+                                ZIndex: =2
+
+                                Label29_48 As label:
+                                    Color: =RGBA(117, 117, 117, 1)
+                                    PaddingLeft: =15
+                                    PaddingTop: =0
+                                    Size: =15
+                                    Text: ="Client Name - "
+                                    ZIndex: =1
+
+                                Label32_65 As label:
+                                    FillPortions: =1
+                                    LayoutMinWidth: =250
+                                    Text: =ThisItem.Clientname
+                                    Width: =350
+                                    ZIndex: =2
+
+                                Container20_65 As groupContainer.horizontalAutoLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.SetByContainer
+                                    DropShadow: =DropShadow.None
+                                    Height: =50
+                                    LayoutMinHeight: =50
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    Width: =1045
+                                    ZIndex: =6
+
+                                    Label29_49 As label:
+                                        Text: =""
+                                        ZIndex: =1
+
+                                    Label32_72 As label:
+                                        FillPortions: =1
+                                        Text: =
+                                        ZIndex: =2
+
+                            Container20_66 As groupContainer.horizontalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                Height: =50
+                                LayoutMinHeight: =50
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: |-
+                                    =//1045
+                                    Parent.Width
+                                ZIndex: =3
+
+                                Label29_50 As label:
+                                    Color: =RGBA(117, 117, 117, 1)
+                                    PaddingLeft: =15
+                                    PaddingTop: =0
+                                    Size: =15
+                                    Text: ="Project Role - "
+                                    ZIndex: =1
+
+                                Label32_73 As label:
+                                    FillPortions: =1
+                                    Text: =ThisItem.Projectrole.Value
+                                    ZIndex: =2
+
+                                Container20_67 As groupContainer.horizontalAutoLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.SetByContainer
+                                    DropShadow: =DropShadow.None
+                                    Height: =50
+                                    LayoutMinHeight: =50
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    Width: =1045
+                                    ZIndex: =6
+
+                                    Label29_51 As label:
+                                        Text: =""
+                                        ZIndex: =1
+
+                                    Label32_74 As label:
+                                        FillPortions: =1
+                                        Text: =
+                                        ZIndex: =2
+
+                            Container20_74 As groupContainer.horizontalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                Height: =50
+                                LayoutMinHeight: =50
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: |-
+                                    =//1045
+                                    Parent.Width
+                                ZIndex: =4
+
+                                Label29_57 As label:
+                                    Color: =RGBA(117, 117, 117, 1)
+                                    PaddingLeft: =15
+                                    PaddingTop: =0
+                                    Size: =15
+                                    Text: ="Skills Used - "
+                                    ZIndex: =1
+
+                                Container20_75 As groupContainer.horizontalAutoLayoutContainer:
+                                    AlignInContainer: =AlignInContainer.SetByContainer
+                                    DropShadow: =DropShadow.None
+                                    Height: =50
+                                    LayoutMinHeight: =50
+                                    LayoutMinWidth: =250
+                                    LayoutMode: =LayoutMode.Auto
+                                    Width: =1045
+                                    ZIndex: =6
+
+                                    "Gallery6_5 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                                        '#CopilotOverlayLabel': ="Filtered"
+                                        DelayItemLoading: =true
+                                        Height: =Container20_75.Height
+                                        Items: =colProjectSkills
+                                        LayoutMinHeight: =287
+                                        LayoutMinWidth: =320
+                                        LoadingSpinner: =LoadingSpinner.Data
+                                        TemplatePadding: =0
+                                        TemplateSize: |-
+                                            =//Min(440, Self.Height - 60)
+                                            Title6_5.Width - 20
+                                        Visible: =false
+                                        ZIndex: =2
+
+                                        Title6_5 As label:
+                                            FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                                            Height: =41
+                                            OnSelect: =
+                                            PaddingBottom: =0
+                                            PaddingLeft: =0
+                                            PaddingRight: =0
+                                            PaddingTop: =0
+                                            Text: =ThisItem.Value & " ," 
+                                            VerticalAlign: =VerticalAlign.Top
+                                            Width: =201
+                                            Y: =6
+                                            ZIndex: =2
+
+                                    Label16_5 As label:
+                                        FillPortions: =1
+                                        LayoutMinWidth: =200
+                                        Text: =Concatenate(Concat(FirstN(colProjectSkills,CountRows(colProjectSkills )-1) , Value & " , "),Last(colProjectSkills).Value)
+                                        Width: =260
+                                        ZIndex: =3
+
+                            Container21_10 As groupContainer.horizontalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                Height: =If(varEditProfile, Max(Label34_20.Height)+25 , Max(Label34_20.Height)+5)
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: |-
+                                    =//1045
+                                    Parent.Width
+                                ZIndex: =5
+
+                                Label33_9 As label:
+                                    Color: =RGBA(117, 117, 117, 1)
+                                    PaddingLeft: =15
+                                    PaddingTop: =0
+                                    Size: =15
+                                    Text: ="Description - "
+                                    ZIndex: =1
+
+                                Label34_20 As label:
+                                    Align: =Align.Justify
+                                    AutoHeight: =true
+                                    FillPortions: =1
+                                    Height: |
+                                        =40
+                                    LayoutMinWidth: =120
+                                    PaddingRight: =15
+                                    Text: =ThisItem.Description
+                                    Width: =100
+                                    ZIndex: =2
+
+                            Container20_76 As groupContainer.horizontalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                FillPortions: =0
+                                Height: =20
+                                LayoutMinHeight: =50
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =1045
+                                ZIndex: =6
+
+            Container_Project_View_20 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(238, 238, 238, 1)
+                FillPortions: =0
+                Height: |-
+                    =//336
+                    CountRows(Gallery_Project_14.AllItems)*55 +120
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                PaddingBottom: =5
+                PaddingTop: =5
+                Visible: =false
+                Width: =1258
+                X: =60
+                Y: |-
+                    =//1245
+                    (Container_Skills_View_17.Height) + 790
+                ZIndex: =9
+
+                Gallery_Project_14 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: |-
+                        =//239
+                        CountRows(Gallery_Project_14.AllItems)*60+1
+                    Items: =Filter(Projects_TestData,!IsBlank(Projecttitle),EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID)
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    ShowScrollbar: =false
+                    TemplatePadding: =1
+                    TemplateSize: =55
+                    Width: =1068
+                    Y: =74
+                    ZIndex: =1
+
+                    Container8_113 As groupContainer.manualLayoutContainer:
+                        BorderColor: =RGBA(237, 237, 237, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        Visible: =false
+                        Width: =1049
+                        ZIndex: =1
+
+                        Image12_73 As image:
+                            Height: =60
+                            Image: =briefing
+                            OnSelect: =//Select(Parent)
+                            PaddingBottom: =10
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =10
+                            Width: =60
+                            X: =12
+                            Y: =4
+                            ZIndex: =1
+
+                        Label24_68 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Height: =38
+                            OnSelect: =//Select(Parent)
+                            Size: =14
+                            Text: =ThisItem.Projecttitle
+                            Width: =546
+                            X: =86
+                            Y: =16
+                            ZIndex: =2
+
+                        Label53_10 As label:
+                            Text: =ThisItem.Clientname
+                            X: =408
+                            Y: =16
+                            ZIndex: =3
+
+                        Label54_10 As label:
+                            Text: =ThisItem.Projectrole
+                            X: =693
+                            Y: =16
+                            ZIndex: =4
+
+                    Container28_95 As groupContainer.manualLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        Height: =52
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Visible: =false
+                        Width: =151
+                        Y: =3
+                        ZIndex: =2
+
+                        Button29_158 As button:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            OnSelect: |
+                                =EditForm(Form_Project_17);
+                                Set(varProjectform,true);
+                            PaddingTop: =0
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Text: =""
+                            Tooltip: ="Edit"
+                            Width: =45
+                            X: =28
+                            Y: =8
+                            ZIndex: =1
+
+                        Image19_158 As image:
+                            DisabledFill: =RGBA(219, 219, 219, 1)
+                            Height: =25
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            Image: =Edit
+                            OnSelect: |
+                                =EditForm(Form_Project_17);
+                                Set(varProjectform,true);
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            Tooltip: ="Edit"
+                            Width: =25
+                            X: =38
+                            Y: =15
+                            ZIndex: =2
+
+                        Button29_159 As button:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            HoverColor: =RGBA(0, 0, 0, 1)
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            OnSelect: =Remove(Projects_TestData,ThisItem)
+                            PaddingTop: =0
+                            PressedColor: =RGBA(0, 0, 0, 1)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Text: =""
+                            Tooltip: ="Delete"
+                            Width: =45
+                            X: =92
+                            Y: =8
+                            ZIndex: =3
+
+                        Image19_159 As image:
+                            DisabledFill: =RGBA(219, 219, 219, 1)
+                            Height: =20
+                            HoverFill: =RGBA(219, 219, 219, 1)
+                            Image: =trash
+                            OnSelect: =Remove(Projects_TestData,ThisItem)
+                            PressedFill: =RGBA(219, 219, 219, 1)
+                            Tooltip: ="Delete"
+                            Width: =20
+                            X: =104
+                            Y: =18
+                            ZIndex: =4
+
+                    Container8_114 As groupContainer.horizontalAutoLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width - 40
+                        X: =20
+                        ZIndex: =3
+
+                        Label13_139 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            FillPortions: =1
+                            Height: =Parent.Height-0.5
+                            LayoutMinWidth: =120
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: =ThisItem.Projecttitle
+                            Visible: |-
+                                =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                                true
+                            Width: =360
+                            X: =
+                            ZIndex: =1
+
+                        Label14_151 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            FillPortions: =1
+                            Height: =Parent.Height-0.5
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: =ThisItem.Clientname
+                            Width: =190
+                            ZIndex: =5
+
+                        Label14_152 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            FillPortions: =1
+                            Height: =Parent.Height-0.5
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: =ThisItem.Projectrole.Value
+                            Width: =190
+                            ZIndex: =6
+
+                        Container28_94 As groupContainer.manualLayoutContainer:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            DropShadow: =DropShadow.None
+                            FillPortions: =0
+                            Height: =Parent.Height-0.5
+                            LayoutMinHeight: =55
+                            LayoutMinWidth: =160
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Visible: =varEditProfile
+                            Width: =160
+                            X: =1071
+                            Y: =6
+                            ZIndex: =7
+
+                            Button29_156 As button:
+                                BorderColor: =RGBA(202, 202, 202, 1)
+                                Fill: =RGBA(0, 0, 0, 0)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                OnSelect: |
+                                    =EditForm(Form_Project_17);
+                                    Set(varProjectform,true);
+                                PaddingTop: =0
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                RadiusBottomLeft: =4
+                                RadiusBottomRight: =4
+                                RadiusTopLeft: =4
+                                RadiusTopRight: =4
+                                Text: =""
+                                Tooltip: ="Edit"
+                                Width: =45
+                                X: =28
+                                Y: =7
+                                ZIndex: =1
+
+                            Image19_156 As image:
+                                DisabledFill: =RGBA(219, 219, 219, 1)
+                                Height: =25
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                Image: =Edit
+                                OnSelect: |
+                                    =EditForm(Form_Project_17);
+                                    Set(varProjectform,true);
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                Tooltip: ="Edit"
+                                Width: =25
+                                X: =38
+                                Y: =15
+                                ZIndex: =2
+
+                            Button29_157 As button:
+                                BorderColor: =RGBA(202, 202, 202, 1)
+                                Fill: =RGBA(0, 0, 0, 0)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                OnSelect: |-
+                                    =//Remove(Projects_TestData,ThisItem)
+                                    Set(VarProjectdelete,true);
+                                PaddingTop: =0
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                RadiusBottomLeft: =4
+                                RadiusBottomRight: =4
+                                RadiusTopLeft: =4
+                                RadiusTopRight: =4
+                                Text: =""
+                                Tooltip: ="Delete"
+                                Width: =45
+                                X: =92
+                                Y: =7
+                                ZIndex: =3
+
+                            Image19_157 As image:
+                                DisabledFill: =RGBA(219, 219, 219, 1)
+                                Height: =20
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                Image: =trash
+                                OnSelect: |-
+                                    =//Remove(Projects_TestData,ThisItem)
+                                    Set(VarProjectdelete,true);
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                Tooltip: ="Delete"
+                                Width: =20
+                                X: =104
+                                Y: =18
+                                ZIndex: =4
+
+                Container8_112 As groupContainer.horizontalAutoLayoutContainer:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =60
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =15
+                    ZIndex: =2
+
+                    Label13_138 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        LayoutMinWidth: =120
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Project name"
+                        Visible: |-
+                            =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                            true
+                        Width: =360
+                        X: =
+                        ZIndex: =1
+
+                    Label14_111 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Client name"
+                        Width: =190
+                        ZIndex: =5
+
+                    Label14_112 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Role"
+                        Width: =190
+                        ZIndex: =6
+
+                    Label14_150 As label:
+                        Align: =Align.Center
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =RGBA(139, 154, 159, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        Size: =15
+                        Text: ="Actions"
+                        Visible: =varEditProfile
+                        Width: =160
+                        ZIndex: =7
+
+            Container_CertificationHeading_3 As groupContainer.horizontalAutoLayoutContainer:
+                DropShadow: =DropShadow.None
+                FillPortions: =0
+                Height: =60
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =5
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                ZIndex: =10
+
+                Image37_40 As image:
+                    Height: =Parent.Height
+                    Image: =certificate
+                    PaddingTop: =5
+                    Width: =Parent.Height
+                    X: =61
+                    Y: =320
+                    ZIndex: =1
+
+                Lbl_Qualication_28 As label:
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Semibold
+                    Height: =Parent.Height
+                    Size: =17
+                    Text: ="Certifications"
+                    Width: =325
+                    X: =103
+                    Y: =312
+                    ZIndex: =2
+
+                Container33_25 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    DropShadow: =DropShadow.None
+                    FillPortions: =0
+                    Height: =Parent.Height
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: =varEditProfile
+                    Width: =Button_Qualification_57.Width+4
+                    ZIndex: =5
+
+                    Button_Qualification_57 As button:
+                        Align: =Align.Left
+                        BorderThickness: =1
+                        Color: =RGBA(0, 0, 0, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FontWeight: =FontWeight.Normal
+                        Height: =44
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(245, 245, 245, 1)
+                        OnSelect: =ResetForm(Form_Certification_10); NewForm(Form_Certification_10); Set(varCertificationform,true);
+                        PaddingLeft: =45
+                        PressedBorderColor: =RGBA(219, 219, 219, 1)
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(219, 219, 219, 1)
+                        RadiusBottomLeft: =5
+                        RadiusBottomRight: =5
+                        RadiusTopLeft: =5
+                        RadiusTopRight: =5
+                        Size: =14
+                        Text: ="  Add Certification"
+                        Tooltip: ="Add certification"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =205
+                        X: =4
+                        Y: =9
+                        ZIndex: =2
+
+                    Img_qul_add_48 As image:
+                        BorderColor: =RGBA(219, 219, 219, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =30
+                        Image: =Plus
+                        OnSelect: =ResetForm(Form_Certification_10); NewForm(Form_Certification_10); Set(varCertificationform,true);
+                        PaddingBottom: =6
+                        PaddingLeft: =6
+                        PaddingRight: =6
+                        PaddingTop: =6
+                        Tooltip: ="Addcertification"
+                        Visible: |-
+                            =//varTab=2
+                            true
+                        Width: =30
+                        X: =12
+                        Y: =16
+                        ZIndex: =3
+
+            Container_Certification_View_15 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(238, 238, 238, 1)
+                FillPortions: =0
+                Height: |-
+                    =//Gallery_Certifications_12.Height+Container8_98.Height+15+Self.PaddingBottom
+                    
+                    //320
+                    CountRows(Gallery_Certifications_15.AllItems)*55 +120
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                PaddingBottom: =5
+                PaddingTop: =5
+                Visible: |-
+                    =//varTab=5
+                    true
+                Width: =1255
+                X: =56
+                Y: |-
+                    =//1651
+                    //(Container_Project_View_8.Height + 1400)
+                    (Container_Project_View_20.Height) + 1240
+                ZIndex: =11
+
+                Gallery_Certifications_15 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: |-
+                        =//230
+                        CountRows(Gallery_Certifications_15.AllItems)*60 +1
+                    Items: =Filter(CertificationsList_TestData_1,!IsBlank(Certificationtitle),EmployeeId=Gallery4_2.Selected.'Employee Id')
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    ShowScrollbar: =false
+                    TemplatePadding: =1
+                    TemplateSize: =55
+                    Width: =1060
+                    X: =10
+                    Y: =75
+                    ZIndex: =1
+
+                    Container8_118 As groupContainer.horizontalAutoLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        LayoutMode: =LayoutMode.Auto
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Parent.Width - 30
+                        X: =9
+                        ZIndex: =3
+
+                        Label13_144 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            BorderThickness: =1
+                            FillPortions: =1
+                            Height: =55
+                            LayoutMinWidth: =120
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: =ThisItem.Certificationtitle
+                            Visible: |-
+                                =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                                true
+                            Width: =500
+                            X: =
+                            ZIndex: =1
+
+                        Label14_155 As label:
+                            BorderColor: =RGBA(202, 202, 202, 1)
+                            FillPortions: =1
+                            Height: =55
+                            PaddingLeft: =15
+                            PaddingTop: =6
+                            Size: =15
+                            Text: =ThisItem.Completeddate
+                            Width: =190
+                            ZIndex: =5
+
+                Container8_117 As groupContainer.horizontalAutoLayoutContainer:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =60
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =15
+                    ZIndex: =10
+
+                    Label13_143 As label:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        LayoutMinWidth: =220
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Name"
+                        Visible: |-
+                            =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                            true
+                        Width: =515
+                        X: =
+                        ZIndex: =1
+
+                    Label14_154 As label:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Completed date"
+                        Width: =596
+                        ZIndex: =5
+
+                    Label14_153 As label:
+                        Align: =Align.Center
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        FontWeight: =FontWeight.Semibold
+                        Height: =Parent.Height-0.5
+                        Size: =15
+                        Text: ="Actions"
+                        Visible: =varEditProfile
+                        Width: =160
+                        ZIndex: =6
+
+            Container_Certification_popup_11 As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(0, 0, 0, 0.5)
+                Height: =768
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                Visible: =varCertificationform
+                Width: =1366
+                ZIndex: =12
+
+                Container_Certification_Form_11 As groupContainer.manualLayoutContainer:
+                    BorderColor: =RGBA(219, 219, 219, 1)
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: =630
+                    Width: =950
+                    X: =248
+                    Y: =84
+                    ZIndex: =1
+
+                    Form_Certification_11 As form:
+                        BorderColor: =RGBA(166, 166, 166, 1)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =0.5
+                        DataSource: =CertificationsList_TestData_1
+                        DefaultMode: =FormMode.New
+                        Height: =347
+                        Item: =Gallery_Certifications_15.Selected
+                        NumberOfColumns: =1
+                        OnSuccess: =Set(varCertificationform,false);
+                        Width: =724
+                        X: =66
+                        Y: =103
+                        ZIndex: =1
+
+                        Title_DataCard4_14 As typedDataCard.textualEditCard:
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="Title"
+                            Default: =ThisItem.Certificationtitle
+                            DisplayMode: =Parent.DisplayMode
+                            DisplayName: =DataSourceInfo([@Certifications_TestData_1],DataSourceInfo.DisplayName,Title)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =110
+                            MaxLength: =DataSourceInfo([@Certifications_TestData_1], DataSourceInfo.MaxLength, Title)
+                            Required: =true
+                            Update: =DataCardValue19_12.Text
+                            Width: =724
+                            X: =0
+                            Y: =0
+                            ZIndex: =2
+
+                            DataCardKey20_14 As label:
+                                AutoHeight: =true
+                                Color: =RGBA(0, 0, 0, 1)
+                                Height: =34
+                                Size: =15
+                                Text: =Parent.DisplayName
+                                Width: =(Parent.Width - 60) * 0.4
+                                Wrap: =false
+                                X: =30
+                                Y: =10 + (DataCardValue19_12.Height / 2) - (Self.Height / 2)
+                                ZIndex: =1
+
+                            DataCardValue19_12 As text:
+                                BorderColor: =RGBA(219, 219, 219, 1)
+                                BorderThickness: =1
+                                Default: =Parent.Default
+                                DelayOutput: =true
+                                DisplayMode: =Parent.DisplayMode
+                                Height: =50
+                                HoverBorderColor: =RGBA(202, 202, 202, 1)
+                                HoverFill: =RGBA(255, 255, 255, 1)
+                                MaxLength: =Parent.MaxLength
+                                PaddingLeft: =15
+                                RadiusBottomLeft: =10
+                                RadiusBottomRight: =10
+                                RadiusTopLeft: =10
+                                RadiusTopRight: =10
+                                Tooltip: =Parent.DisplayName
+                                Width: =(Parent.Width - 60) * 0.6
+                                X: =DataCardKey20_14.X + DataCardKey20_14.Width
+                                Y: =10
+                                ZIndex: =2
+
+                            ErrorMessage20_14 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =270
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue19_12.Y + DataCardValue19_12.Height
+                                ZIndex: =3
+
+                            StarVisible20_14 As label:
+                                Align: =Align.Center
+                                Color: =RGBA(184, 0, 0, 1)
+                                Height: =DataCardKey20_14.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                X: =75
+                                Y: =16
+                                ZIndex: =4
+
+                        "'Completed Date_DataCard1_11' As typedDataCard.dateEditCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="CompletedDate"
+                            Default: =ThisItem.Completeddate
+                            DisplayMode: =Parent.DisplayMode
+                            DisplayName: =DataSourceInfo([@Certifications_TestData_1],DataSourceInfo.DisplayName,Completeddate)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =103
+                            Required: =true
+                            Update: =DataCardValue26_11.SelectedDate
+                            Width: =724
+                            X: =0
+                            Y: =1
+                            ZIndex: =2
+
+                            Container1_43 As groupContainer.manualLayoutContainer:
+                                BorderColor: =RGBA(202, 202, 202, 1)
+                                BorderThickness: =1
+                                DropShadow: =DropShadow.None
+                                Fill: =RGBA(255, 255, 255, 1)
+                                Height: =50
+                                RadiusBottomLeft: =10
+                                RadiusBottomRight: =10
+                                RadiusTopLeft: =10
+                                RadiusTopRight: =10
+                                Width: =398
+                                X: =295
+                                Y: =5
+                                ZIndex: =1
+
+                            DataCardKey27_11 As label:
+                                AutoHeight: =true
+                                Color: =RGBA(0, 0, 0, 1)
+                                Height: =34
+                                Size: =14
+                                Text: ="Completed date"
+                                Width: =(Parent.Width - 60) * 0.4
+                                Wrap: =false
+                                X: =30
+                                Y: =10 + (DataCardValue26_11.Height / 2) - (Self.Height / 2)
+                                ZIndex: =2
+
+                            DataCardValue26_11 As datepicker:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                BorderStyle: =BorderStyle.None
+                                BorderThickness: =1
+                                DefaultDate: =Parent.Default
+                                DisplayMode: =Parent.DisplayMode
+                                EndYear: =Year(Today())+100
+                                Height: =36
+                                IconBackground: =Color.Transparent
+                                IconFill: =RGBA(116, 116, 166, 100)
+                                IsEditable: =true
+                                PaddingBottom: =0
+                                PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                                StartYear: =1899
+                                Tooltip: =Parent.DisplayName
+                                Width: =381
+                                X: =300
+                                Y: =10
+                                ZIndex: =3
+
+                            ErrorMessage27_11 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =270
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =55
+                                ZIndex: =4
+
+                            StarVisible27_11 As label:
+                                Align: =Align.Center
+                                Color: =RGBA(184, 0, 0, 1)
+                                Height: =DataCardKey27_11.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                X: =181
+                                Y: =10
+                                ZIndex: =5
+
+                        "'Is Certification Available_DataCard1_11' As typedDataCard.toggleEditCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="IsCertificationAvailable"
+                            Default: =ThisItem.IsCertificationAvailable
+                            DisplayMode: =Parent.DisplayMode
+                            DisplayName: =DataSourceInfo([@Certifications_TestData_1],DataSourceInfo.DisplayName,IsCertificationAvailable)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =88
+                            Required: =true
+                            Update: =DataCardValue27_11.Value
+                            Width: =724
+                            X: =0
+                            Y: =2
+                            ZIndex: =2
+
+                            DataCardKey28_11 As label:
+                                AutoHeight: =true
+                                Color: =RGBA(0, 0, 0, 1)
+                                Height: =34
+                                Size: =14
+                                Text: ="Is certification available"
+                                Width: =(Parent.Width - 60) * 0.4
+                                Wrap: =false
+                                X: =30
+                                Y: =10 + (DataCardValue27_11.Height / 2) - (Self.Height / 2)
+                                ZIndex: =1
+
+                            DataCardValue27_11 As toggleSwitch:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                BorderStyle: =BorderStyle.None
+                                Default: =//Parent.Default
+                                DisplayMode: =Parent.DisplayMode
+                                FalseText: ="No"
+                                Tooltip: =Parent.DisplayName
+                                TrueFill: =RGBA(51, 122, 183, 1)
+                                TrueText: ="Yes"
+                                X: =295
+                                Y: =12
+                                ZIndex: =2
+
+                            ErrorMessage28_11 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue27_11.Y + DataCardValue27_11.Height
+                                ZIndex: =3
+
+                            StarVisible28_11 As label:
+                                Align: =Align.Center
+                                Color: =RGBA(184, 0, 0, 1)
+                                Height: =DataCardKey28_11.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                X: =243
+                                Y: =5
+                                ZIndex: =4
+
+                        "'Employee Id_DataCard2_11' As typedDataCard.textualEditCard":
+                            BorderStyle: =BorderStyle.Solid
+                            DataField: ="EmployeeId"
+                            Default: =LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID
+                            DisplayMode: =Parent.DisplayMode
+                            DisplayName: =DataSourceInfo([@CertificationsList_TestData_1],DataSourceInfo.DisplayName,EmployeeId)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            Height: =50
+                            MaxLength: =DataSourceInfo([@CertificationsList_TestData_1], DataSourceInfo.MaxLength, EmployeeId)
+                            Required: =false
+                            Update: =DataCardValue25_11.Text
+                            Visible: =false
+                            Width: =724
+                            X: =0
+                            Y: =3
+                            ZIndex: =2
+
+                            DataCardKey26_11 As label:
+                                AutoHeight: =true
+                                Height: =34
+                                Text: =Parent.DisplayName
+                                Width: =(Parent.Width - 60) * 0.4
+                                Wrap: =false
+                                X: =30
+                                Y: =10 + (DataCardValue25_11.Height / 2) - (Self.Height / 2)
+                                ZIndex: =1
+
+                            DataCardValue25_11 As text:
+                                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                                Default: =LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID
+                                DelayOutput: =true
+                                DisplayMode: =Parent.DisplayMode
+                                MaxLength: =Parent.MaxLength
+                                PaddingLeft: =5
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Tooltip: =Parent.DisplayName
+                                Width: =(Parent.Width - 60) * 0.6
+                                X: =DataCardKey26_11.X + DataCardKey26_11.Width
+                                Y: =10
+                                ZIndex: =2
+
+                            ErrorMessage26_11 As label:
+                                AutoHeight: =true
+                                Height: =10
+                                Live: =Live.Assertive
+                                PaddingBottom: =0
+                                PaddingLeft: =0
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                Text: =Parent.Error
+                                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                                Width: =Parent.Width - 60
+                                X: =30
+                                Y: =DataCardValue25_11.Y + DataCardValue25_11.Height
+                                ZIndex: =3
+
+                            StarVisible26_11 As label:
+                                Align: =Align.Center
+                                Height: =DataCardKey26_11.Height
+                                Text: ="*"
+                                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                                Width: =30
+                                Wrap: =false
+                                Y: =DataCardKey26_11.Y
+                                ZIndex: =4
+
+                    Label13_77 As label:
+                        Height: =79
+                        Size: =20
+                        Text: =If(Form_Certification_11.Mode = FormMode.New, "Add Certification ", "Edit Certification")
+                        Width: =699
+                        X: =40
+                        Y: =1
+                        ZIndex: =4
+
+                    Container6_37 As groupContainer.manualLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =0.001
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(241, 244, 249, 1)
+                        Height: =1
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =928
+                        X: =2
+                        Y: =79
+                        ZIndex: =5
+
+                    Rectangle13_37 As rectangle:
+                        BorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =RGBA(245, 245, 245, 1)
+                        Height: =110
+                        Width: =869
+                        X: =40
+                        Y: =480
+                        ZIndex: =7
+
+                    Button24_89 As button:
+                        Color: =RGBA(0, 0, 0, 1)
+                        DisabledBorderColor: =
+                        DisabledColor: =RGBA(255, 255, 255, 1)
+                        DisabledFill: =RGBA(30, 49, 68, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FocusedBorderThickness: =
+                        FontWeight: =FontWeight.Normal
+                        Height: =45
+                        HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                        HoverColor: =RGBA(0, 0, 0, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |+
+                            =ResetForm(Form_Certification_11);
+                            Set(varCertificationform, false)
+                            
+                            
+                            
+                        PressedBorderColor: =//Self.Fill
+                        PressedColor: =RGBA(0, 0, 0, 1)
+                        PressedFill: =RGBA(255, 255, 255, 1)
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        Size: =14
+                        Text: ="Cancel"
+                        Tooltip: ="Cancel"
+                        Width: =106
+                        X: =486
+                        Y: =512
+                        ZIndex: =8
+
+                    Button24_88 As button:
+                        DisabledBorderColor: =
+                        DisabledColor: =RGBA(255, 255, 255, 1)
+                        DisabledFill: =RGBA(30, 49, 68, 1)
+                        Fill: =RGBA(51, 122, 183, 1)
+                        FocusedBorderThickness: =
+                        FontWeight: =FontWeight.Normal
+                        Height: =45
+                        HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                        HoverFill: =RGBA(0, 94, 146, 1)
+                        OnSelect: |+
+                            =SubmitForm(Form_Certification_11);
+                            
+                            
+                            
+                        PressedBorderColor: =//Self.Fill
+                        PressedColor: =RGBA(255, 255, 255, 1)
+                        PressedFill: =RGBA(0, 94, 146, 1)
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        Size: =14
+                        Text: ="Save"
+                        Tooltip: ="Save"
+                        Width: =106
+                        X: =356
+                        Y: =512
+                        ZIndex: =9
+
+                    Icon8_49 As icon.CancelBadge:
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =28
+                        Icon: =Icon.CancelBadge
+                        OnSelect: |+
+                            =ResetForm(Form_Certification_11);
+                            Set(varCertificationform, false)
+                            
+                            
+                            
+                        Tooltip: ="Close"
+                        Width: =28
+                        X: =902
+                        Y: =25
+                        ZIndex: =10
+
+            Container_Certification_View_22 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: |-
+                    =//Gallery_Certifications_12.Height+Container8_98.Height+15+Self.PaddingBottom
+                    
+                    //320
+                    60
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                PaddingBottom: =5
+                PaddingTop: =5
+                Visible: |-
+                    =//varTab=5
+                    true
+                Width: =1255
+                X: =56
+                Y: |-
+                    =//1651
+                    //(Container_Project_View_8.Height + 1400)
+                    (Container_Project_View_20.Height) + 1240
+                ZIndex: =13
+
+    Group3_1 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =25
+
+        Rectangle5_1 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.4)
+            Height: =768
+            Visible: =varSkillOnselect
+            Width: =1366
+            ZIndex: =22
+
+        Container4_1 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =674
+            Visible: =varSkillOnselect
+            Width: =851
+            X: =315
+            Y: =57
+            ZIndex: =23
+
+            "Gallery2_2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver5.0'":
+                '#CopilotOverlayLabel': ="Filtered"
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =1
+                DelayItemLoading: =true
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =559
+                Items: |-
+                    =Filter(
+                        UsersSkillMatrix_TestData_1,
+                        EmployeeID in If(
+                            varskillselect = true,
+                            Filter(
+                                SkillMap_TestData_1,
+                                SkillId = Gallery8_6.Selected.ID
+                            ).EmployeeId,
+                            Switch(
+                                varrating,
+                                12,
+                                Filter(
+                                    colusersbyrating,
+                                    avgrating >= 1,
+                                    avgrating  <= 2
+                                ).Title,
+                                24,
+                                Filter(
+                                    colusersbyrating,
+                                    avgrating  >= 2,
+                                    avgrating  <= 4
+                                ).Title,
+                                Filter(
+                                    colusersbyrating,
+                                    avgrating  >= 4,
+                                    avgrating  <= 5
+                                ).Title
+                            )
+                        )
+                    )
+                Layout: =Layout.Vertical
+                LoadingSpinner: =LoadingSpinner.Data
+                TemplateSize: =70
+                Width: =799
+                X: =27
+                Y: =97
+                ZIndex: =1
+
+                Image3_5 As image:
+                    Height: =50
+                    Image: |-
+                        =//SampleImage
+                         LookUp(UsersSkillMatrix_TestData_1,EmployeeID = ThisItem.EmployeeID).ProfilePicture
+                    OnSelect: =Select(Parent)
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    Width: =50
+                    X: =16
+                    Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                Title3_2 As label:
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.Fullname
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =383
+                    X: =103
+                    Y: =19
+                    ZIndex: =2
+
+                Separator1_2 As rectangle:
+                    Fill: =RGBA(238, 238, 238, 1)
+                    Height: =3
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - Self.Height
+                    ZIndex: =5
+
+                Title3_3 As label:
+                    Align: =Align.Center
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.TotalExperience&" years"
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =180
+                    X: =486
+                    Y: =19
+                    ZIndex: =6
+
+            Rectangle6_1 As rectangle:
+                Fill: =RGBA(219, 219, 219, 1)
+                Height: =2
+                Width: =Parent.Width
+                Y: =81
+                ZIndex: =2
+
+            Label9_1 As label:
+                Height: =81
+                Size: =20
+                Text: ="Employees"
+                Width: =583
+                X: =27
+                ZIndex: =3
+
+            Label13_54 As label:
+                Align: =Align.Center
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Height: =22
+                PaddingLeft: =15
+                Text: ="No Records to Display"
+                Visible: =IsEmpty(Gallery2_2.AllItems)
+                Width: =238
+                X: =306
+                Y: =345
+                ZIndex: =4
+
+        Icon1_1 As icon.CancelBadge:
+            Color: =RGBA(0, 0, 0, 1)
+            Height: =30
+            Icon: =Icon.CancelBadge
+            OnSelect: =Set(varSkillOnselect,false)
+            Tooltip: ="Close"
+            Visible: =varSkillOnselect
+            Width: =30
+            X: =1098
+            Y: =81
+            ZIndex: =24
+

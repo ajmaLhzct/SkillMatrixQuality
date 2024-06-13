@@ -1,0 +1,35 @@
+Component_Admin_Navi As CanvasComponent:
+    Fill: =RGBA(255, 255, 255, 1)
+    HeaderMenu: ="Text"
+    Height: =70
+    ImagePadding: =0
+    MenuImage: =SampleImage
+    MenuItems: =
+    MenuTitle: ="Text"
+    Width: =1098
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Label11 As label:
+        Color: =RGBA(119, 119, 119, 1)
+        Height: =70
+        PaddingBottom: =10
+        Size: =16
+        Text: =Component_Admin_Navi.MenuTitle
+        Width: =345
+        X: =53
+        ZIndex: =2
+
+    Image11 As image:
+        Height: =40
+        Image: =Component_Admin_Navi.MenuImage
+        PaddingBottom: =Component_Admin_Navi.ImagePadding
+        PaddingLeft: =Component_Admin_Navi.ImagePadding
+        PaddingRight: =Component_Admin_Navi.ImagePadding
+        PaddingTop: =Component_Admin_Navi.ImagePadding
+        Width: =40
+        X: =6
+        Y: =15
+        ZIndex: =3
+

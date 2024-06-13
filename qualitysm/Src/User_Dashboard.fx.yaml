@@ -1,0 +1,1060 @@
+User_Dashboard As screen:
+    Fill: =RGBA(248, 249, 250, 1)
+    OnVisible: |-
+        =Set(varTopTab,"Summary");
+        ClearCollect(
+            ColTopskillsUser,
+            DropColumns(
+                AddColumns(
+                    GroupBy(
+                       Filter(SkillMap_TestData_1,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID && SkillType.Value <> "Soft Skill"),SkillId
+                        ,
+                        Rating1
+                    ),
+                    'Sum of Value',
+                    RoundUp(
+                        Sum(
+                            Rating1,
+                            Rating
+                        ) / CountRows(Rating1),
+                        1
+                    ),Count,CountRows(Rating1),Title,LookUp('SkillMatrix_Skills Admin',ID = SkillID).Title)
+                ,
+                Rating1
+            )
+        );
+
+    Container_DashboardUser_2 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.None
+        Height: =608
+        Visible: |-
+            =//varTopTab = "Summary"
+            true
+        Width: =1122
+        X: =244
+        Y: =160
+        ZIndex: =1
+
+        Container7_23 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =596
+            Width: =732
+            X: =373
+            ZIndex: =1
+
+            Label13_34 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Italic: =true
+                PaddingLeft: =25
+                Text: ="Projects"
+                ZIndex: =1
+
+            Gallery5_1 As gallery.variableTemplateHeightGallery:
+                '#CopilotOverlayLabel': ="Filtered"
+                DelayItemLoading: =true
+                Height: =546
+                Items: =Filter(Projects_TestData,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).'Employee Id')
+                Layout: =Layout.Vertical
+                TemplatePadding: =12
+                TemplateSize: =Container19_7.Height
+                Width: =732
+                Y: =40
+                ZIndex: =3
+
+                Container19_7 As groupContainer.verticalAutoLayoutContainer:
+                    BorderColor: =RGBA(219, 219, 219, 1)
+                    BorderThickness: =1
+                    Height: =Max(Container20_27.Height +Container21_7.Height +Container21_12.Height+Container21_13.Height+Container21_16.Height)
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingTop: =10
+                    RadiusBottomLeft: =10
+                    RadiusBottomRight: =10
+                    RadiusTopLeft: =10
+                    RadiusTopRight: =10
+                    Width: =690
+                    X: =10
+                    ZIndex: =1
+
+                    Container20_27 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        DropShadow: =DropShadow.None
+                        Height: =50
+                        LayoutMinHeight: =50
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: |-
+                            =//1045
+                            Parent.Width
+                        ZIndex: =1
+
+                        Label32_38 As label:
+                            FillPortions: =1
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            LayoutMinWidth: =250
+                            PaddingLeft: =10
+                            Size: =15
+                            Text: |
+                                =ThisItem.Projecttitle
+                            Width: =550
+                            ZIndex: =1
+
+                        Label32_39 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            LayoutMinWidth: =250
+                            PaddingLeft: =15
+                            Size: =18
+                            Text: =
+                            Width: =100
+                            ZIndex: =2
+
+                        Container20_28 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.Center
+                            DropShadow: =DropShadow.None
+                            Fill: =RGBA(238, 238, 238, 1)
+                            FillPortions: =0
+                            Height: =35
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMinHeight: =50
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingLeft: =5
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Width: =320
+                            ZIndex: =3
+
+                            Image37_78 As image:
+                                Height: =Parent.Height
+                                Image: ='calender-svgrepo-com (1)'
+                                PaddingBottom: =10
+                                PaddingLeft: =10
+                                PaddingRight: =10
+                                PaddingTop: =10
+                                Width: =60
+                                X: =61
+                                Y: =11
+                                ZIndex: =1
+
+                            Label29_24 As label:
+                                Height: =50
+                                Size: =11
+                                Text: =Text(DateValue(ThisItem.Startdate), "dd/mm/yyyy")
+                                Width: =90
+                                ZIndex: =2
+
+                            Image37_77 As image:
+                                Height: =40
+                                Image: ='horizontal-rule-svgrepo-com'
+                                PaddingBottom: =10
+                                PaddingLeft: =10
+                                PaddingRight: =10
+                                PaddingTop: =10
+                                Width: =50
+                                X: =61
+                                Y: =11
+                                ZIndex: =3
+
+                            Label32_41 As label:
+                                FillPortions: =1
+                                Height: =50
+                                LayoutMinWidth: =90
+                                PaddingLeft: =10
+                                Size: =11
+                                Text: =Text(DateValue(ThisItem.Enddate), "dd/mm/yyyy")
+                                Width: =90
+                                ZIndex: =4
+
+                        Label32_40 As label:
+                            FontWeight: =FontWeight.Semibold
+                            Height: =50
+                            LayoutMinWidth: =10
+                            PaddingLeft: =15
+                            Size: =18
+                            Text: =
+                            Width: =15
+                            ZIndex: =4
+
+                    Container21_7 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =Max(Label34_17.Height)+5
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: |-
+                            =//1045
+                            Parent.Width
+                        ZIndex: =2
+
+                        Label5 As label:
+                            Color: =RGBA(117, 117, 117, 1)
+                            PaddingBottom: =15
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =12
+                            Text: ="Client Name -"
+                            Width: =120
+                            ZIndex: =1
+
+                        Label34_17 As label:
+                            Align: =Align.Justify
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: |
+                                =40
+                            LayoutMinWidth: =120
+                            PaddingRight: =15
+                            Size: =11
+                            Text: =ThisItem.Clientname
+                            Width: =100
+                            ZIndex: =2
+
+                    Container21_13 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =Max(Label34_23.Height)+5
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: |-
+                            =//1045
+                            Parent.Width
+                        ZIndex: =3
+
+                        Label5_2 As label:
+                            Color: =RGBA(117, 117, 117, 1)
+                            PaddingBottom: =15
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =12
+                            Text: ="Project Role -"
+                            Width: =120
+                            ZIndex: =1
+
+                        Label34_23 As label:
+                            Align: =Align.Justify
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: |
+                                =40
+                            LayoutMinWidth: =120
+                            PaddingRight: =15
+                            Size: =11
+                            Text: =ThisItem.Projectrole.Value
+                            Width: =100
+                            ZIndex: =2
+
+                    Container21_16 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: |
+                            =If(IsBlank( Label34_26.Text ), 35 ,Label34_26.Height)+5
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: |-
+                            =//1045
+                            Parent.Width
+                        ZIndex: =4
+
+                        Label5_3 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =RGBA(117, 117, 117, 1)
+                            PaddingBottom: =15
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            Size: =12
+                            Text: ="Skill Used -"
+                            Width: =120
+                            ZIndex: =1
+
+                        Label34_26 As label:
+                            Align: =Align.Justify
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: =Label34_26.AutoHeight
+                            LayoutMinWidth: =120
+                            PaddingRight: =15
+                            Size: =11
+                            Text: |
+                                =//Concatenate(Concat(FirstN(Filter(SkillMatrix_SkillUsedProject,'Project ID' = ThisItem.ID),CountRows(Filter(SkillMatrix_SkillUsedProject,'Project ID' = ThisItem.ID))-1),'Skill ' & " , "),Last(Filter(SkillMatrix_SkillUsedProject,'Project ID' = ThisItem.ID)).'Skill ')
+                                
+                                If(
+                                    IsBlank(Concatenate(
+                                        Concat(
+                                            FirstN(
+                                                Filter(SkillMatrix_SkillUsedProject, 'Project ID' = ThisItem.ID), 
+                                                CountRows(Filter(SkillMatrix_SkillUsedProject, 'Project ID' = ThisItem.ID)) - 1
+                                            ), 
+                                            'Skill ' & " , "
+                                        ) & Last(Filter(SkillMatrix_SkillUsedProject, 'Project ID' = ThisItem.ID)).'Skill '
+                                    )),
+                                    "NA",
+                                    Concatenate(
+                                        Concat(
+                                            FirstN(
+                                                Filter(SkillMatrix_SkillUsedProject, 'Project ID' = ThisItem.ID), 
+                                                CountRows(Filter(SkillMatrix_SkillUsedProject, 'Project ID' = ThisItem.ID)) - 1
+                                            ), 
+                                            'Skill ' & " , "
+                                        ) & Last(Filter(SkillMatrix_SkillUsedProject, 'Project ID' = ThisItem.ID)).'Skill '
+                                    )
+                                )
+                            Width: =100
+                            ZIndex: =2
+
+                    Container21_12 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =Max(Label34_22.Height)+40
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: |-
+                            =//1045
+                            Parent.Width
+                        ZIndex: =5
+
+                        Label5_1 As label:
+                            Color: =RGBA(117, 117, 117, 1)
+                            PaddingBottom: =15
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =12
+                            Text: ="Description -"
+                            Width: =120
+                            ZIndex: =1
+
+                        Label34_22 As label:
+                            Align: =Align.Justify
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: |
+                                =40
+                            LayoutMinWidth: =120
+                            PaddingRight: =15
+                            Size: =11
+                            Text: |
+                                =If(
+                                    IsBlank(ThisItem.Description),
+                                    "NA",
+                                    ThisItem.Description
+                                )
+                            Width: =100
+                            ZIndex: =2
+
+            Label25_1 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                Italic: =true
+                Text: ="NA"
+                Visible: =IsBlank(Label32_38.Text)
+                X: =32
+                Y: =60
+                ZIndex: =4
+
+        Rectangle3_6 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =596
+            Visible: =false
+            Width: =367
+            ZIndex: =5
+
+        Container7_21 As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =260
+            Visible: =false
+            Width: =360
+            X: =5
+            ZIndex: =11
+
+            Label13_50 As label:
+                Color: =RGBA(122, 138, 143, 1)
+                FontWeight: =FontWeight.Semibold
+                Italic: =true
+                PaddingLeft: =15
+                Text: ="About"
+                ZIndex: =1
+
+            Image12_20 As image:
+                Height: =30
+                Image: ='skill-entity-svgrepo-com'
+                Visible: =false
+                Width: =30
+                X: =90
+                Y: =210
+                ZIndex: =12
+
+            Label44_23 As label:
+                Align: =Align.Center
+                PaddingLeft: =15
+                PaddingRight: =10
+                Size: =12
+                Text: =VarUser.Email
+                Width: =360
+                Y: =147
+                ZIndex: =13
+
+            Image12_19 As image:
+                Height: =20
+                Image: ='phone-svgrepo-com (1)'
+                Visible: =false
+                Width: =20
+                X: =90
+                Y: =185
+                ZIndex: =14
+
+            Label44_24 As label:
+                Align: =Align.Right
+                Height: =37
+                PaddingRight: =10
+                Text: =First(Office365Users.UserProfileV2(User().Email).businessPhones).Value
+                Width: =122
+                X: =56
+                Y: =180
+                ZIndex: =15
+
+            Label44_22 As label:
+                Align: =Align.Center
+                PaddingRight: =10
+                Text: =CountRows(Filter(SkillMap_TestData_1,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID && 'Created By'.Email = VarUser.Email)) & " " & "active skill"
+                Tooltip: |-
+                    =//CountRows(Filter('SkillMap_TestData_1',Title = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID && 'Created By'.Email = VarUser.Email)) & " " & "active skill"
+                    //Concat(Filter('SkillMap_TestData_1',Title = ThisItem.Title),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") "," ;")
+                Visible: =false
+                Width: =360
+                ZIndex: =17
+
+            Label40_6 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Semibold
+                Height: =35
+                PaddingLeft: =10
+                PaddingRight: =10
+                Size: =15
+                Text: =User().FullName
+                Width: =360
+                Y: =120
+                ZIndex: =19
+
+            Image1_10 As image:
+                Image: =User().Image
+                RadiusBottomLeft: =100
+                RadiusBottomRight: =100
+                RadiusTopLeft: =100
+                RadiusTopRight: =100
+                X: =138
+                Y: =20
+                ZIndex: =20
+
+            Image12_18 As image:
+                Height: =20
+                Image: ='email-svgrepo-com'
+                Visible: =false
+                Width: =20
+                X: =68
+                Y: =157
+                ZIndex: =21
+
+        Container2_16 As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(187, 188, 189, 1)
+            Height: =1
+            Visible: =false
+            Width: =341
+            X: =18
+            Y: =227
+            ZIndex: =12
+
+    Component_Admin_Navi_4 As Component_Admin_Navi:
+        MenuImage: =UserProfile
+        MenuTitle: ="My Summary"
+        Width: =1105
+        X: =245
+        Y: =70
+        ZIndex: =38
+
+    Component_SidbarNavi_User_3 As Component_SidbarNavi_User:
+        Height: =768
+        ZIndex: =40
+
+    Label43_29 As label:
+        Color: =RGBA(116, 116, 116, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =42
+        Size: =18
+        Text: ="Skills Matrix"
+        Width: =385
+        X: =245
+        Y: =15
+        ZIndex: =41
+
+    Canvas1_2 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =591
+        Width: =366
+        X: =245
+        Y: =160
+        ZIndex: =42
+
+        DataCard1_2 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =240
+            Width: =366
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            Container7_24 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =240
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Visible: =false
+                Width: =370
+                Y: =1
+                ZIndex: =1
+
+                Label13_56 As label:
+                    Color: =RGBA(122, 138, 143, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Italic: =true
+                    PaddingLeft: =15
+                    Text: ="About"
+                    ZIndex: =1
+
+                Image12_23 As image:
+                    Height: =30
+                    Image: ='skill-entity-svgrepo-com'
+                    Visible: =false
+                    Width: =30
+                    X: =90
+                    Y: =210
+                    ZIndex: =12
+
+                Label44_27 As label:
+                    Align: =Align.Center
+                    PaddingLeft: =15
+                    PaddingRight: =10
+                    Size: =12
+                    Text: =VarUser.Email
+                    Width: =360
+                    Y: =147
+                    ZIndex: =13
+
+                Image12_22 As image:
+                    Height: =20
+                    Image: ='phone-svgrepo-com (1)'
+                    Visible: =false
+                    Width: =20
+                    X: =90
+                    Y: =185
+                    ZIndex: =14
+
+                Label44_29 As label:
+                    Align: =Align.Right
+                    Height: =37
+                    PaddingRight: =10
+                    Text: =First(Office365Users.UserProfileV2(User().Email).businessPhones).Value
+                    Width: =122
+                    X: =56
+                    Y: =180
+                    ZIndex: =15
+
+                Label44_26 As label:
+                    Align: =Align.Center
+                    PaddingRight: =10
+                    Text: =CountRows(Filter(SkillMap_TestData_1,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID && 'Created By'.Email = VarUser.Email)) & " " & "active skill"
+                    Tooltip: |-
+                        =//CountRows(Filter('SkillMap_TestData_1',Title = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID && 'Created By'.Email = VarUser.Email)) & " " & "active skill"
+                        //Concat(Filter('SkillMap_TestData_1',Title = ThisItem.Title),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") "," ;")
+                    Visible: =false
+                    Width: =360
+                    ZIndex: =17
+
+                Label40_7 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    Height: =35
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    Size: =15
+                    Text: =User().FullName
+                    Width: =360
+                    Y: =120
+                    ZIndex: =19
+
+                Image1_16 As image:
+                    Height: =90
+                    Image: =User().Image
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    Width: =90
+                    X: =138
+                    Y: =20
+                    ZIndex: =20
+
+                Image12_21 As image:
+                    Height: =20
+                    Image: ='email-svgrepo-com'
+                    Visible: =false
+                    Width: =20
+                    X: =68
+                    Y: =157
+                    ZIndex: =21
+
+            Container7_25 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =260
+                Width: =360
+                X: =6
+                ZIndex: =2
+
+                Label13_59 As label:
+                    Color: =RGBA(122, 138, 143, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Italic: =true
+                    PaddingLeft: =15
+                    Text: ="About"
+                    ZIndex: =1
+
+                Image12_26 As image:
+                    Height: =30
+                    Image: ='skill-entity-svgrepo-com'
+                    Width: =30
+                    X: =90
+                    Y: =211
+                    ZIndex: =12
+
+                Label44_31 As label:
+                    Height: =30
+                    PaddingLeft: =15
+                    PaddingRight: =10
+                    Size: =12
+                    Text: =VarUser.Email
+                    Width: =304
+                    Wrap: =false
+                    X: =30
+                    Y: =150
+                    ZIndex: =13
+
+                Image12_25 As image:
+                    Height: =20
+                    Image: ='phone-svgrepo-com (1)'
+                    Width: =16
+                    X: =98
+                    Y: =190
+                    ZIndex: =14
+
+                Label44_32 As label:
+                    Align: =Align.Center
+                    Height: =30
+                    PaddingRight: =10
+                    Text: =First(Office365Users.UserProfileV2(User().Email).businessPhones).Value
+                    Width: =122
+                    X: =114
+                    Y: =181
+                    ZIndex: =15
+
+                Label40_8 As label:
+                    Align: =Align.Center
+                    FontWeight: =FontWeight.Semibold
+                    Height: =35
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    Size: =15
+                    Text: =User().FullName
+                    Width: =360
+                    Y: =120
+                    ZIndex: =19
+
+                Image1_20 As image:
+                    Image: =User().Image
+                    RadiusBottomLeft: =100
+                    RadiusBottomRight: =100
+                    RadiusTopLeft: =100
+                    RadiusTopRight: =100
+                    X: =125
+                    Y: =20
+                    ZIndex: =20
+
+                Image12_24 As image:
+                    Height: =18
+                    Image: ='email-svgrepo-com'
+                    Width: =18
+                    X: =20
+                    Y: =158
+                    ZIndex: =21
+
+                Label44_33 As label:
+                    Align: =Align.Center
+                    Height: =33
+                    PaddingRight: =10
+                    Text: =CountRows(Filter(SkillMap_TestData_1,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID))& " " & "active skills"
+                    Tooltip: =Concat(Filter(SkillMap_TestData_1,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID  && 'Created By'.Email = VarUser.Email),LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title &" (" & Rating & ") ","; ")
+                    Width: =168
+                    X: =98
+                    Y: =208
+                    ZIndex: =22
+
+            Container2_17 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(187, 188, 189, 1)
+                Height: =1
+                Width: =341
+                X: =14
+                Y: =245
+                ZIndex: =3
+
+        DataCard2_3 As dataCard.blankCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =Max(Container_Certifications_4.Height+Container_Qualifications_3.Height+Container_TopSkills_4.Height)+20
+            Width: =366
+            X: =0
+            Y: =1
+            ZIndex: =2
+
+            Container_Qualifications_3 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: |+
+                    =//80
+                    (Gallery8_18.Height+Container3_10.Height)-20
+                    
+                Width: =357
+                X: =3
+                ZIndex: =1
+
+                Label13_57 As label:
+                    Color: =RGBA(122, 138, 143, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =25
+                    Italic: =true
+                    PaddingLeft: =15
+                    Text: ="Qualifications"
+                    X: =40
+                    ZIndex: =1
+
+                Gallery8_18 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Height: |-
+                        =//79
+                        CountRows(Gallery8_18.AllItems)*30
+                    Items: =Filter(Qualifications_TestData_1,EmployeeId =LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).'Employee Id')
+                    Layout: =Layout.Vertical
+                    ShowScrollbar: =false
+                    TemplateSize: =Label34_28.Height -5
+                    Width: =292
+                    X: =40
+                    Y: =25
+                    ZIndex: =2
+
+                    Container21_18 As groupContainer.horizontalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        Height: =Label34_28.Height
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =282
+                        ZIndex: =2
+
+                        Label34_28 As label:
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: =25
+                            LayoutMinWidth: =120
+                            PaddingBottom: =0
+                            PaddingLeft: =15
+                            PaddingRight: =15
+                            Size: =12
+                            Text: |-
+                                =LookUp(SkillMatrix_QualificationsAdmin,ID = ThisItem.QualificationId).Title 
+                                & " , "&ThisItem.'Percentage / CGPA'
+                            Width: =100
+                            ZIndex: =2
+
+                Container3_10 As groupContainer.manualLayoutContainer:
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    Height: =50
+                    RadiusBottomLeft: =50
+                    RadiusBottomRight: =50
+                    RadiusTopLeft: =50
+                    RadiusTopRight: =50
+                    Width: =50
+                    X: =15
+                    Y: =2
+                    ZIndex: =4
+
+                    Image1_17 As image:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =22
+                        Image: ='education-cap-svgrepo-com'
+                        RadiusBottomLeft: =50
+                        RadiusBottomRight: =50
+                        RadiusTopLeft: =50
+                        RadiusTopRight: =50
+                        Width: =22
+                        X: =3
+                        ZIndex: =1
+
+            Container_Certifications_4 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: |-
+                    =//95
+                    (Gallery8_21.Height+Container3_11.Height)-20
+                Width: =357
+                X: =3
+                Y: =(Container_Qualifications_3.Height)+10
+                ZIndex: =2
+
+                Label13_38 As label:
+                    Color: =RGBA(122, 138, 143, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =25
+                    Italic: =true
+                    PaddingLeft: =15
+                    Text: ="Certifications"
+                    X: =41
+                    ZIndex: =1
+
+                Label19_4 As label:
+                    Height: =25
+                    Text: |-
+                        =Concat(
+                            FirstN(
+                                Sort(
+                                    Filter(
+                                        CertificationsList_TestData_1,
+                                        EmployeeId = LookUp(
+                                            UsersSkillMatrix_TestData_1,
+                                            Email = User().Email
+                                        ).'Employee Id'
+                                    ),
+                                    SortOrder.Descending
+                                ),
+                                3
+                            ),
+                            LookUp(
+                                CertificationsList_TestData_1,
+                                EmployeeId = LookUp(
+                                    UsersSkillMatrix_TestData_1,
+                                    Email = User().Email
+                                ).'Employee Id'
+                            ).Certificationtitle,
+                            " ,"
+                        )
+                        //Filter(Certifications_TestData_1 ,!IsBlank(Title),EmployeeId =LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).EmployeeID)
+                    Visible: =false
+                    Width: =357
+                    ZIndex: =4
+
+                Container3_11 As groupContainer.manualLayoutContainer:
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    Height: =50
+                    RadiusBottomLeft: =50
+                    RadiusBottomRight: =50
+                    RadiusTopLeft: =50
+                    RadiusTopRight: =50
+                    Width: =50
+                    X: =15
+                    Y: =2
+                    ZIndex: =5
+
+                    Image1_18 As image:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =22
+                        Image: =certificate
+                        RadiusBottomLeft: =50
+                        RadiusBottomRight: =50
+                        RadiusTopLeft: =50
+                        RadiusTopRight: =50
+                        Width: =22
+                        X: =3
+                        Y: =2
+                        ZIndex: =1
+
+                Gallery8_21 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Height: |-
+                        =If(
+                            CountRows(Gallery8_21.AllItems) = 0,
+                            40,
+                        CountRows(Gallery8_21.AllItems)*30 +10)
+                    Items: |-
+                        =Filter(
+                            CertificationsList_TestData_1,
+                            !IsBlank(Certificationtitle),
+                            EmployeeId = LookUp(
+                                UsersSkillMatrix_TestData_1,
+                                Email = User().Email
+                            ).'Employee Id'
+                        )
+                    Layout: =Layout.Vertical
+                    ShowScrollbar: =false
+                    TemplateSize: =Label34_31.Height -5
+                    Width: =292
+                    X: =40
+                    Y: =25
+                    ZIndex: =8
+
+                    Container21_21 As groupContainer.horizontalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        Height: =Label34_31.Height
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =282
+                        ZIndex: =2
+
+                        Label34_31 As label:
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: =25
+                            LayoutMinWidth: =120
+                            PaddingBottom: =0
+                            PaddingLeft: =15
+                            PaddingRight: =15
+                            Size: =12
+                            Text: |-
+                                =//LookUp(SkillMatrix_QualificationsAdmin,ID = ThisItem.QualificationId).Title & " , "&
+                                ThisItem.Certificationtitle
+                            Width: =100
+                            ZIndex: =2
+
+                Label25 As label:
+                    Color: =RGBA(122, 138, 143, 1)
+                    Italic: =true
+                    Text: ="NA"
+                    Visible: =IsBlank(Label34_31.Text)
+                    X: =41
+                    Y: =25
+                    ZIndex: =9
+
+            Container_TopSkills_4 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =(Gallery8_22.Height+Container3_12.Height)-20
+                Width: =357
+                X: =3
+                Y: =Container_Qualifications_3.Height+Container_Certifications_4.Height+10
+                ZIndex: =3
+
+                Label13_58 As label:
+                    Color: =RGBA(122, 138, 143, 1)
+                    FontWeight: =FontWeight.Semibold
+                    Height: =25
+                    Italic: =true
+                    PaddingLeft: =15
+                    Text: ="Top skills"
+                    X: =41
+                    ZIndex: =1
+
+                Container3_12 As groupContainer.manualLayoutContainer:
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    DropShadow: =DropShadow.None
+                    Height: =50
+                    RadiusBottomLeft: =50
+                    RadiusBottomRight: =50
+                    RadiusTopLeft: =50
+                    RadiusTopRight: =50
+                    Width: =50
+                    X: =15
+                    Y: =2
+                    ZIndex: =4
+
+                    Image1_19 As image:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Height: =28
+                        Image: ='skill-svgrepo-com'
+                        RadiusBottomLeft: =50
+                        RadiusBottomRight: =50
+                        RadiusTopLeft: =50
+                        RadiusTopRight: =50
+                        Width: =28
+                        X: =3
+                        ZIndex: =1
+
+                Gallery8_22 As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    DelayItemLoading: =true
+                    Height: |-
+                        =//79
+                        CountRows(Gallery8_22.AllItems)*30+10
+                    Items: =FirstN(Sort(ColTopskillsUser,'Sum of Value',SortOrder.Descending),3)
+                    Layout: =Layout.Vertical
+                    ShowScrollbar: =false
+                    TemplateSize: |-
+                        =//Label34_32.Height
+                        20
+                    Width: =292
+                    X: =40
+                    Y: =25
+                    ZIndex: =6
+
+                    Container21_22 As groupContainer.horizontalAutoLayoutContainer:
+                        DropShadow: =DropShadow.None
+                        Height: =Label34_32.Height
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =282
+                        Y: =5
+                        ZIndex: =2
+
+                        Label34_32 As label:
+                            AutoHeight: =true
+                            FillPortions: =1
+                            Height: =25
+                            LayoutMinWidth: =120
+                            PaddingBottom: =2
+                            PaddingLeft: =15
+                            PaddingRight: =15
+                            Size: =12
+                            Text: |-
+                                =//LookUp(SkillMatrix_QualificationsAdmin,ID = ThisItem.QualificationId).Title & " , "&
+                                ThisItem.Title
+                            Width: =100
+                            ZIndex: =2
+
+            Container_TopSkills_5 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =0
+                Width: =357
+                X: =9
+                Y: =(Container_Certifications_4.Height +Container_Qualifications_3.Height+Container_TopSkills_4.Height)+30
+                ZIndex: =5
+

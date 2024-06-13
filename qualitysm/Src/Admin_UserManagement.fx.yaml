@@ -1,0 +1,1806 @@
+Admin_UserManagement As screen:
+    Fill: =RGBA(248, 249, 250, 1)
+    OnVisible: |-
+        =Set(
+            varPageNumber,
+            1
+        );
+        Set(
+            varTopTab,
+            "Admin_UserManagement"
+        );
+        Set(
+            varShowMenu,
+            false
+        );
+        Set (
+            LoadingSpinnerVisible,
+            false
+        );
+        ClearCollect(
+            colskillmap,
+            SkillMap_TestData_1
+        );
+        ClearCollect(
+            FilteredData,
+            UsersSkillMatrix_TestData_1
+        );
+        Set(
+            varSkillMandate,
+            false
+        );
+        ClearCollect(
+            ColUserReport,
+            UsersSkillMatrix_TestData_1
+        );
+        Set(
+            varSuccess,
+            false
+        );
+        Set(
+            varAction,
+            false
+        );
+        Set(
+            Varuserform,
+            false
+        );
+        Set(
+            ValidationError,
+            " "
+        );
+        Set(
+            ValidationError5,
+            ""
+        )
+
+    Container_SkillReport_1 As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(202, 202, 202, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =1
+        DropShadow: =DropShadow.None
+        Height: =608
+        Visible: |-
+            =//varTopTab="Skill Report"
+            true
+        Width: =1115
+        X: =240
+        Y: =160
+        ZIndex: =1
+
+        Group4_1 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =4
+
+            Container25_6 As groupContainer.horizontalAutoLayoutContainer:
+                BorderColor: =RGBA(139, 154, 159, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =0.2
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =54
+                LayoutMode: =LayoutMode.Auto
+                RadiusBottomLeft: =1
+                RadiusBottomRight: =1
+                RadiusTopLeft: =1
+                RadiusTopRight: =1
+                Width: =1108
+                X: =5
+                Y: =92
+                ZIndex: =2
+
+                Label34_6 As label:
+                    FontWeight: =FontWeight.Semibold
+                    Height: =55
+                    LayoutMinWidth: =200
+                    PaddingLeft: =10
+                    Size: =15
+                    Text: ="Full name"
+                    Width: =500
+                    ZIndex: =1
+
+                Container27_15 As groupContainer.horizontalAutoLayoutContainer:
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Visible: =false
+                    Width: =300
+                    ZIndex: =2
+
+                    Label37_15 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Email"
+                        Width: =Parent.Width
+                        ZIndex: =1
+
+                Container27_16 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Visible: =false
+                    Width: =160
+                    ZIndex: =3
+
+                    Label37_16 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Phone"
+                        Width: =Parent.Width
+                        ZIndex: =1
+
+                Container27_21 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =450
+                    ZIndex: =4
+
+                    Label37_21 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="User role"
+                        Width: =Parent.Width
+                        ZIndex: =1
+
+                Container27_18 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    LayoutMinHeight: =55
+                    LayoutMinWidth: =360
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =160
+                    ZIndex: =6
+
+                    Label37_18 As label:
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        PaddingLeft: =10
+                        Size: =15
+                        Text: ="Actions"
+                        Width: =Parent.Width
+                        ZIndex: =1
+
+            Gallery_UserDetails As gallery.galleryVertical:
+                '#CopilotOverlayLabel': ="Filtered"
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =0.2
+                DelayItemLoading: =true
+                Height: =371
+                Items: |
+                    =
+                    If(
+                        icoNext_5.DisplayMode = DisplayMode.Disabled,
+                        LastN(
+                            FirstN(
+                                Sort(
+                                    Filter(
+                                        galHidden_2.AllItems,
+                                        StartsWith(Fullname, TextInput6_1.Text) &&
+                                        StartsWith(Email,TextInput6_1.Text) 
+                                    ),
+                                    Created,
+                                    SortOrder.Descending
+                                ),
+                                drpPaginationSize_3.Selected.Value * varPageNumber
+                            ),
+                            drpPaginationSize_3.Selected.Value - (drpPaginationSize_3.Selected.Value * varPageNumber - Value(lblCountRows_3.Text))
+                        ),
+                       LastN(
+                            FirstN(
+                                Sort(
+                                    Filter(
+                                        galHidden_2.AllItems,
+                                        StartsWith(Fullname, TextInput6_1.Text) &&
+                                        StartsWith(Email,TextInput6_1.Text)
+                                    ),
+                                    Created,
+                                    SortOrder.Descending
+                                ),
+                                drpPaginationSize_3.Selected.Value * varPageNumber
+                            ),
+                            drpPaginationSize_3.Selected.Value - (drpPaginationSize_3.Selected.Value * varPageNumber - Value(lblCountRows_3.Text))
+                        )
+                    )
+                Layout: =Layout.Vertical
+                LoadingSpinner: =LoadingSpinner.Data
+                ShowScrollbar: =false
+                TemplatePadding: =1
+                TemplateSize: =55
+                Width: =1110
+                X: =4
+                Y: =146.2
+                ZIndex: =3
+
+                Container25_7 As groupContainer.horizontalAutoLayoutContainer:
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =55
+                    LayoutMode: =LayoutMode.Auto
+                    RadiusBottomLeft: =1
+                    RadiusBottomRight: =1
+                    RadiusTopLeft: =1
+                    RadiusTopRight: =1
+                    Width: =1108
+                    ZIndex: =1
+
+                    Label34_7 As label:
+                        Height: =55
+                        LayoutMinWidth: =200
+                        PaddingLeft: =10
+                        Text: =Concatenate(ThisItem.Fullname )
+                        Width: =500
+                        ZIndex: =1
+
+                    Container27_20 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =false
+                        Width: =300
+                        ZIndex: =3
+
+                        Label37_20 As label:
+                            Height: =55
+                            PaddingLeft: =10
+                            Text: =ThisItem.Email
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                    Container30_5 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.Start
+                        FillPortions: =0
+                        Height: =55
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =270
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =false
+                        Width: =160
+                        ZIndex: =4
+
+                        Label38_5 As label:
+                            Height: =55
+                            PaddingLeft: =15
+                            Text: =ThisItem.MobileNumber
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                    Container27_22 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =450
+                        ZIndex: =6
+
+                        Label38_10 As label:
+                            Height: =55
+                            PaddingLeft: =15
+                            Text: =ThisItem.UserRole.Value
+                            Width: =Parent.Width
+                            ZIndex: =1
+
+                    Container27_23 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        LayoutMinHeight: =55
+                        LayoutMinWidth: =360
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =160
+                        ZIndex: =7
+
+                        Container28_48 As groupContainer.manualLayoutContainer:
+                            DropShadow: =DropShadow.None
+                            Height: =60
+                            LayoutMinHeight: =50
+                            LayoutMinWidth: =160
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Width: =Parent.Width
+                            X: =1074
+                            Y: =4
+                            ZIndex: =2
+
+                            Button29_97 As button:
+                                BorderColor: =RGBA(202, 202, 202, 1)
+                                Fill: =RGBA(0, 0, 0, 0)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                OnSelect: =ResetForm(Form_UserManagement);Set(Varuserform ,true);EditForm(Form_UserManagement);
+                                PaddingTop: =0
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                RadiusBottomLeft: =4
+                                RadiusBottomRight: =4
+                                RadiusTopLeft: =4
+                                RadiusTopRight: =4
+                                Text: =""
+                                Tooltip: ="Edit"
+                                Width: =45
+                                X: =22
+                                Y: =8
+                                ZIndex: =1
+
+                            Image19_96 As image:
+                                DisabledFill: =RGBA(219, 219, 219, 1)
+                                Height: =25
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                Image: =Edit
+                                OnSelect: =ResetForm(Form_UserManagement);Set(Varuserform ,true);EditForm(Form_UserManagement);
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                Tooltip: ="Edit"
+                                Width: =25
+                                X: =32
+                                Y: =15
+                                ZIndex: =2
+
+                            Button29_98 As button:
+                                BorderColor: =RGBA(202, 202, 202, 1)
+                                Fill: =RGBA(0, 0, 0, 0)
+                                HoverColor: =RGBA(0, 0, 0, 1)
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                OnSelect: =Set(varDeleteUser, true)
+                                PaddingTop: =0
+                                PressedColor: =RGBA(0, 0, 0, 1)
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                RadiusBottomLeft: =4
+                                RadiusBottomRight: =4
+                                RadiusTopLeft: =4
+                                RadiusTopRight: =4
+                                Text: =""
+                                Tooltip: ="Delete"
+                                Width: =45
+                                X: =88
+                                Y: =8
+                                ZIndex: =3
+
+                            Image19_97 As image:
+                                DisabledFill: =RGBA(219, 219, 219, 1)
+                                Height: =20
+                                HoverFill: =RGBA(219, 219, 219, 1)
+                                Image: =trash
+                                OnSelect: =Set(varDeleteUser, true)
+                                PressedFill: =RGBA(219, 219, 219, 1)
+                                Tooltip: ="Delete"
+                                Width: =20
+                                X: =100
+                                Y: =18
+                                ZIndex: =4
+
+        Button18_4 As button:
+            Align: =Align.Left
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =41
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: |
+                =Set(
+                    Varuserform,
+                    true
+                );
+                NewForm(Form_UserManagement);
+                Set(
+                    ValidationError5,
+                    ""
+                );
+                Set(
+                    ValidationError,
+                    " "
+                );
+            PaddingLeft: =40
+            PressedBorderColor: =RGBA(219, 219, 219, 1)
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Add User            "
+            Tooltip: ="Add qualification"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =150
+            X: =945
+            Y: =17
+            ZIndex: =10
+
+        Group5_2 As group:
+            Height: =5
+            Width: =5
+            X: =-238
+            Y: =-117
+            ZIndex: =10
+
+            Rectangle35_3 As rectangle:
+                Fill: =RGBA(238, 238, 238, 1)
+                Height: =80
+                Width: =1108
+                X: =7
+                ZIndex: =4
+
+            TextInput6_1 As text:
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderThickness: =1
+                Default: =""
+                DisabledColor: =RGBA(0, 0, 0, 1)
+                Height: =41
+                HintText: ="Search"
+                HoverBorderColor: =RGBA(219, 219, 219, 1)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                Italic: =true
+                PressedBorderColor: =RGBA(219, 219, 219, 1)
+                PressedColor: =RGBA(202, 202, 202, 1)
+                PressedFill: =RGBA(255, 255, 255, 1)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =20
+                RadiusTopLeft: =0
+                RadiusTopRight: =20
+                Width: =384
+                X: =56
+                Y: =17
+                ZIndex: =7
+
+            Image17_3 As image:
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Fill: =RGBA(219, 219, 219, 1)
+                Height: =30
+                Image: =cross
+                OnSelect: =Reset(TextInput6_1)
+                PaddingBottom: =5
+                PaddingLeft: =5
+                PaddingRight: =5
+                PaddingTop: =5
+                RadiusBottomLeft: =50
+                RadiusBottomRight: =50
+                RadiusTopLeft: =50
+                RadiusTopRight: =50
+                Width: =30
+                X: =398
+                Y: =23
+                ZIndex: =8
+
+            Image16_8 As image:
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderThickness: =1
+                Fill: =RGBA(233, 236, 239, 1)
+                Height: =41
+                Image: ='search-black'
+                PaddingBottom: =8
+                PaddingLeft: =8
+                PaddingRight: =8
+                PaddingTop: =8
+                RadiusBottomLeft: =5
+                RadiusTopLeft: =5
+                Width: =30
+                X: =25
+                Y: =17
+                ZIndex: =9
+
+        Image17_5 As image:
+            Height: =30
+            Image: =Plus
+            OnSelect: =Set(Varuserform , true);NewForm(Form_UserManagement);
+            PaddingBottom: =6
+            PaddingLeft: =6
+            PaddingRight: =6
+            PaddingTop: =6
+            Tooltip: ="Add qualification"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =30
+            X: =948
+            Y: =22
+            ZIndex: =11
+
+    Component_Admin_Navi_11 As Component_Admin_Navi:
+        Height: =79
+        ImagePadding: =2
+        MenuImage: ='user-profile-svgrepo-com (1)'
+        MenuTitle: ="User Management "
+        Width: =1108
+        X: =245
+        Y: =70
+        ZIndex: =2
+
+    Label43_3 As label:
+        Color: =RGBA(116, 116, 116, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =42
+        Size: =18
+        Text: ="Skill Matrix"
+        Width: =385
+        X: =245
+        Y: =15
+        ZIndex: =3
+
+    Container_Success_popup_2 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =varSuccess
+        Width: =1366
+        ZIndex: =4
+
+        Container_Success_popoup_2 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(219, 219, 219, 1)
+            BorderThickness: =1
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =186
+            Visible: =false
+            Width: =667
+            X: =500
+            Y: =235
+            ZIndex: =1
+
+            Label14_13 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Semibold
+                Height: =59
+                Size: =14
+                Text: ="Registeration completed Successfully. You are being Redirecting to Home page."
+                Width: =565
+                X: =60
+                Y: =35
+                ZIndex: =12
+
+            Image18_3 As image:
+                Height: =80
+                Image: ='Rolling-1s-204px'
+                ImagePosition: =ImagePosition.Center
+                Width: =80
+                X: =302
+                Y: =94
+                ZIndex: =13
+
+        Timer1_2 As timer:
+            Duration: =2000
+            OnTimerEnd: |-
+                =Set(varSuccessPopup,false);
+                Navigate(User_Dashboard);
+            OnTimerStart: =
+            Start: =varSuccessPopup
+            Visible: =false
+            X: =1206
+            Y: =15
+            ZIndex: =2
+
+        Image18_5 As image:
+            Height: =112
+            Image: ='Rolling-1s-204px'
+            ImagePosition: =ImagePosition.Center
+            Width: =148
+            X: =688
+            Y: =308
+            ZIndex: =3
+
+    Container_Download_template_3 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.5)
+        Height: =768
+        Visible: =vardownloadtem 
+        Width: =1366
+        ZIndex: =22
+
+        Container_Certification_Form_38 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(219, 219, 219, 1)
+            BorderThickness: =1
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =244
+            Width: =683
+            X: =405
+            Y: =219
+            ZIndex: =1
+
+            Label13_176 As label:
+                FontWeight: =FontWeight.Semibold
+                Height: =52
+                Size: =15
+                Text: ="Message"
+                Width: =349
+                X: =27
+                Y: =1
+                ZIndex: =4
+
+            Container6_79 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderThickness: =0.001
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(241, 244, 249, 1)
+                Height: =1
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Width: =636
+                X: =27
+                Y: =57
+                ZIndex: =5
+
+            Rectangle13_76 As rectangle:
+                BorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(245, 245, 245, 1)
+                Height: =83
+                Width: =636
+                X: =27
+                Y: =150
+                ZIndex: =7
+
+            Button24_171 As button:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledBorderColor: =
+                DisabledColor: =RGBA(255, 255, 255, 1)
+                DisabledFill: =RGBA(30, 49, 68, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                FocusedBorderThickness: =
+                FontWeight: =FontWeight.Normal
+                Height: =45
+                HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                OnSelect: |+
+                    =
+                    Set(vardownloadtem, false)
+                    
+                    
+                    
+                PressedBorderColor: =//Self.Fill
+                PressedColor: =RGBA(0, 0, 0, 1)
+                PressedFill: =RGBA(255, 255, 255, 1)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =14
+                Text: ="Cancel"
+                Tooltip: ="Cancel"
+                Width: =96
+                X: =360
+                Y: =169
+                ZIndex: =8
+
+            Button24_170 As button:
+                DisabledBorderColor: =
+                DisabledColor: =RGBA(255, 255, 255, 1)
+                DisabledFill: =RGBA(30, 49, 68, 1)
+                Fill: =RGBA(51, 122, 183, 1)
+                FocusedBorderThickness: =
+                FontWeight: =FontWeight.Normal
+                Height: =45
+                HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                HoverFill: =RGBA(0, 94, 146, 1)
+                OnSelect: |+
+                    =//Launch("https://iz.sharepoint.com/sites/DEMO_PowerApps/Shared%20Documents/RegistrationTemplate.xlsx");
+                    Launch("https://iz.sharepoint.com/:x:/r/sites/DEMO_PowerApps/SkillManagement_UploadFiles/Book.xlsx");
+                    Set(vardownloadtem, false)
+                    
+                    
+                    
+                    
+                    
+                PressedBorderColor: =//Self.Fill
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(0, 94, 146, 1)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =14
+                Text: ="Yes"
+                Tooltip: ="Save"
+                Width: =96
+                X: =230
+                Y: =169
+                ZIndex: =9
+
+            Icon8_92 As icon.CancelBadge:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =28
+                Icon: =Icon.CancelBadge
+                OnSelect: |+
+                    =//ResetForm(Form_Certification_10);
+                    Set(vardownloadtem, false)
+                    
+                    
+                    
+                Tooltip: ="Close"
+                Width: =28
+                X: =635
+                Y: =17
+                ZIndex: =10
+
+            Label52_26 As label:
+                Align: =Align.Center
+                FontWeight: =FontWeight.Semibold
+                Height: =55
+                Size: =18
+                Text: ="Are you sure want to download template ? "
+                Width: =639
+                X: =25
+                Y: =70
+                ZIndex: =11
+
+    Component_SidbarNavi_Admin_New_9 As Component_SidbarNavi_Admin:
+        DirectoryItems: |-
+            =Table(
+            
+                 {
+                    Title: "Skills",
+                    Screen: Skills
+                },
+                {
+                    Title: "Qualifications",
+                    Screen: Qualifications
+                }
+            )
+        Height: =768
+        ZIndex: =28
+
+    Container1_9 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.5)
+        Height: =768
+        Visible: =varISLoading
+        Width: =1366
+        ZIndex: =29
+
+        Image2_22 As image:
+            Image: ='output-onlinegiftools'
+            X: =588
+            Y: =276
+            ZIndex: =1
+
+        Timer1_22 As timer:
+            Duration: =9000
+            OnTimerEnd: |-
+                =Set(varISLoading , false); 
+                Set(varUploadLoc , false);
+            Start: =varISLoading
+            Visible: =false
+            X: =807
+            Y: =168
+            ZIndex: =2
+
+    Group_Paginataion_Location_2 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =72
+
+        galHidden_2 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            Default: |-
+                =If(
+                    drpPaginationSize_3.Selected.Value * varPageNumber >= CountRows(Self.AllItems),
+                    Last(Self.AllItems)
+                )
+            DelayItemLoading: =true
+            Height: =75
+            Items: =Filter(UsersSkillMatrix_TestData_1,!IsBlank(Fullname))
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+            Visible: =false
+            Width: =20
+            X: =1100
+            Y: =691
+            ZIndex: =5
+
+        lblCountRows_3 As label:
+            Height: =51
+            Text: =CountRows(galHidden_2.AllItems)
+            Visible: =false
+            Width: =241
+            X: =244
+            Y: =691
+            ZIndex: =6
+
+        Container12_3 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =45
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Width: =152
+            X: =245
+            Y: =706
+            ZIndex: =7
+
+            drpPaginationSize_3 As dropdown:
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                ChevronBackground: =RGBA(0, 0, 0, 0)
+                ChevronFill: =RGBA(116, 116, 116, 1)
+                ChevronHoverBackground: =RGBA(0, 0, 0, 0)
+                ChevronHoverFill: =RGBA(116, 116, 116, 1)
+                HoverFill: =RGBA(237, 237, 237, 1)
+                Items: |
+                    =[5,10,25,50,100]
+                PressedColor: =RGBA(0, 0, 0, 1)
+                PressedFill: =RGBA(202, 202, 202, 1)
+                SelectionFill: =RGBA(219, 219, 219, 1)
+                Width: =150
+                Y: =5
+                ZIndex: =1
+
+        Label32_3 As label:
+            PaddingLeft: =1
+            Text: ="Per Page"
+            X: =405
+            Y: =708
+            ZIndex: =8
+
+        Label21_5 As label:
+            Height: =38
+            PaddingLeft: =0
+            Size: =12
+            Text: |-
+                ="Showing "&((varPageNumber * drpPaginationSize_3.Selected.Value) - drpPaginationSize_3.Selected.Value) + 1 & " to " & If(
+                    ((varPageNumber * drpPaginationSize_3.Selected.Value) > CountRows(galHidden_2.AllItems)),
+                    CountRows(galHidden_2.AllItems),
+                    (varPageNumber * drpPaginationSize_3.Selected.Value)
+                )&"  of " & lblCountRows_3.Text & " entries"
+            Width: =345
+            X: =246
+            Y: =668
+            ZIndex: =9
+
+        icoPrev_5 As button:
+            BorderThickness: =1
+            Color: =RGBA(0, 121, 187, 1)
+            DisplayMode: |-
+                =If(
+                    varPageNumber = 1,
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit
+                )
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varPageNumber,varPageNumber-1)
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =0
+            RadiusTopLeft: =8
+            RadiusTopRight: =0
+            Text: ="← Previous"
+            Tooltip: ="Previous"
+            Width: =140
+            X: =895
+            Y: =706
+            ZIndex: =10
+
+        Label15_5 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =45
+            Text: |-
+                ="Page " & varPageNumber & " of " & If(
+                    Mod(
+                         CountRows(galHidden_2.AllItems),
+                        100
+                    ) = 0,
+                    RoundUp(
+                         CountRows(galHidden_2.AllItems) / drpPaginationSize_3.Selected.Value,
+                        0
+                    ) & " + Pages ",
+                    RoundUp(
+                         CountRows(galHidden_2.AllItems) / drpPaginationSize_3.Selected.Value,
+                        0
+                    ) & " Pages"
+                )
+            Width: =177
+            X: =1035
+            Y: =706
+            ZIndex: =11
+
+        icoNext_5 As button:
+            Color: =RGBA(0, 121, 187, 1)
+            DisplayMode: |-
+                =If(
+                    drpPaginationSize_3.Selected.Value * varPageNumber <= Value(lblCountRows_3.Text),
+                    DisplayMode.Edit,
+                    DisplayMode.Disabled
+                )
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varPageNumber,varPageNumber+1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =8
+            RadiusTopLeft: =0
+            RadiusTopRight: =8
+            Text: ="Next → "
+            Tooltip: ="Next"
+            Width: =140
+            X: =1212
+            Y: =706
+            ZIndex: =12
+
+    Grp_Edit_UserDetails As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =75
+
+        Rectangle1 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.5)
+            Height: =768
+            Visible: =Varuserform
+            Width: =1366
+            ZIndex: =24
+
+        Container_Qualification_10 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(219, 219, 219, 1)
+            BorderThickness: =1
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =615
+            Visible: =Varuserform
+            Width: =950
+            X: =324
+            Y: =76
+            ZIndex: =25
+
+            Form_UserManagement As form:
+                BorderColor: =RGBA(166, 166, 166, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =0.5
+                DataSource: =UsersSkillMatrix_TestData_1
+                Height: =410
+                Item: =Gallery_UserDetails.Selected
+                NumberOfColumns: =2
+                OnSuccess: =Set(Varuserform,false)
+                Width: =874
+                X: =40
+                Y: =98
+                ZIndex: =1
+
+                "'User Role_DataCard1' As typedDataCard.comboBoxEditCard":
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="UserRole"
+                    Default: =ThisItem.UserRole
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,UserRole)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    Required: =true
+                    Update: =DataCardValue10.Selected
+                    Width: =437
+                    X: =1
+                    Y: =1
+                    ZIndex: =1
+
+                    Container23_34 As groupContainer.manualLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        DropShadow: =DropShadow.None
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =50
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        Width: =377
+                        X: =30
+                        Y: =49
+                        ZIndex: =1
+
+                    DataCardKey13 As label:
+                        AutoHeight: =true
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =34
+                        Text: ="User role"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =2
+
+                    DataCardValue10 As combobox:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        BorderStyle: =BorderStyle.None
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronFill: =RGBA(128, 128, 128, 1)
+                        ChevronHoverBackground: =RGBA(202, 202, 202, 1)
+                        DefaultSelectedItems: =Parent.Default
+                        DisplayFields: =["Value"]
+                        DisplayMode: =Parent.DisplayMode
+                        HoverBorderColor: =RGBA(128, 128, 128, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        Items: =Choices([@UsersSkillMatrix_TestData_1].UserRole)
+                        PaddingLeft: =If(Self.DisplayMode = DisplayMode.Edit, 5, 0)
+                        PressedBorderColor: =RGBA(128, 128, 128, 1)
+                        PressedFill: =RGBA(202, 202, 202, 1)
+                        SearchFields: =["Value"]
+                        SearchItems: =Choices(SkillMatrix_UserManagement.UserRole,DataCardValue10.SearchText)
+                        SelectionFill: =RGBA(128, 128, 128, 1)
+                        SelectMultiple: =false
+                        Tooltip: =Parent.DisplayName
+                        Width: =350
+                        X: =43
+                        Y: =54
+                        ZIndex: =3
+
+                    ErrorMessage13 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue10.Y + DataCardValue10.Height
+                        ZIndex: =4
+
+                    StarVisible13 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Height: =DataCardKey13.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        X: =121
+                        Y: =10
+                        ZIndex: =5
+
+                Fullname_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Firstname"
+                    Default: =ThisItem.Fullname
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,Fullname)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, Fullname)
+                    Required: =true
+                    Update: =DataCardValue2.Text
+                    Width: =436
+                    X: =0
+                    Y: =0
+                    ZIndex: =2
+
+                    DataCardKey3 As label:
+                        AutoHeight: =true
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =34
+                        Size: =14
+                        Text: |-
+                            =//Parent.DisplayName
+                            "Full name"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue2 As text:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Height: =50
+                        HoverBorderColor: =RGBA(202, 202, 202, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =15
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage3 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue2.Y + DataCardValue2.Height
+                        ZIndex: =3
+
+                    StarVisible3 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(189, 49, 51, 1)
+                        Height: =DataCardKey3.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        X: =115
+                        Y: =DataCardKey3.Y
+                        ZIndex: =4
+
+                Location_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Location"
+                    Default: =ThisItem.Location
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,Location)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, Location)
+                    Required: =true
+                    Update: =DataCardValue9.Text
+                    Width: =436
+                    X: =1
+                    Y: =0
+                    ZIndex: =2
+
+                    DataCardKey10 As label:
+                        AutoHeight: =true
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =34
+                        Size: =14
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue9 As text:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Height: =50
+                        HoverBorderColor: =RGBA(202, 202, 202, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =15
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey10.Y + DataCardKey10.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage10 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue9.Y + DataCardValue9.Height
+                        ZIndex: =3
+
+                    StarVisible10 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Height: =DataCardKey10.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        X: =110
+                        Y: =DataCardKey10.Y
+                        ZIndex: =4
+
+                "'Experience (in years)_DataCard1' As typedDataCard.numberEditCard":
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Experience_x0028_inyears_x0029_"
+                    Default: =ThisItem.TotalExperience
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,TotalExperience)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    Required: =true
+                    Update: =Value(DataCardValue7.Text)
+                    Width: =436
+                    X: =0
+                    Y: =1
+                    ZIndex: =2
+
+                    DataCardKey8 As label:
+                        AutoHeight: =true
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =34
+                        Size: =14
+                        Text: ="Total experience"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue7 As text:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Format: =TextFormat.Number
+                        Height: =50
+                        HoverBorderColor: =RGBA(202, 202, 202, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        PaddingLeft: =15
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey8.Y + DataCardKey8.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage8 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue7.Y + DataCardValue7.Height
+                        ZIndex: =3
+
+                    StarVisible8 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Height: =DataCardKey8.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        X: =184
+                        Y: =10
+                        ZIndex: =4
+
+                Email_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Email"
+                    Default: =ThisItem.Email
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,Email)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, Email)
+                    Required: =true
+                    Update: =DataCardValue5.Text
+                    Visible: =false
+                    Width: =436
+                    X: =0
+                    Y: =2
+                    ZIndex: =2
+
+                    DataCardKey5 As label:
+                        AutoHeight: =true
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =34
+                        Size: =14
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue5 As text:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Height: =50
+                        HoverBorderColor: =RGBA(202, 202, 202, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =Parent.MaxLength
+                        OnChange: |-
+                            =If(
+                                And(
+                                    !IsBlank(DataCardValue5.Text),
+                                    !IsMatch(
+                                        DataCardValue5.Text,
+                                        "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                    )
+                                ),
+                                Set(ValidationError5, "Invalid Email Address."),
+                                Set(ValidationError5, "")
+                            )
+                        PaddingLeft: =15
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey5.Y + DataCardKey5.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage5 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |
+                            =Coalesce(
+                                Parent.Error,
+                                If(
+                                    (Form_UserManagement.Mode = FormMode.Edit && DataCardValue5.Text = ThisItem.Email),
+                                    Blank(),
+                                    If(
+                                        !IsBlank(
+                                            LookUp(
+                                                UsersSkillMatrix_TestData_1,
+                                                Email = DataCardValue5.Text
+                                            ).Email
+                                        ),
+                                        "Email already registered",
+                                        Blank()
+                                    )
+                                ),
+                                ValidationError5
+                            )
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue5.Y + DataCardValue5.Height
+                        ZIndex: =3
+
+                    StarVisible5 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Height: =DataCardKey5.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        X: =90
+                        Y: =DataCardKey5.Y
+                        ZIndex: =4
+
+                Mobilenumber_DataCard1 As typedDataCard.numberEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Mobilenumber"
+                    Default: =ThisItem.MobileNumber
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,MobileNumber)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    Required: =true
+                    Update: =Value(DataCardValue6.Text)
+                    Visible: =false
+                    Width: =436
+                    X: =1
+                    Y: =2
+                    ZIndex: =2
+
+                    DataCardKey7 As label:
+                        AutoHeight: =true
+                        Color: =RGBA(0, 0, 0, 1)
+                        Height: =34
+                        Size: =14
+                        Text: |-
+                            =//Parent.DisplayName
+                            "Mobile number"
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue6 As text:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        Format: =TextFormat.Number
+                        Height: =50
+                        HoverBorderColor: =RGBA(202, 202, 202, 1)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        MaxLength: =10
+                        OnChange: |
+                            =If(!IsBlank(DataCardValue6.Text)&&IsMatch(Trim(DataCardValue6.Text),"^\+?\d{1,4}\s?\d{9,10}$"),Set(ValidationError," "),Set(ValidationError,"Invalid input. Please enter a valid mobile number."))
+                        PaddingLeft: =15
+                        RadiusBottomLeft: =10
+                        RadiusBottomRight: =10
+                        RadiusTopLeft: =10
+                        RadiusTopRight: =10
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey7.Y + DataCardKey7.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage7 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: |-
+                            =ValidationError
+                             
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue6.Y + DataCardValue6.Height
+                        ZIndex: =3
+
+                    StarVisible7 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Height: =DataCardKey7.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        X: =171
+                        Y: =DataCardKey7.Y
+                        ZIndex: =4
+
+                Title_DataCard1 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="Title"
+                    Default: =If(Form_UserManagement.Mode=FormMode.Edit,ThisItem.EmployeeID,IsBlank(DataCardValue5.Text),Blank(), Office365Users.UserProfile(Text(DataCardValue5.Text)).Id)
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@UsersSkillMatrix_TestData_1],DataSourceInfo.DisplayName,EmployeeID)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =50
+                    MaxLength: =DataSourceInfo([@UsersSkillMatrix_TestData_1], DataSourceInfo.MaxLength, EmployeeID)
+                    Required: =false
+                    Update: =DataCardValue1.Text
+                    Visible: =false
+                    Width: =436
+                    X: =0
+                    Y: =3
+                    ZIndex: =2
+
+                    DataCardKey1 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        Text: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        Wrap: =false
+                        X: =30
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue1 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage1 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue1.Y + DataCardValue1.Height
+                        ZIndex: =3
+
+                    StarVisible1 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey1.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey1.Y
+                        ZIndex: =4
+
+            Container10_15 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(30, 49, 68, 1)
+                Height: =55
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Visible: =false
+                Width: =874
+                ZIndex: =2
+
+                Label27_14 As label:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =50
+                    PaddingLeft: =10
+                    Size: =15
+                    Text: ="Create New Qualification"
+                    Width: =777
+                    ZIndex: =1
+
+                Icon5_12 As icon.CancelBadge:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =50
+                    Icon: =Icon.CancelBadge
+                    OnSelect: =Set(varQualificationform,false)
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    Width: =50
+                    X: =800
+                    ZIndex: =2
+
+            Label13_141 As label:
+                Height: =70
+                Size: =20
+                Text: =If(Form_UserManagement.Mode = FormMode.New, "Add User ", "Edit User")
+                Width: =699
+                X: =33
+                Y: =1
+                ZIndex: =4
+
+            Container6_53 As groupContainer.manualLayoutContainer:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                BorderThickness: =0.001
+                DropShadow: =DropShadow.None
+                Fill: =RGBA(241, 244, 249, 1)
+                Height: =1
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Width: =922
+                X: =16
+                Y: =70
+                ZIndex: =5
+
+            Rectangle13_53 As rectangle:
+                BorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(245, 245, 245, 1)
+                Height: =116
+                Width: =856
+                X: =49
+                Y: =475
+                ZIndex: =7
+
+            Button24_124 As button:
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledBorderColor: =
+                DisabledColor: =RGBA(255, 255, 255, 1)
+                DisabledFill: =RGBA(30, 49, 68, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                FocusedBorderThickness: =
+                FontWeight: =FontWeight.Normal
+                Height: =45
+                HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(237, 237, 237, 1)
+                OnSelect: |-
+                    =ResetForm(Form_UserManagement);
+                    Set(Varuserform,false);
+                PressedBorderColor: =//Self.Fill
+                PressedColor: =RGBA(0, 0, 0, 1)
+                PressedFill: =RGBA(219, 219, 219, 1)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =14
+                Text: ="Cancel"
+                Tooltip: ="Cancel"
+                Width: =100
+                X: =492
+                Y: =511
+                ZIndex: =8
+
+            Button24_123 As button:
+                DisabledBorderColor: =
+                DisabledColor: =RGBA(255, 255, 255, 1)
+                DisabledFill: =RGBA(30, 49, 68, 1)
+                DisplayMode: =If(IsBlank(ErrorMessage3.Text) && IsBlank(ErrorMessage5.Text) && IsBlank(ErrorMessage1.Text)  && IsBlank(ErrorMessage10.Text)&& IsBlank(ErrorMessage7.Text)&& IsBlank(ErrorMessage8.Text)&& IsBlank(ErrorMessage13.Text),DisplayMode.Edit,DisplayMode.Disabled)
+                Fill: =RGBA(51, 122, 183, 1)
+                FocusedBorderThickness: =
+                FontWeight: =FontWeight.Normal
+                Height: =45
+                HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
+                HoverFill: =RGBA(0, 94, 146, 1)
+                OnSelect: =SubmitForm(Form_UserManagement);
+                PressedBorderColor: =//Self.Fill
+                PressedColor: =RGBA(255, 255, 255, 1)
+                PressedFill: =RGBA(0, 94, 146, 1)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =14
+                Text: ="Save"
+                Tooltip: ="Save"
+                Width: =100
+                X: =362
+                Y: =509
+                ZIndex: =9
+
+            Icon8_68 As icon.CancelBadge:
+                Color: =RGBA(0, 0, 0, 1)
+                Height: =28
+                Icon: =Icon.CancelBadge
+                OnSelect: |-
+                    =ResetForm(Form_UserManagement);
+                    Set(Varuserform,false)
+                Tooltip: ="Close"
+                Width: =28
+                X: =907
+                Y: =21
+                ZIndex: =10
+
+    Group_Delete_UserManagement As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =76
+
+        Rectangle30_1 As rectangle:
+            BorderColor: =RGBA(219, 219, 219, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =685
+            Visible: =varDeleteUser
+            Width: =1110
+            X: =246
+            Y: =72
+            ZIndex: =30
+
+        Label30_7 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Height: =83
+            Size: =15
+            Text: ="Are you sure you want to delete the following user ?"
+            Visible: =varDeleteUser
+            Width: =1088
+            X: =244
+            Y: =114
+            ZIndex: =31
+
+        Label31_7 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Height: =74
+            Size: =17
+            Text: =Gallery_UserDetails.Selected.Fullname
+            Visible: =varDeleteUser
+            Width: =1089
+            X: =241
+            Y: =197
+            ZIndex: =32
+
+        Button23_7 As button:
+            BorderThickness: =1
+            Fill: =RGBA(218, 79, 73, 1)
+            Height: =54
+            HoverFill: =RGBA(189, 54, 47, 1)
+            OnSelect: |-
+                =/*
+                ClearCollect(ColUserQualifications,Filter(Qualifications_TestData_1 ,EmployeeId = Gallery_UserDetails.Selected.EmployeeID));
+                ClearCollect(ColUserProjects,Filter(Projects_TestData ,EmployeeId = Gallery_UserDetails.Selected.EmployeeID));
+                ClearCollect(ColUserCertifications,Filter(Certifications_TestData_1 ,EmployeeId = Gallery_UserDetails.Selected.EmployeeID));
+                ClearCollect(ColUserSkills,Filter('SkillMap_TestData_1' ,Title = Gallery_UserDetails.Selected.EmployeeID));
+                ClearCollect(ColUserSkillsUsed,Filter(SkillMatrix_SkillUsedProject ,Title = Gallery_UserDetails.Selected.EmployeeID));
+                Remove(UsersSkillMatrix_TestData_1,Gallery_UserDetails.Selected);
+                RemoveIf(Qualifications_TestData_1 ,EmployeeId in ColUserQualifications.EmployeeId);
+                RemoveIf(Projects_TestData ,EmployeeId in ColUserProjects.EmployeeId);
+                RemoveIf(Certifications_TestData_1,EmployeeId in ColUserCertifications.EmployeeId);
+                RemoveIf('SkillMap_TestData_1' ,Title in ColUserSkills.Title);
+                RemoveIf(SkillMatrix_SkillUsedProject,Title in ColUserSkillsUsed.Title);
+                Set(varDeleteUser, false);
+                */
+                
+                Remove(UsersSkillMatrix_TestData_1,Gallery_UserDetails.Selected);
+                Set(varDeleteUser, false);
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(189, 54, 47, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Delete"
+            Visible: =varDeleteUser
+            Width: =130
+            X: =636
+            Y: =299
+            ZIndex: =33
+
+        Button24_7 As button:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =54
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: |-
+                =//Navigate(Locations);
+                Set(varDeleteUser, false);
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Cancel"
+            Visible: =varDeleteUser
+            Width: =130
+            X: =781
+            Y: =299
+            ZIndex: =34
+

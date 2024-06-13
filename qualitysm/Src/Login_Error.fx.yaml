@@ -1,0 +1,48 @@
+Login_Error As screen:
+    BackgroundImage: =
+    Fill: =RGBA(248, 249, 250, 1)
+
+    Image2_14 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        Fill: =RGBA(255, 255, 255, 1)
+        FocusedBorderThickness: =4
+        Height: =Parent.Height
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: ='oops-404-error-with-broken-robot-concept-illustration_114360-1932'
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        Transparency: =0.9
+        Width: =Parent.Width
+        ZIndex: =1
+
+    Container11 As groupContainer.manualLayoutContainer:
+        DropShadow: =DropShadow.ExtraBold
+        Height: =281
+        Width: =659
+        X: =352
+        Y: =243
+        ZIndex: =2
+
+        Label19 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Semibold
+            Height: =65
+            Size: =22
+            Text: ="Your data was not found please contact to your administrator ."
+            Width: =Parent.Width
+            Y: =161
+            ZIndex: =1
+
+        Image3 As image:
+            Height: =121
+            Image: ='svg-edited (11)_1'
+            Width: =125
+            X: =267
+            Y: =13
+            ZIndex: =2
+

@@ -1,0 +1,172 @@
+LaunchPage As screen:
+    Fill: =RGBA(248, 249, 250, 1)
+    OnVisible: =
+
+    Container1_7 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(248, 249, 250, 1)
+        Height: =96
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Width: =1366
+        ZIndex: =1
+
+        Label13_8 As label:
+            FontWeight: =FontWeight.Semibold
+            Height: =Parent.Height
+            PaddingBottom: =8
+            PaddingLeft: =0
+            PaddingRight: =8
+            PaddingTop: =8
+            Size: =25
+            Text: ="Skill Matrix"
+            Width: =281
+            X: =52
+            ZIndex: =1
+
+    Container9 As groupContainer.manualLayoutContainer:
+        BorderColor: =RGBA(9, 33, 98, 1)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =1
+        DropShadow: =DropShadow.None
+        Fill: =RGBA(248, 249, 250, 1)
+        Height: =668
+        RadiusBottomLeft: =0
+        RadiusBottomRight: =0
+        RadiusTopLeft: =0
+        RadiusTopRight: =0
+        Width: =1366
+        Y: =100
+        ZIndex: =3
+
+        Container10 As groupContainer.manualLayoutContainer:
+            BorderStyle: =BorderStyle.None
+            DropShadow: =DropShadow.Bold
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =518
+            RadiusBottomLeft: =15
+            RadiusBottomRight: =15
+            RadiusTopLeft: =15
+            RadiusTopRight: =15
+            Width: =540
+            X: =52
+            Y: =68
+            ZIndex: =1
+
+            Image14 As image:
+                Height: =236
+                Image: ='skill (3)'
+                Width: =259
+                X: =132
+                Y: =76
+                ZIndex: =1
+
+            Label27 As label:
+                Align: =Align.Center
+                Color: =RGBA(30, 49, 68, 1)
+                Fill: =RGBA(255, 255, 255, 1)
+                FontWeight: =FontWeight.Bold
+                Height: =79
+                Size: =28
+                Text: ="Welcome to Skill Matrix "
+                Width: =465
+                X: =43
+                Y: =362
+                ZIndex: =2
+
+        Label30 As label:
+            Align: =Align.Center
+            Height: =125
+            Size: =18
+            Text: ="Skill Matrix makes skills decisions extra transparent, collaborative, and equitable through real-time and accurate ability insights actionable in days, not months."
+            Width: =691
+            X: =648
+            Y: =251
+            ZIndex: =2
+
+        Label31 As label:
+            Align: =Align.Center
+            Color: =RGBA(30, 49, 68, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =164
+            PaddingRight: =0
+            Size: =25
+            Text: ="Unleash your team's potential with skills management software"
+            Width: =691
+            X: =648
+            Y: =87
+            ZIndex: =3
+
+        Button25_1 As button:
+            Fill: =RGBA(51, 122, 183, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =58
+            HoverFill: =RGBA(50, 119, 179, 1)
+            OnSelect: |-
+                =If(IsBlank(LookUp(UsersSkillMatrix_TestData_1,Email=User().Email).'Employee Id'),Navigate(Login_Error),
+                Set(varemployeeid,LookUp(UsersSkillMatrix_TestData_1,Email=User().Email).'Employee Id');
+                If(
+                    !IsEmpty(
+                        Filter(
+                            UsersSkillMatrix_TestData_1,
+                            ReportingManagerEmail = User().Email
+                        )
+                    ),
+                    Set(
+                        varismanager,
+                        true
+                    ),
+                    Set(
+                        varismanager,
+                        false
+                    )
+                );
+                If(
+                    !IsEmpty(
+                        Filter(
+                            UsersSkillMatrix_TestData_1,
+                            DHId = varemployeeid
+                        )
+                    ),
+                    Set(
+                        varisdh,
+                        true
+                    ),
+                    Set(
+                        varisdh,
+                        false
+                    )
+                );
+                If(
+                    
+                        LookUp(
+                            UsersSkillMatrix_TestData_1,
+                            Email = User().Email
+                        ).SelfAssessment
+                    ,
+                    Navigate(RegistrationPageNew),varisdh,Navigate(DH_Dashboard),
+                    varismanager,
+                    Navigate(Manager_Dashboard),
+                    Navigate(User_Dashboard)))
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(51, 122, 183, 1)
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Text: ="Get started"
+            Tooltip: ="Get Started"
+            Width: =183
+            X: =902
+            Y: =432
+            ZIndex: =4
+
+        Image1_5 As image:
+            Height: =51
+            Image: ='MicrosoftTeams-image (7)'
+            Width: =277
+            X: =1060
+            Y: =600
+            ZIndex: =5
+

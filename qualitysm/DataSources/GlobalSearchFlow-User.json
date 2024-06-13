@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "3ce50363-2e9d-451b-9f0c-34f4dc8d775d",
+    "Name": "GlobalSearchFlow-User",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "589ac160-b51d-ef11-840a-6045bd72e9c4"
+  }
+]

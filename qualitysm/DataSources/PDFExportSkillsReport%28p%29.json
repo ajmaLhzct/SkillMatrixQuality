@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "dc1f140f-a5df-4c56-a26d-51a6360949e3",
+    "Name": "PDFExportSkillsReport(p)",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "29a1e56a-180d-ef11-9f89-7c1e520ecbe9"
+  }
+]

@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "c9035865-9643-4875-b8da-d7634c4ea875",
+    "Name": "GlobalSearchFlow-Skill",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "229ce55c-c81d-ef11-840a-6045bd72e9c4"
+  }
+]

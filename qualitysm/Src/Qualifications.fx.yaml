@@ -1,0 +1,1566 @@
+Qualifications As screen:
+    Fill: =RGBA(248, 249, 250, 1)
+    OnVisible: |-
+        =Set(
+            varPageNumber,
+            1
+        );
+        ClearCollect(colOnselectedQuldata1,{Value : "Name"},{Value : "Description URL"});
+        Set(varTopTab,"Qualifications");
+        Set(varAddQuli,false);
+
+    Label49 As label:
+        Text: =
+        X: =646
+        Y: =526
+        ZIndex: =51
+
+    Component_SidbarNavi_Admin_New_6 As Component_SidbarNavi_Admin:
+        DirectoryItems: |-
+            =Table(
+                 {
+                    Title: "Skills",
+                    Screen: Skills
+                },
+                {
+                    Title: "Qualifications",
+                    Screen: Qualifications
+                }
+                
+            )
+        Height: =768
+        ZIndex: =52
+
+    Label43_2 As label:
+        Color: =RGBA(116, 116, 116, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =42
+        Size: =18
+        Text: ="Skill Matrix"
+        Width: =385
+        X: =245
+        Y: =15
+        ZIndex: =53
+
+    Component_Admin_Navi_6 As Component_Admin_Navi:
+        Height: =79
+        MenuImage: =lists
+        MenuTitle: ="Qualifications"
+        Width: =1108
+        X: =245
+        Y: =70
+        ZIndex: =54
+
+    Group_DisplauCol As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =62
+
+        Rectangle19 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.7)
+            Height: =768
+            Visible: =varSelectQualiCol
+            Width: =1366
+            ZIndex: =1
+
+        Rectangle21 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =359
+            Visible: =varSelectQualiCol
+            Width: =644
+            X: =476
+            Y: =111
+            ZIndex: =2
+
+        Label35 As label:
+            Color: =RGBA(119, 119, 119, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =64
+            PaddingLeft: =10
+            Size: =20
+            Text: ="Display columns"
+            Visible: =varSelectQualiCol
+            Width: =553
+            X: =488
+            Y: =112
+            ZIndex: =3
+
+        Container29 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(219, 219, 219, 1)
+            Height: =1
+            Visible: =varSelectQualiCol
+            Width: =644
+            X: =476
+            Y: =173
+            ZIndex: =4
+
+        Rectangle23 As rectangle:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(245, 245, 245, 1)
+            Height: =78
+            Visible: =varSelectQualiCol
+            Width: =644
+            X: =476
+            Y: =391
+            ZIndex: =5
+
+        Button31 As button:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(238, 238, 238, 1)
+            OnSelect: =Set(varSelectQualiCol , false)
+            PressedBorderColor: =RGBA(219, 219, 219, 1)
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: ="Close"
+            Visible: =varSelectQualiCol
+            Width: =100
+            X: =819
+            Y: =407
+            ZIndex: =6
+
+        Button32 As button:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(51, 122, 183, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            OnSelect: |-
+                =ClearCollect(colonclick , colOnselecteddata);
+                Set(varSelectQualiCol,false);
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: ="Save Changes"
+            Visible: =varSelectQualiCol
+            Width: =173
+            X: =937
+            Y: =404
+            ZIndex: =7
+
+        Gallery10 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =218
+            Items: =["Name" , "Datasource" , "Description URL"]
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplateSize: =55
+            Visible: =varSelectQualiCol
+            Width: =451
+            X: =663
+            Y: =176
+            ZIndex: =8
+
+            Checkbox5 As checkbox:
+                BorderStyle: =BorderStyle.None
+                CheckboxBorderColor: =RGBA(116, 116, 116, 1)
+                CheckmarkFill: =RGBA(116, 116, 116, 1)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                OnCheck: =Collect(colOnselecteddata , ThisItem)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(colOnselecteddata,ThisItem)
+                Size: =15
+                Text: =ThisItem.Value
+                Width: =202
+                X: =12
+                ZIndex: =1
+
+    Group_HeaderNavi_1 As group:
+        Height: =5
+        Width: =5
+        X: =20
+        Y: =20
+        ZIndex: =92
+
+        Button10_3 As button:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverFill: =RGBA(41, 63, 84, 1)
+            OnSelect: =Set(varAction,!varAction)
+            PaddingLeft: =0
+            PaddingRight: =10
+            Text: ="Actions"
+            Width: =126
+            X: =1215
+            Y: =87
+            ZIndex: =9
+
+        Image10_21 As image:
+            Height: =15
+            HoverBorderColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            Image: =Down
+            Width: =15
+            X: =1320
+            Y: =103
+            ZIndex: =10
+
+    Group_Add_Edit_Quli As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =102
+
+        Rectangle38 As rectangle:
+            Fill: =RGBA(248, 249, 250, 1)
+            Height: =707
+            Visible: =varAddQuli
+            Width: =1128
+            X: =238
+            Y: =61
+            ZIndex: =63
+
+        Rectangle14_1 As rectangle:
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =506
+            Visible: =varAddQuli
+            Width: =731
+            X: =244
+            Y: =79
+            ZIndex: =64
+
+        Label13_10 As label:
+            Height: =61
+            Size: =20
+            Text: =If(Form3_1.Mode = FormMode.New, "Add Qualification ", "Edit Qualification")
+            Visible: =varAddQuli
+            Width: =699
+            X: =276
+            Y: =82
+            ZIndex: =65
+
+        Container6_10 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =0.001
+            DropShadow: =DropShadow.None
+            Fill: =RGBA(241, 244, 249, 1)
+            Height: =1
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Visible: =varAddQuli
+            Width: =694
+            X: =260
+            Y: =148
+            ZIndex: =66
+
+        Form3_1 As form:
+            DataSource: =SkillMatrix_QualificationsAdmin
+            DefaultMode: =FormMode.New
+            Height: =294
+            Item: =Gal_Qualification.Selected
+            NumberOfColumns: =1
+            OnSuccess: =Set(varAddQuli , false)
+            Visible: =varAddQuli
+            Width: =671
+            X: =285
+            Y: =171
+            ZIndex: =67
+
+            Title_DataCard8 As typedDataCard.textualEditCard:
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="Title"
+                Default: =ThisItem.Title
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@SkillMatrix_QualificationsAdmin],DataSourceInfo.DisplayName,Title)
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =121
+                MaxLength: =DataSourceInfo([@SkillMatrix_QualificationsAdmin], DataSourceInfo.MaxLength, Title)
+                Required: =true
+                Update: =DataCardValue3.Text
+                Width: =671
+                X: =0
+                Y: =0
+                ZIndex: =99
+
+                DataCardKey2 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(0, 0, 0, 1)
+                    Height: =34
+                    Size: =15
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =43
+                    ZIndex: =1
+
+                DataCardValue3 As text:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    BorderThickness: =1
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =50
+                    HoverBorderColor: =RGBA(202, 202, 202, 1)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    MaxLength: =Parent.MaxLength
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =10
+                    RadiusBottomRight: =10
+                    RadiusTopLeft: =10
+                    RadiusTopRight: =10
+                    Tooltip: =Parent.DisplayName
+                    Width: =397
+                    X: =244
+                    Y: =30
+                    ZIndex: =2
+
+                ErrorMessage2 As label:
+                    Height: =28
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =427
+                    X: =252
+                    Y: =81
+                    ZIndex: =3
+
+                StarVisible2 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(184, 0, 0, 1)
+                    Height: =DataCardKey2.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    X: =85
+                    Y: =43
+                    ZIndex: =4
+
+            "'Description URL_DataCard2' As typedDataCard.urlEditCard":
+                BorderStyle: =BorderStyle.Solid
+                DataField: ="DescriptionURL"
+                Default: =ThisItem.'Description URL'
+                DisplayMode: =Parent.DisplayMode
+                DisplayName: =DataSourceInfo([@SkillMatrix_QualificationsAdmin],DataSourceInfo.DisplayName,'Description URL')
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =156
+                Required: =false
+                Update: =DataCardValue13.Text
+                Width: =671
+                X: =0
+                Y: =1
+                ZIndex: =99
+
+                DataCardKey18 As label:
+                    AutoHeight: =true
+                    Color: =RGBA(0, 0, 0, 1)
+                    Height: =34
+                    Size: =15
+                    Text: =Parent.DisplayName
+                    Width: =(Parent.Width - 60) * 0.4
+                    Wrap: =false
+                    X: =30
+                    Y: =10 + (DataCardValue13.Height / 2) - (Self.Height / 2)
+                    ZIndex: =1
+
+                DataCardValue13 As text:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    BorderThickness: =1
+                    Default: =Parent.Default
+                    DelayOutput: =true
+                    DisplayMode: =Parent.DisplayMode
+                    Height: =104
+                    HoverBorderColor: =RGBA(202, 202, 202, 1)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    Mode: =TextMode.MultiLine
+                    PaddingLeft: =5
+                    RadiusBottomLeft: =10
+                    RadiusBottomRight: =10
+                    RadiusTopLeft: =10
+                    RadiusTopRight: =10
+                    Tooltip: =Parent.DisplayName
+                    Width: =396
+                    X: =245
+                    Y: =10
+                    ZIndex: =2
+
+                ErrorMessage18 As label:
+                    AutoHeight: =true
+                    Height: =10
+                    Live: =Live.Assertive
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =Parent.Error
+                    Visible: =Parent.DisplayMode=DisplayMode.Edit
+                    Width: =Parent.Width - 60
+                    X: =30
+                    Y: =DataCardValue13.Y + DataCardValue13.Height
+                    ZIndex: =3
+
+                StarVisible18 As label:
+                    Align: =Align.Center
+                    Height: =DataCardKey18.Height
+                    Text: ="*"
+                    Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                    Width: =30
+                    Wrap: =false
+                    Y: =DataCardKey18.Y
+                    ZIndex: =4
+
+        Rectangle13_10 As rectangle:
+            Fill: =RGBA(245, 245, 245, 1)
+            Height: =109
+            Visible: =varAddQuli
+            Width: =675
+            X: =276
+            Y: =464
+            ZIndex: =68
+
+        Button11_4 As button:
+            Fill: =RGBA(51, 122, 183, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =49
+            OnSelect: |
+                =SubmitForm(Form3_1);
+                /*
+                Patch(
+                    'Qualification Details',
+                    Defaults('Qualification Details'),
+                    {
+                        Title: DataCardValue1.Text,
+                        'Parent Category': Dropdown4.Selected.Title
+                    }
+                );
+                */
+                //Navigate(Skills);
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: ="Save"
+            Visible: =varAddQuli
+            Width: =100
+            X: =528
+            Y: =495
+            ZIndex: =69
+
+        Button12_4 As button:
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =49
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(238, 238, 238, 1)
+            OnSelect: |-
+                =ResetForm(Form3_1);
+                Set(varAddQuli, false);
+            PressedBorderColor: =RGBA(202, 202, 202, 1)
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(238, 238, 238, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: ="Cancel"
+            Visible: =varAddQuli
+            Width: =100
+            X: =643
+            Y: =494
+            ZIndex: =70
+
+    Group_QulificationDelete_2 As group:
+        Height: =5
+        Width: =5
+        X: =13
+        Y: =13
+        ZIndex: =103
+
+        Rectangle4_2 As rectangle:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =675
+            Visible: =varQualiItemsDelete
+            Width: =1115
+            X: =238
+            Y: =79
+            ZIndex: =71
+
+        Label30_8 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Height: =84
+            Size: =15
+            Text: ="Are you sure you want to delete the following qualification?"
+            Visible: =varQualiItemsDelete
+            Width: =1094
+            X: =257
+            Y: =127
+            ZIndex: =72
+
+        Label31_8 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Bold
+            Height: =75
+            Size: =17
+            Text: =Gal_Qualification.Selected.Title
+            Visible: =varQualiItemsDelete
+            Width: =1095
+            X: =254
+            Y: =211
+            ZIndex: =73
+
+        Button23_8 As button:
+            BorderThickness: =1
+            Fill: =RGBA(218, 79, 73, 1)
+            Height: =54
+            HoverFill: =RGBA(189, 54, 47, 1)
+            OnSelect: |-
+                =Remove(SkillMatrix_QualificationsAdmin , Gal_Qualification.Selected);
+                Set(varQualiItemsDelete, false);
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(189, 54, 47, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Delete"
+            Visible: =varQualiItemsDelete
+            Width: =131
+            X: =651
+            Y: =314
+            ZIndex: =74
+
+        Button24_8 As button:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =54
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: |-
+                =//Navigate(Locations);
+                Set(varQualiItemsDelete, false);
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Cancel"
+            Visible: =varQualiItemsDelete
+            Width: =131
+            X: =797
+            Y: =314
+            ZIndex: =75
+
+    Group_qul_add As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =106
+
+        Rectangle4 As rectangle:
+            BorderColor: =RGBA(237, 237, 237, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =199
+            Visible: =false
+            Width: =1109
+            X: =244
+            Y: =160
+            ZIndex: =11
+
+        Label1 As label:
+            Align: =Align.Center
+            FontWeight: =FontWeight.Semibold
+            Height: =50
+            Size: =15
+            Text: ="Qualifications"
+            Visible: =false
+            Width: =1106
+            X: =247
+            Y: =170
+            ZIndex: =12
+
+        Label12 As label:
+            Align: =Align.Center
+            Height: =50
+            Size: =16
+            Text: ="There are no qualifications recorded for this person"
+            Visible: =false
+            Width: =1100
+            X: =253
+            Y: =220
+            ZIndex: =13
+
+        Button10 As button:
+            Align: =Align.Left
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =46
+            HoverFill: =RGBA(41, 63, 84, 1)
+            OnSelect: =
+            PaddingLeft: =40
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Add a qualification"
+            Visible: =false
+            Width: =232
+            X: =707
+            Y: =281
+            ZIndex: =14
+
+        Image2 As image:
+            Height: =20
+            HoverBorderColor: =RGBA(255, 255, 255, 1)
+            Image: =Plus
+            PressedBorderColor: =RGBA(255, 255, 255, 1)
+            Visible: =false
+            Width: =20
+            X: =718
+            Y: =295
+            ZIndex: =15
+
+    Group_DisplauCol_3 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =115
+
+        Rectangle19_3 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0.7)
+            Height: =768
+            Visible: =varQualiCol
+            Width: =1366
+            ZIndex: =55
+
+        Rectangle21_3 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =359
+            Visible: =varQualiCol
+            Width: =644
+            X: =476
+            Y: =111
+            ZIndex: =56
+
+        Label35_11 As label:
+            Color: =RGBA(119, 119, 119, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =64
+            PaddingLeft: =10
+            Size: =20
+            Text: ="Display columns"
+            Visible: =varQualiCol
+            Width: =553
+            X: =488
+            Y: =112
+            ZIndex: =57
+
+        Container29_11 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(219, 219, 219, 1)
+            Height: =1
+            Visible: =varQualiCol
+            Width: =644
+            X: =476
+            Y: =173
+            ZIndex: =58
+
+        Rectangle23_11 As rectangle:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(245, 245, 245, 1)
+            Height: =78
+            Visible: =varQualiCol
+            Width: =644
+            X: =476
+            Y: =391
+            ZIndex: =59
+
+        Button31_11 As button:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(238, 238, 238, 1)
+            OnSelect: =Set(varQualiCol , false)
+            PressedBorderColor: =RGBA(219, 219, 219, 1)
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: ="Close"
+            Visible: =varQualiCol
+            Width: =100
+            X: =819
+            Y: =407
+            ZIndex: =60
+
+        Button32_7 As button:
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(51, 122, 183, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            OnSelect: |-
+                =ClearCollect(colonselectQul1 , colOnselectedQuldata1);
+                Set(varQualiCol,false);
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: ="Save Changes"
+            Visible: =varQualiCol
+            Width: =173
+            X: =937
+            Y: =404
+            ZIndex: =61
+
+        Gallery10_3 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            DelayItemLoading: =true
+            Height: =204
+            Items: =["Name" ,"Description URL"]
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            TemplatePadding: =0
+            TemplateSize: =55
+            Visible: =varQualiCol
+            Width: =615
+            X: =496
+            Y: =190
+            ZIndex: =62
+
+            Checkbox5_3 As checkbox:
+                BorderStyle: =BorderStyle.None
+                CheckboxBorderColor: =RGBA(116, 116, 116, 1)
+                CheckmarkFill: =RGBA(116, 116, 116, 1)
+                HoverColor: =RGBA(0, 0, 0, 1)
+                OnCheck: =Collect(colOnselectedQuldata1, ThisItem.Value)
+                OnSelect: =Select(Parent)
+                OnUncheck: =Remove(colOnselectedQuldata1, ThisItem)
+                Size: =15
+                Text: =ThisItem.Value
+                Width: =202
+                X: =12
+                ZIndex: =1
+
+    Group_Overview_Qul As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =117
+
+        Rectangle24 As rectangle:
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =595
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =1109
+            X: =244
+            Y: =159
+            ZIndex: =16
+
+        Rectangle20_3 As rectangle:
+            Fill: =RGBA(238, 238, 238, 1)
+            Height: =80
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =1112
+            X: =245
+            Y: =158
+            ZIndex: =17
+
+        Button18_3 As button:
+            Align: =Align.Left
+            BorderThickness: =1
+            Color: =RGBA(0, 0, 0, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =41
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: |
+                =//Navigate(Qualifications_Add);
+                Set(varAddQuli , true);
+                ResetForm(Form3_1);
+                NewForm(Form3_1);
+            PaddingLeft: =40
+            PressedBorderColor: =RGBA(219, 219, 219, 1)
+            PressedColor: =RGBA(0, 0, 0, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Text: ="Add a  Qualification              "
+            Tooltip: ="Add qualification"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =233
+            X: =1108
+            Y: =176
+            ZIndex: =18
+
+        Image17_4 As image:
+            Height: =30
+            Image: =Plus
+            PaddingBottom: =6
+            PaddingLeft: =6
+            PaddingRight: =6
+            PaddingTop: =6
+            Tooltip: ="Add qualification"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =30
+            X: =1116
+            Y: =182
+            ZIndex: =19
+
+        TextInput4_Search As text:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Default: =""
+            Height: =41
+            HintText: ="Search qualifications"
+            HoverBorderColor: =RGBA(219, 219, 219, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            Italic: =true
+            PaddingLeft: =10
+            PressedBorderColor: =RGBA(219, 219, 219, 1)
+            PressedColor: =RGBA(202, 202, 202, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =20
+            RadiusTopLeft: =0
+            RadiusTopRight: =20
+            Tooltip: ="Search"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =349
+            X: =285
+            Y: =178
+            ZIndex: =20
+
+        Image14_12 As image:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Fill: =RGBA(233, 236, 239, 1)
+            Height: =41
+            Image: ='search-black'
+            PaddingBottom: =8
+            PaddingLeft: =8
+            PaddingRight: =8
+            PaddingTop: =8
+            RadiusBottomLeft: =5
+            RadiusTopLeft: =5
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =30
+            X: =257
+            Y: =178
+            ZIndex: =21
+
+        Image14_13 As image:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =1
+            Fill: =RGBA(219, 219, 219, 1)
+            Height: =30
+            Image: =cross
+            OnSelect: =Reset(TextInput4_Search)
+            PaddingBottom: =5
+            PaddingLeft: =5
+            PaddingRight: =5
+            PaddingTop: =5
+            RadiusBottomLeft: =50
+            RadiusBottomRight: =50
+            RadiusTopLeft: =50
+            RadiusTopRight: =50
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =30
+            X: =596
+            Y: =184
+            ZIndex: =22
+
+        Button28_2 As button:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =41
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varQualiCol , true)
+            PressedBorderColor: =RGBA(219, 219, 219, 1)
+            PressedFill: =RGBA(219, 219, 219, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: =""
+            Tooltip: ="Display columns"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =50
+            X: =1045
+            Y: =175
+            ZIndex: =23
+
+        Image1_4 As image:
+            Height: =20
+            Image: =setting
+            OnSelect: =Set(varQualiCol , true)
+            Tooltip: ="Display columns"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =20
+            X: =1060
+            Y: =185
+            ZIndex: =24
+
+        Container33_1 As groupContainer.manualLayoutContainer:
+            DropShadow: =DropShadow.None
+            Height: =462
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =1128
+            X: =238
+            Y: =239
+            ZIndex: =25
+
+            Container32_1 As groupContainer.manualLayoutContainer:
+                DropShadow: =DropShadow.None
+                Height: =408
+                Width: =1107
+                X: =10
+                Y: =10
+                ZIndex: =1
+
+                Container8_4 As groupContainer.horizontalAutoLayoutContainer:
+                    BorderColor: =RGBA(202, 202, 202, 1)
+                    BorderThickness: =1
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =55
+                    LayoutMode: =LayoutMode.Auto
+                    Width: =1103
+                    ZIndex: =1
+
+                    Label13_6 As label:
+                        FillPortions: =1
+                        FontWeight: =FontWeight.Semibold
+                        Height: =55
+                        LayoutMinWidth: =120
+                        PaddingLeft: =15
+                        Size: =15
+                        Text: ="Name"
+                        Visible: |
+                            =If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                        Width: =120
+                        X: =
+                        ZIndex: =1
+
+                    Container9_24 As groupContainer.verticalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.Center
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =55
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Vertical
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                        Width: =30
+                        ZIndex: =2
+
+                        Image1_21 As image:
+                            Height: =20
+                            Image: =Up_arrow
+                            OnSelect: |-
+                                =UpdateContext({SortDescendingquli: !SortDescendingquli})
+                            PaddingBottom: =1
+                            PaddingLeft: =1
+                            PaddingRight: =1
+                            PaddingTop: =1
+                            Visible: =SortDescendingquli
+                            Width: =20
+                            ZIndex: =1
+
+                        Image12_29 As image:
+                            Height: =20
+                            Image: =Down_arrow
+                            OnSelect: |-
+                                =UpdateContext({SortDescendingquli: !SortDescendingquli})
+                            PaddingBottom: =1
+                            PaddingLeft: =1
+                            PaddingRight: =1
+                            PaddingTop: =1
+                            Visible: =!SortDescendingquli
+                            Width: =20
+                            ZIndex: =2
+
+                    Container10_19 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        Height: =55
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =210
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: |-
+                            =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Description URL" ).Value),true,false)
+                            true
+                        Width: =220
+                        ZIndex: =4
+
+                        Label14_19 As label:
+                            FillPortions: =1
+                            FontWeight: =FontWeight.Semibold
+                            Height: =55
+                            PaddingLeft: =15
+                            Size: =15
+                            Text: ="Description URL"
+                            Visible: |-
+                                =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Description URL" ).Value),true,false) 
+                                true
+                            Width: =190
+                            ZIndex: =1
+
+                        Container9_26 As groupContainer.verticalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            DropShadow: =DropShadow.None
+                            FillPortions: =0
+                            Height: =55
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =30
+                            ZIndex: =2
+
+                            Image1_23 As image:
+                                Height: =20
+                                Image: =Up_arrow
+                                OnSelect: |-
+                                    =UpdateContext({SortDescendingquli: !SortDescendingquli})
+                                PaddingBottom: =1
+                                PaddingLeft: =1
+                                PaddingRight: =1
+                                PaddingTop: =1
+                                Tooltip: ="Sort"
+                                Visible: =SortDescendingquli
+                                Width: =20
+                                ZIndex: =1
+
+                            Image12_31 As image:
+                                Height: =20
+                                Image: =Down_arrow
+                                OnSelect: |-
+                                    =UpdateContext({SortDescendingquli: !SortDescendingquli})
+                                PaddingBottom: =1
+                                PaddingLeft: =1
+                                PaddingRight: =1
+                                PaddingTop: =1
+                                Tooltip: ="Sort"
+                                Visible: =!SortDescendingquli
+                                Width: =20
+                                ZIndex: =2
+
+                    Container10_25 As groupContainer.horizontalAutoLayoutContainer:
+                        AlignInContainer: =AlignInContainer.SetByContainer
+                        FillPortions: =0
+                        Height: =55
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =160
+                        ZIndex: =10
+
+                        Label14_25 As label:
+                            Align: =Align.Center
+                            FontWeight: =FontWeight.Semibold
+                            Height: =55
+                            Size: =15
+                            Text: ="Actions"
+                            Width: =160
+                            ZIndex: =1
+
+                Gal_Qualification As gallery.galleryVertical:
+                    '#CopilotOverlayLabel': ="Filtered"
+                    BorderColor: =RGBA(149, 149, 149, 1)
+                    DelayItemLoading: =true
+                    Height: =336
+                    Items: |-
+                        =If(
+                            icoNext_6.DisplayMode = DisplayMode.Disabled,
+                            LastN(
+                                FirstN(
+                                    Sort(
+                                        Filter(
+                                            galHidden_qul_2.AllItems,
+                                            (StartsWith(
+                                               Title,
+                                               TextInput4_Search.Text
+                                            ))
+                                        ),
+                                       Title,
+                                        If(
+                                            SortDescendingquli,
+                                            SortOrder.Descending,
+                                            SortOrder.Ascending
+                                        )
+                                    ),
+                                    drpPaginationSize_4.Selected.Value * varPageNumber
+                                ),
+                                drpPaginationSize_4.Selected.Value - (drpPaginationSize_4.Selected.Value * varPageNumber-Value(lblCountRows_4.Text))
+                            ),
+                            LastN(
+                                FirstN(
+                                    Sort(
+                                        Filter(
+                                            galHidden_qul_2.AllItems,
+                                            (StartsWith(
+                                                Title,
+                                               TextInput4_Search.Text
+                                            ))
+                                        ),
+                                       Title,
+                                        If(
+                                            SortDescendingquli,
+                                            SortOrder.Descending,
+                                            SortOrder.Ascending
+                                        )
+                                    ),
+                                    drpPaginationSize_4.Selected.Value * varPageNumber
+                                ),
+                                drpPaginationSize_4.Selected.Value
+                            )
+                        )
+                    Layout: =Layout.Vertical
+                    LoadingSpinner: =LoadingSpinner.Data
+                    ShowScrollbar: =false
+                    TemplatePadding: =0
+                    TemplateSize: =58
+                    Width: =1107
+                    Y: =55
+                    ZIndex: =2
+
+                    Container8_5 As groupContainer.horizontalAutoLayoutContainer:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =55
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =1102
+                        X: =0 
+                        Y: =3
+                        ZIndex: =1
+
+                        Label13_7 As label:
+                            Color: =RGBA(47, 153, 222, 1)
+                            FillPortions: =1
+                            Height: =55
+                            LayoutMinWidth: =120
+                            PaddingLeft: =15
+                            Text: =ThisItem.Title
+                            Visible: |
+                                =If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                            Width: =120
+                            ZIndex: =1
+
+                        Container9_32 As groupContainer.verticalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.Center
+                            DropShadow: =DropShadow.None
+                            FillPortions: =0
+                            Height: =55
+                            LayoutAlignItems: =LayoutAlignItems.Center
+                            LayoutDirection: =LayoutDirection.Vertical
+                            LayoutJustifyContent: =LayoutJustifyContent.Center
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            Visible: =If(!IsBlank(LookUp(colonselectQul1 , Value = "Name" ).Value),true,false)
+                            Width: =30
+                            ZIndex: =2
+
+                            Image1_29 As image:
+                                Height: =20
+                                Image: =Profile
+                                PaddingBottom: =1
+                                PaddingLeft: =1
+                                PaddingRight: =1
+                                PaddingTop: =1
+                                Width: =20
+                                ZIndex: =1
+
+                            Image12_37 As image:
+                                Height: =20
+                                Image: =Profile
+                                PaddingBottom: =1
+                                PaddingLeft: =1
+                                PaddingRight: =1
+                                PaddingTop: =1
+                                Width: =20
+                                ZIndex: =2
+
+                        Container10_27 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            Height: =55
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =230
+                            LayoutMode: =LayoutMode.Auto
+                            Visible: |-
+                                =//If(!IsBlank(LookUp(colonselectQul1 , Value = "Description URL" ).Value),true,false)
+                                true
+                            Width: =220
+                            ZIndex: =4
+
+                            Label14_27 As label:
+                                FillPortions: =1
+                                Height: =55
+                                PaddingLeft: =15
+                                Text: =ThisItem.'Description URL'
+                                Width: =190
+                                ZIndex: =1
+
+                            Container9_34 As groupContainer.verticalAutoLayoutContainer:
+                                AlignInContainer: =AlignInContainer.SetByContainer
+                                DropShadow: =DropShadow.None
+                                FillPortions: =0
+                                Height: =55
+                                LayoutAlignItems: =LayoutAlignItems.Center
+                                LayoutDirection: =LayoutDirection.Vertical
+                                LayoutJustifyContent: =LayoutJustifyContent.Center
+                                LayoutMinHeight: =100
+                                LayoutMinWidth: =250
+                                LayoutMode: =LayoutMode.Auto
+                                Width: =30
+                                ZIndex: =2
+
+                                Image1_31 As image:
+                                    Height: =20
+                                    Image: =Profile
+                                    Width: =20
+                                    ZIndex: =1
+
+                                Image12_39 As image:
+                                    Height: =20
+                                    Image: =Profile
+                                    Width: =20
+                                    ZIndex: =2
+
+                        Container10_33 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            FillPortions: =0
+                            Height: =55
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            Width: =160
+                            ZIndex: =10
+
+                            Container28_5 As groupContainer.manualLayoutContainer:
+                                DropShadow: =DropShadow.None
+                                FillPortions: =0
+                                LayoutMinHeight: =58
+                                LayoutMinWidth: =150
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Width: =160
+                                ZIndex: =1
+
+                                Button29_10 As button:
+                                    BorderColor: =RGBA(202, 202, 202, 1)
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    HoverColor: =RGBA(0, 0, 0, 1)
+                                    HoverFill: =RGBA(219, 219, 219, 1)
+                                    OnSelect: |-
+                                        =EditForm(Form3_1);
+                                        Set(varAddQuli , true);
+                                    PaddingTop: =0
+                                    PressedColor: =RGBA(0, 0, 0, 1)
+                                    PressedFill: =RGBA(219, 219, 219, 1)
+                                    RadiusBottomLeft: =4
+                                    RadiusBottomRight: =4
+                                    RadiusTopLeft: =4
+                                    RadiusTopRight: =4
+                                    Text: =""
+                                    Tooltip: ="Edit qualification"
+                                    Width: =45
+                                    X: =28
+                                    Y: =8
+                                    ZIndex: =1
+
+                                Image19_10 As image:
+                                    DisabledFill: =RGBA(219, 219, 219, 1)
+                                    Height: =25
+                                    HoverFill: =RGBA(219, 219, 219, 1)
+                                    Image: =Edit
+                                    OnSelect: |-
+                                        =EditForm(Form3_1);
+                                        Set(varAddQuli , true);
+                                    PressedFill: =RGBA(219, 219, 219, 1)
+                                    Tooltip: ="Edit qualification"
+                                    Width: =25
+                                    X: =38
+                                    Y: =15
+                                    ZIndex: =2
+
+                                Button29_11 As button:
+                                    BorderColor: =RGBA(202, 202, 202, 1)
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    HoverColor: =RGBA(0, 0, 0, 1)
+                                    HoverFill: =RGBA(219, 219, 219, 1)
+                                    OnSelect: =Set(varQualiItemsDelete , true)
+                                    PaddingTop: =0
+                                    PressedColor: =RGBA(0, 0, 0, 1)
+                                    PressedFill: =RGBA(219, 219, 219, 1)
+                                    RadiusBottomLeft: =4
+                                    RadiusBottomRight: =4
+                                    RadiusTopLeft: =4
+                                    RadiusTopRight: =4
+                                    Text: =""
+                                    Tooltip: ="Delete qualification"
+                                    Width: =45
+                                    X: =92
+                                    Y: =8
+                                    ZIndex: =3
+
+                                Image19_11 As image:
+                                    DisabledFill: =RGBA(219, 219, 219, 1)
+                                    Height: =20
+                                    HoverFill: =RGBA(219, 219, 219, 1)
+                                    Image: =trash
+                                    OnSelect: =Set(varQualiItemsDelete , true)
+                                    PressedFill: =RGBA(219, 219, 219, 1)
+                                    Tooltip: ="Delete qualification"
+                                    Width: =20
+                                    X: =104
+                                    Y: =18
+                                    ZIndex: =4
+
+        galHidden_qul_2 As gallery.galleryVertical:
+            '#CopilotOverlayLabel': ="Filtered"
+            Default: |-
+                =If(
+                    drpPaginationSize_4.Selected.Value * varPageNumber >= CountRows(Self.AllItems),
+                    Last(Self.AllItems)
+                )
+            DelayItemLoading: =true
+            Height: =75
+            Items: =SkillMatrix_QualificationsAdmin
+            Layout: =Layout.Vertical
+            LoadingSpinner: =LoadingSpinner.Data
+            ShowScrollbar: =false
+            TemplateSize: =If(Self.Layout = Layout.Horizontal, Min(280, Self.Width - 60), Min(280, Self.Height - 60))
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =20
+            X: =1094
+            Y: =693
+            ZIndex: =26
+
+        lblCountRows_4 As label:
+            Height: =51
+            Text: =CountRows(galHidden_qul_2.AllItems)
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =236
+            X: =257
+            Y: =693
+            ZIndex: =27
+
+        Container12_4 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(149, 149, 149, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =45
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =152
+            X: =258
+            Y: =708
+            ZIndex: =28
+
+            drpPaginationSize_4 As dropdown:
+                BorderColor: =RGBA(149, 149, 149, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                ChevronBackground: =RGBA(0, 0, 0, 0)
+                ChevronFill: =RGBA(116, 116, 116, 1)
+                ChevronHoverBackground: =RGBA(0, 0, 0, 0)
+                ChevronHoverFill: =RGBA(116, 116, 116, 1)
+                HoverFill: =RGBA(237, 237, 237, 1)
+                Items: =[5,10,25,50,100]
+                PressedColor: =RGBA(0, 0, 0, 1)
+                PressedFill: =RGBA(202, 202, 202, 1)
+                SelectionFill: =RGBA(219, 219, 219, 1)
+                Width: =150
+                Y: =5
+                ZIndex: =1
+
+        Label32_4 As label:
+            PaddingLeft: =1
+            Size: =11
+            Text: ="Per Page"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =147
+            X: =414
+            Y: =710
+            ZIndex: =29
+
+        Label21_6 As label:
+            Height: =38
+            PaddingLeft: =0
+            Size: =12
+            Text: |-
+                ="Showing "&((varPageNumber * drpPaginationSize_4.Selected.Value) - drpPaginationSize_4.Selected.Value) + 1 & " to " & If(
+                    ((varPageNumber * drpPaginationSize_4.Selected.Value) > CountRows(galHidden_qul_2.AllItems)),
+                    CountRows(galHidden_qul_2.AllItems),
+                    (varPageNumber * drpPaginationSize_4.Selected.Value)
+                )&"  of " & lblCountRows_4.Text & " entries"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =338
+            X: =259
+            Y: =670
+            ZIndex: =30
+
+        icoPrev_6 As button:
+            BorderThickness: =1
+            Color: =RGBA(0, 121, 187, 1)
+            DisplayMode: |-
+                =If(
+                    varPageNumber = 1,
+                    DisplayMode.Disabled,
+                    DisplayMode.Edit
+                )
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varPageNumber,varPageNumber-1)
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =0
+            RadiusTopLeft: =8
+            RadiusTopRight: =0
+            Text: ="← Previous"
+            Tooltip: ="Previous"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =137
+            X: =894
+            Y: =708
+            ZIndex: =31
+
+        Label15_6 As label:
+            Align: =Align.Center
+            BorderColor: =RGBA(202, 202, 202, 1)
+            BorderThickness: =1
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =45
+            Text: |-
+                ="Page " & varPageNumber & " of " & If(
+                    Mod(
+                         CountRows(galHidden_qul_2.AllItems),
+                        100
+                    ) = 0,
+                    RoundUp(
+                         CountRows(galHidden_qul_2.AllItems) / drpPaginationSize_4.Selected.Value,
+                        0
+                    ) & " + Pages ",
+                    RoundUp(
+                         CountRows(galHidden_qul_2.AllItems) / drpPaginationSize_4.Selected.Value,
+                        0
+                    ) & " Pages"
+                )
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =173
+            X: =1030
+            Y: =708
+            ZIndex: =32
+
+        icoNext_6 As button:
+            Color: =RGBA(0, 121, 187, 1)
+            DisplayMode: |-
+                =If(
+                    drpPaginationSize_4.Selected.Value * varPageNumber <= Value(lblCountRows_4.Text),
+                    DisplayMode.Edit,
+                    DisplayMode.Disabled
+                )
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =45
+            HoverColor: =RGBA(0, 0, 0, 1)
+            HoverFill: =RGBA(219, 219, 219, 1)
+            OnSelect: =Set(varPageNumber,varPageNumber+1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =8
+            RadiusTopLeft: =0
+            RadiusTopRight: =8
+            Text: ="Next → "
+            Tooltip: ="Next"
+            Visible: |-
+                =//varTopTab = "Qualifications"
+                true
+            Width: =137
+            X: =1203
+            Y: =708
+            ZIndex: =33
+

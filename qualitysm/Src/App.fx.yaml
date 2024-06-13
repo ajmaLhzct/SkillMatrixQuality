@@ -1,0 +1,90 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |
+        =Set(
+            IsUserInSPGroupAdmin,
+            !IsBlank(
+                LookUp(
+                    'Security List',
+                    Title = "Admins"
+                ).Title
+            )
+        );
+        Set(
+            VarUser,
+            User()
+        );
+        Set(
+            varfilterterm,
+            ""
+        );
+        Set(
+            varemployeeid,
+            LookUp(
+                UsersSkillMatrix_TestData_1,
+                Email = User().Email
+            ).'Employee Id'
+        );
+        If(
+            !IsEmpty(
+                Filter(
+                    UsersSkillMatrix_TestData_1,
+                    ReportingManagerEmail = User().Email
+                )
+            ),
+            Set(
+                varismanager,
+                true
+            ),
+            Set(
+                varismanager,
+                false
+            )
+        );
+        If(
+            !IsEmpty(
+                Filter(
+                    UsersSkillMatrix_TestData_1,
+                    DHId = varemployeeid
+                )
+            ),
+            Set(
+                varisdh,
+                true
+            ),
+            Set(
+                varisdh,
+                false
+            )
+        );
+    StartScreen: |-
+        =If(IsBlank(LookUp(UsersSkillMatrix_TestData_1,Email=User().Email).'Employee Id'),Login_Error,
+            
+                LookUp(
+                    UsersSkillMatrix_TestData_1,
+                    Email = User().Email
+                ).SelfAssessment
+            ,
+        LaunchPage,!IsEmpty(
+                Filter(
+                    UsersSkillMatrix_TestData_1,
+                    DeliveryGroup = LookUp(UsersSkillMatrix_TestData_1,Email=User().Email).'Employee Id'
+                )
+            ),DH_Dashboard,
+            !IsEmpty(
+                Filter(
+                    UsersSkillMatrix_TestData_1,
+                    ReportingManagerEmail = User().Email
+                )
+            ),
+        Manager_Dashboard,
+        User_Dashboard)
+    Theme: =PowerAppsTheme
+
+    Host As hostControl.DefaultHostControlVariant:
+        OnCancel: =false
+        OnEdit: =false
+        OnNew: =false
+        OnSave: =false
+        OnView: =false
+
