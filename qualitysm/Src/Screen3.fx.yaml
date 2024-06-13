@@ -5,28 +5,26 @@ Screen3 As screen:
         Set(EffectiveBarWidth, If(TotalRequiredWidth > ColumnChart1_16.Width, 70, ColumnChart1_16.Width / NumberOfDataPoints));
         
 
-    Container24 As groupContainer.verticalAutoLayoutContainer:
+    Container32 As groupContainer.horizontalAutoLayoutContainer:
         Height: =370
-        LayoutDirection: =LayoutDirection.Vertical
         LayoutMode: =LayoutMode.Auto
         LayoutOverflowX: =LayoutOverflow.Scroll
         Width: =1117
-        X: =40
-        Y: =40
-        ZIndex: =1
+        X: =48
+        Y: =84
+        ZIndex: =2
 
-        Container12_21 As groupContainer.manualLayoutContainer:
-            Height: =370
+        Container12_24 As groupContainer.manualLayoutContainer:
+            FillPortions: =0
+            Height: =358
             LayoutMinHeight: =100
             LayoutMinWidth: =250
-            Width: =1117
-            X: =244
-            Y: =124
+            Width: =Gallery2_8.AllItemsCount * Gallery2_8.TemplateWidth
             ZIndex: =1
 
-            ColumnChart1_17 As barChart:
+            ColumnChart1_20 As barChart:
                 Font: =Font.Arial
-                Height: =Container12_21.Height
+                Height: =370
                 ItemColorSet: =[RGBA(94,193,108,1),RGBA(246,199,144,1),RGBA(247,199,114,1),RGBA(247,180,91,1),RGBA(246,143,100,1),RGBA(212,96,104,1),RGBA(148,110,176,1),RGBA(118,154,204,1),RGBA(96,197,234,1),RGBA(51,153,255,1),RGBA(255,102,255,1),RGBA(255,0,102,1),]
                 Items: |
                     =Sort(colresourcecount,Count,SortOrder.Descending)
@@ -34,11 +32,11 @@ Screen3 As screen:
                 MinimumBarWidth: =70
                 OnSelect: =Set(varSkillOnselect,true)
                 Size: =9
-                Width: =Container12_21.Width
+                Width: =Container12_24.Width
                 XLabelAngle: =0
                 ZIndex: =1
 
-            Label13_62 As label:
+            Label13_65 As label:
                 Color: =RGBA(122, 138, 143, 1)
                 FontWeight: =FontWeight.Semibold
                 Italic: =true
@@ -48,7 +46,7 @@ Screen3 As screen:
                 Y: =15
                 ZIndex: =2
 
-            Label15_17 As label:
+            Label15_20 As label:
                 Align: =Align.Center
                 Fill: =RGBA(255, 255, 255, 1)
                 Height: =295
@@ -56,48 +54,46 @@ Screen3 As screen:
                 Text: ="No records found "
                 Visible: =IsEmpty(colresourcecount)
                 Width: =500
-                Y: =75
+                Y: =63
                 ZIndex: =3
 
-        "Gallery2_4 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
-            BorderStyle: =BorderStyle.None
-            DelayItemLoading: =true
-            FillPortions: =0
-            Height: =100
-            Items: =Sort(colresourcecount,Count,SortOrder.Descending)
-            LayoutMinHeight: =287
-            LayoutMinWidth: =320
-            LoadingSpinner: =LoadingSpinner.Data
-            TemplatePadding: =10
-            TemplateSize: =EffectiveBarWidth
-            Width: =Container12_21.Width
-            X: =244
-            Y: =124
-            ZIndex: =2
+            "Gallery2_8 As gallery.'BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0'":
+                BorderStyle: =BorderStyle.None
+                DelayItemLoading: =true
+                Height: =300
+                Items: =Sort(colresourcecount,Count,SortOrder.Descending)
+                LoadingSpinner: =LoadingSpinner.Data
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =EffectiveBarWidth
+                Width: =Container12_24.Width
+                Y: =10
+                ZIndex: =4
 
-            HtmlText1_1 As htmlViewer:
-                Height: =25
-                HtmlText: |-
-                    ="<div style='text-align:right;    
-                         position: absolute;   
-                         left: calc(50% - 50vh); 
-                         top: calc(50% - 50vw);   
-                         width: 100vh;  
-                         height: 100vw;  
-                         transform: rotate(90deg); 
-                         display: flex; 
-                         align-items: center; 
-                         justify-content: center;'> 
-                        "   & ThisItem.Count &   "       
-                    </div>"
-                    
-                    //"<div style='width:100%;'>" & ThisItem.Count & "</div>"
-                OnSelect: =Select(Parent)
-                PaddingLeft: =50
-                Width: |-
-                    =//(ColumnChart1_16.Width/Label34.Text)
-                    
-                    //ColumnChart1_16.Width * (Value(ThisItem.Count) / Value(MaxValue))
-                    EffectiveBarWidth
-                ZIndex: =3
+                HtmlText1_5 As htmlViewer:
+                    Height: =328
+                    HtmlText: |-
+                        ="<div style='text-align:right;    
+                             position: absolute;   
+                             left: calc(50% - 50vh); 
+                             top: calc(50% - 50vw);   
+                             width: 100vh;  
+                             height: 100vw;  
+                             transform: rotate(90deg); 
+                             display: flex; 
+                             align-items: center; 
+                             justify-content: center;'> 
+                            "   & ThisItem.Count &   "       
+                        </div>"
+                        
+                        //"<div style='width:100%;'>" & ThisItem.Count & "</div>"
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =50
+                    Width: |-
+                        =//(ColumnChart1_16.Width/Label34.Text)
+                        
+                        //ColumnChart1_16.Width * (Value(ThisItem.Count) / Value(MaxValue))
+                        EffectiveBarWidth
+                    X: =50
+                    ZIndex: =3
 
