@@ -418,7 +418,8 @@
       "SkillMap_TestData",
       "SkillMap_TestData_1",
       "UsersSkillMatrix_TestData",
-      "UsersSkillMatrix_TestData_1"
+      "UsersSkillMatrix_TestData_1",
+      "SkillMatrix_UserManagement"
     ],
     "dependencies": {},
     "dependents": [

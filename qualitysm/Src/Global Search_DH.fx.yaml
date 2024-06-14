@@ -181,7 +181,7 @@
                             AutoHeight: =true
                             BorderThickness: =1
                             FillPortions: =1
-                            HtmlText: =Concatenate(Concat(FirstN(Filter(colallskillmap,EmployeeId=ThisItem.EmployeeID),(CountRows(Filter(colallskillmap,EmployeeId=ThisItem.EmployeeID))-1)), LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title  & " | "),LookUp('SkillMatrix_Skills Admin',ID = Last(Filter(colallskillmap,EmployeeId = ThisItem.EmployeeID)).SkillId).Title)
+                            HtmlText: =Concatenate(Concat(FirstN(Filter(colallskillmap,EmployeeId=ThisItem.'Employee Id'),(CountRows(Filter(colallskillmap,EmployeeId=ThisItem.'Employee Id'))-1)), LookUp('SkillMatrix_Skills Admin',ID = SkillId).Title  & " | "),LookUp('SkillMatrix_Skills Admin',ID = Last(Filter(colallskillmap,EmployeeId = ThisItem.'Employee Id')).SkillId).Title)
                             PaddingLeft: =10
                             Size: =12
                             Width: =Parent.Width
@@ -1857,7 +1857,7 @@
                                     Height: =55
                                     PaddingLeft: =15
                                     Size: =15
-                                    Text: =ThisItem.Institutename
+                                    Text: =ThisItem.InstituteName
                                     Width: =190
                                     ZIndex: =1
 
@@ -1881,7 +1881,7 @@
                                     Text: |
                                         =//"Highest Qualification "
                                         
-                                        If(ThisItem.IsHighestQualification= false,"No","Yes")
+                                        If(ThisItem.IsHighestQualification in false,"No","Yes")
                                     Width: =190
                                     ZIndex: =1
 
@@ -3031,10 +3031,10 @@
                                 Search(
                                     Filter(
                                        colallusers,
-                                        EmployeeID = useritems.'Employee Id'
+                                        'Employee Id' = useritems.'Employee Id'
                                     ),
                                     value2,
-                                    Fullname,Email,Location,MobileNumber,EmployeeID,Location)
+                                    Fullname,Email,Location,MobileNumber,'Employee Id',Location)
                                 )+CountRows(
                                 Filter(
                                     Filter(
