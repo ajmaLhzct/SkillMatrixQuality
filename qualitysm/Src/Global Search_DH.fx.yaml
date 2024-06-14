@@ -2902,11 +2902,10 @@
             HoverColor: =RGBA(0, 0, 0, 1)
             HoverFill: =RGBA(219, 219, 219, 1)
             OnSelect: |
-                =//Clear(colfilterusers);If(Len(TextInput_Search_3.Text)>=3,ForAll(AddColumns(Sequence(CountRows(UsersSkillMatrix_TestData_1)/100),value1,Value),Collect(colfilterusers,Filter(LastN(FirstN(UsersSkillMatrix_TestData_1,100*value1),100) As useritems,IsEmpty(Filter(ForAll(Filter(AddColumns(Split(Lower(TextInput_Search_3.Text),","),value2,ThisRecord.Value),!IsBlank(value2)),(CountRows(Filter(Filter(preprocessedSkills,Title=useritems.EmployeeID),!IsBlank(Find(TrimEnds(value2),SkillTitle))))+CountRows(Search(Filter(colallusers,EmployeeID=useritems.EmployeeID),value2,Fullname,Email,Location,MobileNumber,EmployeeID,Location))+CountRows(Filter(Filter(preprocessedQualifications,EmployeeId=useritems.EmployeeID),!IsBlank(Find(TrimEnds(value2),QualificationTitle))))+CountRows(Filter(Filter(preprocessedCertifications,EmployeeId=useritems.EmployeeID),!IsBlank(Find(TrimEnds(value2),CertificationTitle))))+CountRows(Filter(Filter(preprocessedProjects,EmployeeId=useritems.EmployeeID),(!IsBlank(Find(TrimEnds(value2),ProjectTitle))||!IsBlank(Find(TrimEnds(value2),ProjectDescription))))))),Value=0))))))
-                Clear(colfilterusers);
+                =Clear(colfilterusers);
                 If(Len(TextInput_Search_3.Text)>=3,
                 ForAll(AddColumns(Sequence(CountRows(SkillMatrix_SkillUsedProject)/100),value1,Value),Collect(colfilterusers,
-                 Filter(LastN(FirstN(UsersSkillMatrix_TestData_1,100*value1),100) As useritems,IsEmpty(
+                 Filter(LastN(FirstN(SkillMatrix_UserManagement,100*value1),100) As useritems,IsEmpty(
                     Filter(
                         ForAll(
                             Filter(
@@ -2919,7 +2918,7 @@
                                 Filter(
                                     Filter(
                                         preprocessedSkills,
-                                        EmployeeId = useritems.EmployeeID
+                                        Title = useritems.EmployeeID
                                     ),
                                     !IsBlank(
                                         Find(
@@ -3001,11 +3000,10 @@
             HoverFill: =RGBA(0, 0, 0, 0)
             Image: ='search-black'
             OnSelect: |
-                =//Clear(colfilterusers);If(Len(TextInput_Search_3.Text)>=3,ForAll(AddColumns(Sequence(CountRows(UsersSkillMatrix_TestData_1)/100),value1,Value),Collect(colfilterusers,Filter(LastN(FirstN(UsersSkillMatrix_TestData_1,100*value1),100) As useritems,IsEmpty(Filter(ForAll(Filter(AddColumns(Split(Lower(TextInput_Search_3.Text),","),value2,ThisRecord.Value),!IsBlank(value2)),(CountRows(Filter(Filter(preprocessedSkills,Title=useritems.EmployeeID),!IsBlank(Find(TrimEnds(value2),SkillTitle))))+CountRows(Search(Filter(colallusers,EmployeeID=useritems.EmployeeID),value2,Fullname,Email,Location,MobileNumber,EmployeeID,Location))+CountRows(Filter(Filter(preprocessedQualifications,EmployeeId=useritems.EmployeeID),!IsBlank(Find(TrimEnds(value2),QualificationTitle))))+CountRows(Filter(Filter(preprocessedCertifications,EmployeeId=useritems.EmployeeID),!IsBlank(Find(TrimEnds(value2),CertificationTitle))))+CountRows(Filter(Filter(preprocessedProjects,EmployeeId=useritems.EmployeeID),(!IsBlank(Find(TrimEnds(value2),ProjectTitle))||!IsBlank(Find(TrimEnds(value2),ProjectDescription))))))),Value=0))))))
-                Clear(colfilterusers);
+                =Clear(colfilterusers);
                 If(Len(TextInput_Search_3.Text)>=3,
                 ForAll(AddColumns(Sequence(CountRows(SkillMatrix_SkillUsedProject)/100),value1,Value),Collect(colfilterusers,
-                 Filter(LastN(FirstN(UsersSkillMatrix_TestData_1,100*value1),100) As useritems,IsEmpty(
+                 Filter(LastN(FirstN(SkillMatrix_UserManagement,100*value1),100) As useritems,IsEmpty(
                     Filter(
                         ForAll(
                             Filter(
@@ -3018,7 +3016,7 @@
                                 Filter(
                                     Filter(
                                         preprocessedSkills,
-                                        EmployeeId = useritems.'Employee Id'
+                                        Title = useritems.EmployeeID
                                     ),
                                     !IsBlank(
                                         Find(
@@ -3031,15 +3029,15 @@
                                 Search(
                                     Filter(
                                        colallusers,
-                                        'Employee Id' = useritems.'Employee Id'
+                                        EmployeeID = useritems.EmployeeID
                                     ),
                                     value2,
-                                    Fullname,Email,Location,MobileNumber,'Employee Id',Location)
+                                    Fullname,Email,Location,MobileNumber,EmployeeID,Location)
                                 )+CountRows(
                                 Filter(
                                     Filter(
                                         preprocessedQualifications,
-                                        EmployeeId = useritems.'Employee Id'
+                                        EmployeeId = useritems.EmployeeID
                                     ),
                                     !IsBlank(
                                         Find(
@@ -3052,7 +3050,7 @@
                                 Filter(
                                     Filter(
                                         preprocessedCertifications,
-                                        EmployeeId = useritems.'Employee Id'
+                                        EmployeeId = useritems.EmployeeID
                                     ),
                                     !IsBlank(
                                         Find(
@@ -3065,7 +3063,7 @@
                                 Filter(
                                     Filter(
                                         preprocessedProjects,
-                                        EmployeeId = useritems.'Employee Id'
+                                        EmployeeId = useritems.EmployeeID
                                     ),
                                     (!IsBlank(
                                         Find(
