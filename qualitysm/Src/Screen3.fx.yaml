@@ -19,7 +19,7 @@ Screen3 As screen:
             Height: =358
             LayoutMinHeight: =100
             LayoutMinWidth: =250
-            Width: =Gallery2_8.AllItemsCount * Gallery2_8.TemplateWidth
+            Width: =Gallery2_8.AllItemsCount * Gallery2_8.TemplateWidth 
             ZIndex: =1
 
             ColumnChart1_20 As barChart:
@@ -33,7 +33,7 @@ Screen3 As screen:
                 MinimumBarWidth: =70
                 OnSelect: =Set(varSkillOnselect,true)
                 Size: =9
-                Width: =Container12_24.Width
+                Width: =Container12_24.Width 
                 XLabelAngle: =0
                 ZIndex: =1
 
@@ -91,6 +91,7 @@ Screen3 As screen:
                         //"<div style='width:100%;'>" & ThisItem.Count & "</div>"
                     OnSelect: =Select(Parent)
                     PaddingLeft: =50
+                    PaddingRight: =50
                     Width: |-
                         =//(ColumnChart1_16.Width/Label34.Text)
                         
