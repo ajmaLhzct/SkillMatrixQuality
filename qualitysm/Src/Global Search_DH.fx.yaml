@@ -189,14 +189,14 @@
                                 Concatenate(
                                     Concat(
                                         FirstN(
-                                            Filter(colallskillmap, Title = ThisItem.'Employee Id'),
-                                            (CountRows(Filter(colallskillmap, Title = ThisItem.'Employee Id')) - 1)
+                                            Filter(colallskillmap, EmployeeId = ThisItem.'Employee Id'),
+                                            (CountRows(Filter(colallskillmap, EmployeeId = ThisItem.'Employee Id')) - 1)
                                         ),
                                         LookUp('SkillMatrix_Skills Admin_TestData', ID = SkillId).Title & " "
                                     ),
                                     LookUp(
                                         'SkillMatrix_Skills Admin_TestData',
-                                        ID = Last(Filter(colallskillmap, Title = ThisItem.'Employee Id')).SkillId
+                                        ID = Last(Filter(colallskillmap, EmployeeId = ThisItem.'Employee Id')).SkillId
                                     ).Title
                                 )
                                 
@@ -2940,7 +2940,7 @@
                                 Filter(
                                     Filter(
                                         preprocessedSkills,
-                                        Title = useritems.'Employee Id'
+                                        EmployeeId = useritems.'Employee Id'
                                     ),
                                     !IsBlank(
                                         Find(
@@ -3039,7 +3039,7 @@
                                 Filter(
                                     Filter(
                                         preprocessedSkills,
-                                        Title = useritems.'Employee Id'
+                                        EmployeeId = useritems.'Employee Id'
                                     ),
                                     !IsBlank(
                                         Find(
