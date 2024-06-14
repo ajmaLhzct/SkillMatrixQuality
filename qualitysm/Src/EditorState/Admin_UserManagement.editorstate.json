@@ -17488,7 +17488,7 @@
       "MetaDataIDKey": "",
       "Name": "Group_Delete_UserManagement",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 23,
+      "ParentIndex": 24,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -17540,7 +17540,7 @@
       "MetaDataIDKey": "",
       "Name": "Group_Paginataion_Location_2",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 24,
+      "ParentIndex": 22,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -17696,7 +17696,7 @@
       "MetaDataIDKey": "",
       "Name": "Grp_Edit_UserDetails",
       "OptimizeForDevices": "Off",
-      "ParentIndex": 22,
+      "ParentIndex": 23,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {

@@ -72,10 +72,11 @@ Screen3 As screen:
                 ZIndex: =4
 
                 HtmlText1_5 As htmlViewer:
-                    Height: =328
+                    Height: =250
                     HtmlText: |-
                         ="<div style='text-align:right;    
-                             position: absolute;   
+                             position: absolute;
+                                
                              left: calc(50% - 50vh); 
                              top: calc(50% - 50vw);   
                              width: 100vh;  
@@ -84,7 +85,7 @@ Screen3 As screen:
                              display: flex; 
                              align-items: center; 
                              justify-content: center;'> 
-                            "   & ThisItem.Count &   "       
+                           java      
                         </div>"
                         
                         //"<div style='width:100%;'>" & ThisItem.Count & "</div>"
@@ -96,5 +97,6 @@ Screen3 As screen:
                         //ColumnChart1_16.Width * (Value(ThisItem.Count) / Value(MaxValue))
                         EffectiveBarWidth
                     X: =50
+                    Y: =100
                     ZIndex: =3
 
