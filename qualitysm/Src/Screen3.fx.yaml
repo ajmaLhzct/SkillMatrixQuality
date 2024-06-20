@@ -23,6 +23,7 @@ Screen3 As screen:
             ZIndex: =1
 
             ColumnChart1_20 As barChart:
+                Color: =RGBA(0, 0, 0, 0)
                 Font: =Font.Arial
                 GridStyle: =GridStyle.None
                 Height: =370
@@ -73,8 +74,8 @@ Screen3 As screen:
 
                 HtmlText1_5 As htmlViewer:
                     Height: =250
-                    HtmlText: |-
-                        ="<div style='text-align:right;    
+                    HtmlText: |
+                        =/*"<div style='text-align:right;    
                              position: absolute;
                                 
                              left: calc(50% - 50vh); 
@@ -86,9 +87,22 @@ Screen3 As screen:
                              align-items: center; 
                              justify-content: center;'> 
                            java      
-                        </div>"
+                        </div>"*/
                         
-                        //"<div style='width:100%;'>" & ThisItem.Count & "</div>"
+                        "<div style='text-align:right;    
+                             position: absolute;  
+                             left: calc(50% - 50vh);
+                             top: calc(50% - 50vw);  
+                             width: 100vh;  
+                             height: 100vw;  
+                             transform: rotate(90deg);
+                             display: flex;
+                             align-items: center;
+                             justify-content: center;'>
+                             
+                           "& Concatenate(  "java" , "<div style='writing-mode: vertical-rl; transform: rotate(180deg);'> 2 </div>") & " 
+                        
+                        </div>"
                     OnSelect: =Select(Parent)
                     PaddingLeft: =50
                     PaddingRight: =50
