@@ -799,7 +799,7 @@ User_Profile As screen:
                     Height: |-
                         =//272
                         CountRows(Gallery_Qualifications_13.AllItems)*60+1
-                    Items: =Filter(SkillMatrix_QualificationsUser,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).'Employee Id')
+                    Items: =Filter(SkillMatrix_QualificationsUser,EmployeeId = LookUp(SkillMatrix_UserManagement,Email = User().Email).EmployeeID)
                     Layout: =Layout.Vertical
                     LoadingSpinner: =LoadingSpinner.Data
                     TemplatePadding: =0
@@ -4285,7 +4285,7 @@ User_Profile As screen:
                 BorderThickness: =0.5
                 DataSource: =SkillMatrix_QualificationsUser
                 Height: =410
-                Item: =Gallery_Qualifications_15.Selected
+                Item: =Gallery_Qualifications_13.Selected
                 NumberOfColumns: =2
                 OnSuccess: =Set(varQualificationform,false);
                 Width: =874
@@ -4604,7 +4604,7 @@ User_Profile As screen:
                 "'Passing Grade_DataCard1_14' As typedDataCard.comboBoxEditCard":
                     BorderStyle: =BorderStyle.Solid
                     DataField: ="PassingGrade"
-                    Default: =ThisItem.GradeSystem
+                    Default: =ThisItem.Gradesystem
                     DisplayMode: =Parent.DisplayMode
                     DisplayName: |-
                         =//DataSourceInfo([@Qualifications_TestData_1],DataSourceInfo.DisplayName,Gradesystem)
@@ -7409,7 +7409,7 @@ User_Profile As screen:
                 HoverBorderColor: =//ColorFade(Self.BorderColor, 20%)
                 HoverFill: =RGBA(0, 94, 146, 1)
                 OnSelect: |+
-                    =Remove(Qualifications_TestData_1,Gallery_Qualifications_13.Selected);
+                    =Remove(SkillMatrix_QualificationsUser,Gallery_Qualifications_13.Selected);
                     
                     Set(VarQualificationdelete, false)
                     
