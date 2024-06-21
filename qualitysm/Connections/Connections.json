@@ -510,26 +510,11 @@
             "tableName": "39b07e13-6115-4789-9e8e-1d9dfd5e23fe"
           }
         }
-      },
-      "https://iz.sharepoint.com/sites/Skill_Matrix": {
-        "dataSources": {
-          "SkillMatrix_UserManagement": {
-            "tableName": "cc69b741-734d-468f-b96b-b8093e51ea64"
-          }
-        }
       }
     },
     "dataSources": [
       "Security List",
       "Downloaded Templates",
-      "SkillMatrix_UserManagement",
-      "SkillMatrix_SkillUsedProject",
-      "SkillMatrix_Project",
-      "SkillMatrix_Skills Admin",
-      "SkillMatrix_Certifications",
-      "SkillMatrix_Skill Map",
-      "SkillMatrix_QualificationsAdmin",
-      "SkillMatrix_QualificationsUser",
       "CertificationsList_TestData",
       "EmployeeProject_TestData",
       "Qualifications_TestData",
@@ -611,8 +596,46 @@
       "parameterHints": {},
       "parameterHintsV2": {}
     },
-    "datasets": {},
-    "dataSources": [],
+    "datasets": {
+      "https://iz.sharepoint.com/sites/DEMO_PowerApps": {
+        "dataSources": {
+          "SkillMatrix_Certifications": {
+            "tableName": "eafcf2ce-9fd0-4ba3-9445-a276af96d8ff"
+          },
+          "SkillMatrix_Project": {
+            "tableName": "b4077710-f0aa-40b8-9d42-950afcd65377"
+          },
+          "SkillMatrix_QualificationsAdmin": {
+            "tableName": "a9713dbd-bd38-42db-947b-daf8350a09c1"
+          },
+          "SkillMatrix_QualificationsUser": {
+            "tableName": "5bc75616-7ea3-4db0-a634-f491b66d8e0a"
+          },
+          "SkillMatrix_Skill Map": {
+            "tableName": "0be6cadd-3c1a-4d54-9ff8-a20980e0f019"
+          },
+          "SkillMatrix_Skills Admin": {
+            "tableName": "4059eb26-11d8-4c69-8674-40b89a47fdd3"
+          },
+          "SkillMatrix_SkillUsedProject": {
+            "tableName": "857ae71c-3639-430f-ac6a-109ede68dc17"
+          },
+          "SkillMatrix_UserManagement": {
+            "tableName": "01909903-466f-4be4-b83b-0cccfcce829b"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "SkillMatrix_UserManagement",
+      "SkillMatrix_SkillUsedProject",
+      "SkillMatrix_Skill Map",
+      "SkillMatrix_Skills Admin",
+      "SkillMatrix_QualificationsUser",
+      "SkillMatrix_QualificationsAdmin",
+      "SkillMatrix_Project",
+      "SkillMatrix_Certifications"
+    ],
     "dependencies": {},
     "dependents": [
       "17ebae1b-0c37-44b2-97a8-43d4d3a7265d",

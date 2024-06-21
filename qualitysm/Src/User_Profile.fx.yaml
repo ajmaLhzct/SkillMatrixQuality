@@ -799,7 +799,7 @@ User_Profile As screen:
                     Height: |-
                         =//272
                         CountRows(Gallery_Qualifications_13.AllItems)*60+1
-                    Items: =Filter(Qualifications_TestData_1,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).'Employee Id')
+                    Items: =Filter(SkillMatrix_QualificationsUser,EmployeeId = LookUp(UsersSkillMatrix_TestData_1,Email = User().Email).'Employee Id')
                     Layout: =Layout.Vertical
                     LoadingSpinner: =LoadingSpinner.Data
                     TemplatePadding: =0
@@ -910,7 +910,7 @@ User_Profile As screen:
                             Fill: =RGBA(0, 0, 0, 0)
                             HoverColor: =RGBA(0, 0, 0, 1)
                             HoverFill: =RGBA(219, 219, 219, 1)
-                            OnSelect: =Remove(Qualifications_TestData_1,ThisItem)
+                            OnSelect: =Remove(SkillMatrix_QualificationsUser,ThisItem)
                             PaddingTop: =0
                             PressedColor: =RGBA(0, 0, 0, 1)
                             PressedFill: =RGBA(219, 219, 219, 1)
@@ -930,7 +930,7 @@ User_Profile As screen:
                             Height: =20
                             HoverFill: =RGBA(219, 219, 219, 1)
                             Image: =trash
-                            OnSelect: =Remove(Qualifications_TestData_1,ThisItem)
+                            OnSelect: =Remove(SkillMatrix_QualificationsUser,ThisItem)
                             PressedFill: =RGBA(219, 219, 219, 1)
                             Tooltip: ="Delete"
                             Width: =20
@@ -4283,8 +4283,7 @@ User_Profile As screen:
                 BorderColor: =RGBA(166, 166, 166, 1)
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =0.5
-                DataSource: |
-                    =Qualifications_TestData_1
+                DataSource: =SkillMatrix_QualificationsUser
                 Height: =410
                 Item: =Gallery_Qualifications_15.Selected
                 NumberOfColumns: =2
@@ -4526,14 +4525,14 @@ User_Profile As screen:
                 "'Institute Name_DataCard1_14' As typedDataCard.textualEditCard":
                     BorderStyle: =BorderStyle.Solid
                     DataField: ="InstituteName"
-                    Default: =ThisItem.Institutename
+                    Default: =ThisItem.InstituteName
                     DisplayMode: =Parent.DisplayMode
                     DisplayName: |-
                         ="Institute name"
                         //DataSourceInfo([@Qualifications_TestData_1],DataSourceInfo.DisplayName,Institutename)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =50
-                    MaxLength: =DataSourceInfo([@Qualifications_TestData_1], DataSourceInfo.MaxLength, Institutename)
+                    MaxLength: =DataSourceInfo([@Qualifications_TestData_1], DataSourceInfo.MaxLength, InstituteName)
                     Required: =true
                     Update: =DataCardValue22_32.Text
                     Width: =436
@@ -4605,7 +4604,7 @@ User_Profile As screen:
                 "'Passing Grade_DataCard1_14' As typedDataCard.comboBoxEditCard":
                     BorderStyle: =BorderStyle.Solid
                     DataField: ="PassingGrade"
-                    Default: =ThisItem.Gradesystem
+                    Default: =ThisItem.GradeSystem
                     DisplayMode: =Parent.DisplayMode
                     DisplayName: |-
                         =//DataSourceInfo([@Qualifications_TestData_1],DataSourceInfo.DisplayName,Gradesystem)

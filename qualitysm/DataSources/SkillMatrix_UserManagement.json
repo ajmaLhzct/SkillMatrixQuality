@@ -52,7 +52,7 @@
       "UserRole": "UserRole",
       "UserRole#Id": "UserRole Id"
     },
-    "DatasetName": "https://iz.sharepoint.com/sites/Skill_Matrix",
+    "DatasetName": "https://iz.sharepoint.com/sites/DEMO_PowerApps",
     "EncodeDataset": true,
     "IsSampleData": false,
     "IsWritable": true,

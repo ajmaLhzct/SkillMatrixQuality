@@ -3,7 +3,7 @@
     "ApiId": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
     "CdpRevision": {
       "BaseUrl": "/",
-      "LastChangedTimeString": "2024-04-22T17:40:22.4110000Z",
+      "LastChangedTimeString": "2024-06-12T17:06:09.5550000Z",
       "RevisionNumber": 1
     },
     "ConnectedDataSourceInfoNameMapping": {
@@ -39,7 +39,7 @@
       "OData__ColorTag": "Color Tag",
       "Title": "Title"
     },
-    "DatasetName": "https://iz.sharepoint.com/sites/Skill_Matrix",
+    "DatasetName": "https://iz.sharepoint.com/sites/DEMO_PowerApps",
     "EncodeDataset": true,
     "IsSampleData": false,
     "IsWritable": true,
